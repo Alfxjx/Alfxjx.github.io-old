@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="经过网上的一段搜索以及查阅Vue.js的[文档](https://vuejs.org/v2/guide/)，我写下了本文中关于Vue的最佳实践以及风格指南，从而可以更正确，更优雅的使用Vue.js。">
+
+
+
+
+  <meta name="keywords" content="Vue,Translation,">
+
+
+
+
+
+  <link rel="alternate" href="/default" title="Alfred's">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://yoursite.com/2019/02/18/practices/">
+
+
+<meta name="description" content="经过网上的一段搜索以及查阅Vue.js的[文档](https://vuejs.org/v2/guide/)，我写下了本文中关于Vue的最佳实践以及风格指南，从而可以更正确，更优雅的使用Vue.js。">
+<meta name="keywords" content="Vue,Translation">
+<meta property="og:type" content="article">
+<meta property="og:title" content="译-Vue.js 最佳实践✓">
+<meta property="og:url" content="http://yoursite.com/2019/02/18/practices/index.html">
+<meta property="og:site_name" content="Alfred&#39;s">
+<meta property="og:description" content="经过网上的一段搜索以及查阅Vue.js的[文档](https://vuejs.org/v2/guide/)，我写下了本文中关于Vue的最佳实践以及风格指南，从而可以更正确，更优雅的使用Vue.js。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/02/18/practices/practices/vueBestPractice.jpeg">
+<meta property="og:updated_time" content="2019-02-20T08:51:56.485Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="译-Vue.js 最佳实践✓">
+<meta name="twitter:description" content="经过网上的一段搜索以及查阅Vue.js的[文档](https://vuejs.org/v2/guide/)，我写下了本文中关于Vue的最佳实践以及风格指南，从而可以更正确，更优雅的使用Vue.js。">
+<meta name="twitter:image" content="http://yoursite.com/2019/02/18/practices/practices/vueBestPractice.jpeg">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: true
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> 译-Vue.js 最佳实践✓ - Alfred's </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">Alfred's</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          译-Vue.js 最佳实践✓
+        
+      </h1>
+
+      <time class="post-time">
+          Feb 18 2019
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p><a href="https://blog.usejournal.com/vue-js-best-practices-c5da8d7af48d" target="_blank" rel="noopener">原文链接</a></p>
+<p>开发者们，你们好。</p>
+<p>经过网上的一段搜索以及查阅Vue.js的<a href="https://vuejs.org/v2/guide/" target="_blank" rel="noopener">文档</a>，我写下了本文中关于Vue的最佳实践以及风格指南，从而可以更正确，更优雅的使用Vue.js。</p>
+<p>下面的要点指出了其中一些功能/优化相关，其他是VueJs命名约定和元素排序。 更详细的信息可以在<a href="https://blog.usejournal.com/vue-js-best-practices-c5da8d7af48d#26f6" target="_blank" rel="noopener">链接</a>中找到。</p>
+<p><img src="./practices/vueBestPractice.jpeg" alt="题图"></p>
+<h3 id="在组件销毁之后使用-off清除事件监听器"><a href="#在组件销毁之后使用-off清除事件监听器" class="headerlink" title="在组件销毁之后使用$off清除事件监听器"></a>在组件销毁之后使用<code>$off</code>清除事件监听器</h3><p>当我们在使用<code>$on</code>监听事件的时候，总是需要在事件销毁（<code>destroyed()</code>）的时候使用<code>$off</code>清除事件监听，这样可以有效防止内存泄漏。</p>
+<h3 id="事件名称使用短横线式命名（kebab-case"><a href="#事件名称使用短横线式命名（kebab-case" class="headerlink" title="事件名称使用短横线式命名（kebab-case)"></a>事件名称使用短横线式命名（kebab-case)</h3><p>在派发/监听事件的时候，我们应该始终使用短横线式命名（kebab-case)，这是因为事件最终会被自动转换为该命名方式。我们监听的时间格式不能是驼峰式以及Pascal式，因此在声明时间的时候，最好就讲时间命名为短横线式。例如：<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Emitting</span></span><br><span class="line"><span class="keyword">this</span>.$emit(<span class="string">'my-event'</span>) <span class="comment">// instead of myEvent</span></span><br><span class="line"><span class="comment">// Listening</span></span><br><span class="line">v-on:my-event</span><br></pre></td></tr></table></figure></p>
+<p>###避免在created以及watch中调用相同的method</p>
+<p>如果我们需要触发组件初始化和属性更改的方法，通常的做法是执行以下操作：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">watch: &#123;</span><br><span class="line">  myProperty() &#123;</span><br><span class="line">    <span class="keyword">this</span>.doSomething();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br><span class="line">created() &#123;</span><br><span class="line">  <span class="keyword">this</span>.doSomething();</span><br><span class="line">&#125;,</span><br><span class="line">methods: &#123;</span><br><span class="line">  doSomething() &#123;</span><br><span class="line">     <span class="built_in">console</span>.log(<span class="string">'doing something...'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>尽管这样看起来挺正确的，但是这里对于<code>created()</code>的使用是多余的。我们本可以将所有的功能放入<code>watch</code>，从而避免在<code>created()</code>里面写重复的代码，这样同样可以在生成组件实例的时候触发。例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">watch: &#123;</span><br><span class="line">  myProperty: &#123;</span><br><span class="line">    immediate: <span class="literal">true</span>, <span class="comment">// forcing handler on initial status</span></span><br><span class="line">    handler() &#123;</span><br><span class="line">      <span class="keyword">this</span>.doSomething();</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br><span class="line">methods: &#123;</span><br><span class="line">  doSomething() &#123;</span><br><span class="line">     <span class="built_in">console</span>.log(<span class="string">'doing something...'</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br><span class="line"><span class="comment">// Even better solution</span></span><br><span class="line">watch: &#123;</span><br><span class="line">  myProperty: &#123;</span><br><span class="line">    immediate: <span class="literal">true</span>, <span class="comment">// forcing handler on initial status</span></span><br><span class="line">    handler() &#123;</span><br><span class="line">      <span class="built_in">console</span>.log(<span class="string">'doing something...'</span>); <span class="comment">// No need to declare a function on methods for 1 use case</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h3 id="总是在v-for循环中使用-key"><a href="#总是在v-for循环中使用-key" class="headerlink" title="总是在v-for循环中使用 :key"></a>总是在v-for循环中使用 :key</h3><p>通常来说，在模板的循环中添加<code>:key</code>是一个最佳实践，不包含<code>:key</code>的<code>v-for</code>循环会导致很难以查出的bug，尤其是在动画效果里面。</p>
+<h3 id="为混入属性-mixins-properties-使用-符号标记"><a href="#为混入属性-mixins-properties-使用-符号标记" class="headerlink" title="为混入属性(mixins properties)使用$_符号标记"></a>为混入属性(mixins properties)使用$_符号标记</h3><p>Mixins 是是将重复代码放入一个块并将其导入多次的好方法，但很多情况下，这可能会导致一些问题。 在这一点上，我们将解决<strong>重叠属性</strong>的问题。</p>
+<p>当我们讲一个mixin导入到我们的组件当中时，实际上是在吧minxin的代码和组件中原本的代码合并（merge）起来，那么同名的属性会呈现什么样呢？一般来说，组件的优先级更高，并且会覆盖mixin。</p>
+<p>那么我要是需要mixin有更高的优先级，该怎么办呢？开发过程中并不能声明优先级，但是你可以避免属性的叠加，并且使用合适的<strong>命名方式</strong>来规避属性的重写。</p>
+<p>In order to differentiate mixin properties from Component properties we use <code>$_</code>. Why these symbols? Well, several reasons:<br>为了将Mixin的属性与组件的属性相区分，我们使用<code>$_</code>，原因如下：</p>
+<ol>
+<li>这是Vuejs传统风格</li>
+<li><code>_</code>在Vuejs中表示私有属性</li>
+<li><code>$</code>属于Vue的保留字</li>
+</ol>
+<p>在<a href="https://vuejs.org/v2/style-guide/#Private-property-names-essential" target="_blank" rel="noopener">风格指南</a>可以看到官方推荐的Mixin命名：<code>$_myMixin_updateUser</code>。</p>
+<p>我发现添加mixin名称会产生比可读性更多的混乱。 但这也取决于mixin，情况和开发人员。</p>
+<p>通过在Mixin之前添加<code>$_</code>，例如<code>$_updateUser</code>，我发现代码更具可读性，可以轻松区分Component和Mixin。</p>
+<h3 id="在Mixin中使用的属性必须全部包含在Mixin之中"><a href="#在Mixin中使用的属性必须全部包含在Mixin之中" class="headerlink" title="在Mixin中使用的属性必须全部包含在Mixin之中"></a>在Mixin中使用的属性必须全部包含在Mixin之中</h3><p>继上一点之后，mixins还有另外一个问题：mixin不够独立。</p>
+<p>如果我们创建一个使用的mixin，比方说，<code>this.language</code>并没有从mixin中的store中定义或获取此属性，那么定义mixin的Component<strong>必须</strong>包含language属性。</p>
+<p>正如您已经知道的那样，这非常容易出错。 为了避免这些错误，我们在mixin里面获取所有需要的数据。 不要担心，如果我们两次获取数据，VueJs是聪明的，如果检测到从store获取到相同的东西，将不会做双重工作（因为大多数情况下会从Vuex获取数据）</p>
+<h3 id="对单文件组件使用PascalCase或kebab-case"><a href="#对单文件组件使用PascalCase或kebab-case" class="headerlink" title="对单文件组件使用PascalCase或kebab-case"></a>对单文件组件使用PascalCase或kebab-case</h3><p>PascalCase与编辑器具有更好的集成，并允许在常用IDE中实现更好的自动完成/导入功能。</p>
+<p>如果我们想要避免使用不区分大小写的文件系统的问题，那么就应该使用kebab-case。</p>
+<h3 id="基础组件名称之前加前缀"><a href="#基础组件名称之前加前缀" class="headerlink" title="基础组件名称之前加前缀"></a>基础组件名称之前加前缀</h3><p>装饰性、基础组件应该有一个前缀，以区别于其他复杂组件。 这大大提高了项目的可读性以及团队和开发人员之间的合作效率。</p>
+<h3 id="JS组件需以PascalCase-命名"><a href="#JS组件需以PascalCase-命名" class="headerlink" title="JS组件需以PascalCase 命名"></a>JS组件需以PascalCase 命名</h3><p>在JavaScript中，类和原型构造方法一般使用PascalCase 命名，并且Vue组件也需要按此方式命名。</p>
+<p>如果我们只通过<code>Vue.component</code>使用全局组件，那可以使用kebab-case。</p>
+<h3 id="Prop-在声明时需要按照CamelCase命名，但是在模板中需要改成kebab-case"><a href="#Prop-在声明时需要按照CamelCase命名，但是在模板中需要改成kebab-case" class="headerlink" title="Prop 在声明时需要按照CamelCase命名，但是在模板中需要改成kebab-case"></a>Prop 在声明时需要按照CamelCase命名，但是在模板中需要改成kebab-case</h3><p>HTML 中的特性名是大小写不敏感的，所以浏览器会把所有大写字符解释为小写字符。这意味着当你使用 DOM 中的模板时，camelCase (驼峰命名法) 的 prop 名需要使用其等价的 kebab-case (短横线分隔命名) 命名。</p>
+<h3 id="按照风格指南设置组件内部选项顺序"><a href="#按照风格指南设置组件内部选项顺序" class="headerlink" title="按照风格指南设置组件内部选项顺序"></a>按照风格指南设置组件内部选项顺序</h3><p>这看起来没什么意义，但是按此规则写成的组件更适合于大型多人开发项目，并且方便日后的扩展。</p>
+<p>详情在[风格指南]<a href="https://vuejs.org/v2/style-guide/#Component-instance-options-order-recommended" target="_blank" rel="noopener">https://vuejs.org/v2/style-guide/#Component-instance-options-order-recommended</a>)</p>
+<h3 id="不在同一个元素上同时使用v-if和v-for"><a href="#不在同一个元素上同时使用v-if和v-for" class="headerlink" title="不在同一个元素上同时使用v-if和v-for"></a>不在同一个元素上同时使用v-if和v-for</h3><p>这是一个性能杀手，列表越长，这种不良做法会带来越多的性能损失。</p>
+<p>让我们用代码解释一下，想象一下以下案例场景：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span></span></span><br><span class="line"><span class="tag">    <span class="attr">v-for</span>=<span class="string">"game in games"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">v-if</span>=<span class="string">"game.isActive"</span></span></span><br><span class="line"><span class="tag">    <span class="attr">:key</span>=<span class="string">"game.slug"</span></span></span><br><span class="line"><span class="tag">  &gt;</span></span><br><span class="line">    &#123;&#123; game.title &#125;&#125;</span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>与下面这种写法相比较：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.games.map(<span class="function"><span class="keyword">function</span> (<span class="params">game</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (game.isActive) &#123;</span><br><span class="line">    <span class="keyword">return</span> game.title</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>不论<code>games</code>是否改变其活动状态，我们每一次都需要遍历整个games列表。</p>
+<p>在Angular等其他框架中，这样写不能通过编译：</p>
+<p>(<em>`**ngIf</em><code>*can&#39;t go in the same element where there is an*</code>*<em>ngFor</em>`<em>)</em>。</p>
+<h3 id="Actions必须要有返回值"><a href="#Actions必须要有返回值" class="headerlink" title="Actions必须要有返回值"></a>Actions必须要有返回值</h3><p>这是Vuex的actions和<code>async</code>/<code>await</code>的冲突造成的，请看这个例子：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Store</span></span><br><span class="line">[SOME_ACTION] () &#123;</span><br><span class="line">   <span class="comment">// Doing stuff that takes a while</span></span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">'Action done'</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Consuming action</span></span><br><span class="line"><span class="keyword">async</span> doSomething() &#123;</span><br><span class="line">  <span class="keyword">await</span> dispatch(SOME_ACTION);</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Do stuff now'</span>);</span><br><span class="line">&#125;</span><br><span class="line">This will output:</span><br><span class="line"><span class="comment">// Do stuff now</span></span><br><span class="line"><span class="comment">// Action done</span></span><br></pre></td></tr></table></figure>
+<p>发生这种情况是因为<code>await</code>不知道要等待什么，相反，如果我们实际返回<code>Promise.resolve()</code>，则<code>await</code>将等待解析然后才继续。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Store</span></span><br><span class="line">[SOME_ACTION] () &#123;</span><br><span class="line">   <span class="comment">// Doing stuff that takes a while</span></span><br><span class="line">   <span class="built_in">console</span>.log(<span class="string">'Action done'</span>);</span><br><span class="line">   <span class="built_in">Promise</span>.resolve();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Consuming action</span></span><br><span class="line"><span class="keyword">async</span> doSomething() &#123;</span><br><span class="line">  <span class="keyword">await</span> dispatch(SOME_ACTION);</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'Do stuff now'</span>);</span><br><span class="line">&#125;</span><br><span class="line">This will output:</span><br><span class="line"><span class="comment">// Action done</span></span><br><span class="line"><span class="comment">// Do stuff now</span></span><br></pre></td></tr></table></figure>
+<h3 id="在actions和getters内部使用选择器"><a href="#在actions和getters内部使用选择器" class="headerlink" title="在actions和getters内部使用选择器"></a>在actions和getters内部使用选择器</h3><p>我们创建选择器是不仅要在app过程中使用，还要在Vuex的store中使用。</p>
+<p>例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// We have this selector</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> language = <span class="function">(<span class="params">state</span>) =&gt;</span> state.userConfig.language;</span><br><span class="line"><span class="comment">// In one of our actions, we need language:</span></span><br><span class="line"><span class="comment">// Bad</span></span><br><span class="line">[GET_GAMES](&#123; commit, rootState &#125;) &#123;</span><br><span class="line">   <span class="keyword">const</span> lang = rootState.userConfig.language;</span><br><span class="line">   <span class="comment">// Do stuff...</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Good</span></span><br><span class="line">[GET_GAMES](&#123; commit, rootState &#125;) &#123;</span><br><span class="line">   <span class="keyword">const</span> lang = language(rootState);</span><br><span class="line">   <span class="comment">// Do stuff...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><ol>
+<li><strong>在组件销毁之后使用<code>$off</code>清除事件监听器</strong> <a href="https://vuejs.org/v2/api/#vm-off" target="_blank" rel="noopener"><strong>source</strong></a></li>
+<li><strong>事件名称使用短横线式命名（kebab-case)</strong> <a href="https://vuejs.org/v2/guide/components-custom-events.html#Event-Names" target="_blank" rel="noopener"><strong>source</strong></a></li>
+<li><strong>避免在created以及watch中调用相同的method</strong> <a href="https://learn-vuejs.github.io/vue-patterns/patterns/#productivity-tips" target="_blank" rel="noopener"><strong>source</strong></a></li>
+<li><strong>总是在v-for循环中使用 :key[</strong>source**](<a href="https://vuejs.org/v2/style-guide/#Keyed-v-for-essential" target="_blank" rel="noopener">https://vuejs.org/v2/style-guide/#Keyed-v-for-essential</a>)</li>
+<li><strong>为混入属性(mixins properties)使用$_符号标记</strong> <a href="https://vuejs.org/v2/style-guide/#Private-property-names-essential" target="_blank" rel="noopener"><strong>source</strong></a></li>
+<li><strong>在Mixin中使用的属性必须全部包含在Mixin之中</strong></li>
+<li><strong>对单文件组件使用PascalCase或kebab-case</strong> <a href="https://vuejs.org/v2/style-guide/#Single-file-component-filename-casing-strongly-recommended" target="_blank" rel="noopener"><strong>source</strong></a></li>
+<li><strong>基础组件名称之前加前缀</strong> <a href="https://vuejs.org/v2/style-guide/#Base-component-names-strongly-recommended" target="_blank" rel="noopener"><strong>source</strong></a></li>
+<li><strong>JS组件需以PascalCase 命名</strong> <a href="https://vuejs.org/v2/style-guide/#Component-name-casing-in-JS-JSX-strongly-recommended" target="_blank" rel="noopener"><strong>source</strong></a></li>
+<li><strong>Prop 在声明时需要按照CamelCase命名，但是在模板中需要改成kebab-case[</strong>source**](<a href="https://vuejs.org/v2/style-guide/#Prop-name-casing-strongly-recommended" target="_blank" rel="noopener">https://vuejs.org/v2/style-guide/#Prop-name-casing-strongly-recommended</a>)</li>
+<li><strong>按照风格指南设置组件内部选项顺序</strong> <a href="https://vuejs.org/v2/style-guide/#Component-instance-options-order-recommended" target="_blank" rel="noopener"><strong>source</strong></a></li>
+<li><strong>不在同一个元素上同时使用v-if和v-for</strong> <a href="https://vuejs.org/v2/style-guide/#Avoid-v-if-with-v-for-essential" target="_blank" rel="noopener"><strong>source</strong></a></li>
+<li><strong>Actions必须要有返回值</strong></li>
+<li><strong>在actions和getters内部使用选择器</strong></li>
+</ol>
+<h3 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h3><ul>
+<li><a href="https://vuejs-tips.github.io/cheatsheet/" target="_blank" rel="noopener"><strong>https://vuejs-tips.github.io/cheatsheet/</strong></a></li>
+<li><a href="https://learn-vuejs.github.io/vue-patterns/patterns/" target="_blank" rel="noopener"><strong>https://learn-vuejs.github.io/vue-patterns/patterns/</strong></a></li>
+<li><a href="https://vuejs.org/v2/style-guide/" target="_blank" rel="noopener"><strong>https://vuejs.org/v2/style-guide/</strong></a></li>
+</ul>
+<h3 id="后记"><a href="#后记" class="headerlink" title="后记"></a>后记</h3><p>这篇文章是在使用VueJs之后完成的。 遵循这些风格指南和最佳实践有助于让每个新开发者都有宾至如归的感觉，并立即投入到工作中！</p>
+<h3 id="翻译后记"><a href="#翻译后记" class="headerlink" title="翻译后记"></a>翻译后记</h3><p>这篇文章着重于代码风格，良好的代码风格是优秀代码的必要条件，也是多人合作过程中必不可少的一部分，之前阅读过阿里的Java手册，深感一个庞大的项目，除了语法之外，也必须在开发之前对于全体开发者的代码风格进行约束，虽然目前有了Eslint之类的风格检查工具，但是诸如命名等还是需要统一约束。</p>
+<p>文章还对一些会影响性能以及容易报错的写法进行了纠正。总体来说值得一读，也值得翻译过来给大家看看😉</p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/Vue/">Vue</a>
+		  
+			<a href="/tags/Translation/">Translation</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2019/02/19/nextTick/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">如何理解Vue中的nextTick？</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2019/01/30/hello-world/">
+        <span class="next-text nav-default">Hello World</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2018 -
+    
+    2019
+    <span class="footer-author">Xu Jianxiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

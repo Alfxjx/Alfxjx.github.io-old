@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="来自中国大学MOOC的课程笔记。">
+
+
+
+
+  <meta name="keywords" content="Python,">
+
+
+
+
+
+  <link rel="alternate" href="/default" title="Alfred's">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://yoursite.com/2018/11/20/pydv/">
+
+
+<meta name="description" content="来自中国大学MOOC的课程笔记。">
+<meta name="keywords" content="Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="python数据可视化笔记">
+<meta property="og:url" content="http://yoursite.com/2018/11/20/pydv/index.html">
+<meta property="og:site_name" content="Alfred&#39;s">
+<meta property="og:description" content="来自中国大学MOOC的课程笔记。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2018/11/20/pydv/pydv/np-week1.JPG">
+<meta property="og:image" content="http://yoursite.com/2018/11/20/pydv/pydv/seed.JPG">
+<meta property="og:image" content="http://yoursite.com/2018/11/20/pydv/pydv/pieEqual.png">
+<meta property="og:image" content="http://yoursite.com/2018/11/20/pydv/pydv/histogram.png">
+<meta property="og:image" content="http://yoursite.com/2018/11/20/pydv/pydv/polar.png">
+<meta property="og:image" content="http://yoursite.com/2018/11/20/pydv/pydv/simpleScatter.png">
+<meta property="og:image" content="http://yoursite.com/2018/11/20/pydv/pydv/grawave.png">
+<meta property="og:updated_time" content="2019-02-20T08:52:46.416Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="python数据可视化笔记">
+<meta name="twitter:description" content="来自中国大学MOOC的课程笔记。">
+<meta name="twitter:image" content="http://yoursite.com/2018/11/20/pydv/pydv/np-week1.JPG">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: true
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> python数据可视化笔记 - Alfred's </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">Alfred's</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          python数据可视化笔记
+        
+      </h1>
+
+      <time class="post-time">
+          Nov 20 2018
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <h2 id="Numpy"><a href="#Numpy" class="headerlink" title="Numpy"></a>Numpy</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line">a = np.arrange(<span class="number">10</span>)</span><br><span class="line">a?</span><br><span class="line"><span class="comment">#IPython环境中，可以用? 显示数据的具体信息。</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">%run demo.py</span><br><span class="line"><span class="comment">#执行（在空的命名空间执行） demo.py</span></span><br><span class="line">%reset </span><br><span class="line">%who</span><br><span class="line"><span class="comment">#查看与删除变量</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>一维数据：列表、集合</li>
+<li>二维数据：列表</li>
+<li>高维数据：字典数据表示，json等</li>
+</ul>
+<h3 id="Numpy-n维数组对象—ndarray"><a href="#Numpy-n维数组对象—ndarray" class="headerlink" title="Numpy n维数组对象—ndarray"></a><strong>Numpy</strong> n维数组对象—ndarray</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">npsum</span><span class="params">()</span>:</span></span><br><span class="line">	a = np.array([<span class="number">0</span>,<span class="number">1</span>,<span class="number">2</span>])</span><br><span class="line">	b = np.array([<span class="number">8</span>,<span class="number">7</span>,<span class="number">6</span>])</span><br><span class="line">	npsum = a**<span class="number">2</span> + b**<span class="number">3</span></span><br><span class="line">	<span class="keyword">return</span> npsum</span><br><span class="line"><span class="comment"># 数组对应元素幂相加</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>轴axis（数据的维度）</li>
+<li>秩rank（维度的数量）</li>
+</ul>
+<h3 id="ndarray数组创建方法"><a href="#ndarray数组创建方法" class="headerlink" title="ndarray数组创建方法"></a><strong>ndarray数组创建方法</strong></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">x = np.array([<span class="number">1</span>,<span class="number">2</span>],(<span class="number">2</span>,<span class="number">3</span>))</span><br><span class="line">allone = np.ones((<span class="number">2</span>,<span class="number">3</span>),dtype = int32)</span><br><span class="line">allzeros = np.zeros(shape)</span><br><span class="line">y = np.eye(n)</span><br><span class="line"><span class="comment"># 单位对角阵</span></span><br><span class="line"></span><br><span class="line">x = np.arange(shape)</span><br><span class="line"><span class="comment">#顺序生成数组</span></span><br><span class="line"></span><br><span class="line">np.ones_like(a) </span><br><span class="line"><span class="comment"># 形状与a相同的全1数组</span></span><br><span class="line"></span><br><span class="line">np.linespace(<span class="number">1</span>,<span class="number">10</span>,<span class="number">4</span>,endpoint = false)</span><br><span class="line"><span class="comment"># 浮点数，从1到10， 总共四个，endpoint表示生成的数是否包括10</span></span><br><span class="line"></span><br><span class="line">np.concatenate() </span><br><span class="line"><span class="comment">#数组合并</span></span><br><span class="line"></span><br><span class="line">.reshape(shape)<span class="comment">#不改变原数组</span></span><br><span class="line">.resize(shape)<span class="comment">#改变</span></span><br><span class="line">.astype(shape)<span class="comment">#类型转变，必创建新数组</span></span><br></pre></td></tr></table></figure>
+<h3 id="数组的索引和切片"><a href="#数组的索引和切片" class="headerlink" title="数组的索引和切片"></a><strong>数组的索引和切片</strong></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#索引</span></span><br><span class="line">a = np.arange(<span class="number">24</span>).reshape((<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>))</span><br><span class="line">a</span><br><span class="line">array([[[ <span class="number">0</span>,  <span class="number">1</span>,  <span class="number">2</span>,  <span class="number">3</span>],</span><br><span class="line">        [ <span class="number">4</span>,  <span class="number">5</span>,  <span class="number">6</span>,  <span class="number">7</span>],</span><br><span class="line">        [ <span class="number">8</span>,  <span class="number">9</span>, <span class="number">10</span>, <span class="number">11</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">12</span>, <span class="number">13</span>, <span class="number">14</span>, <span class="number">15</span>],</span><br><span class="line">        [<span class="number">16</span>, <span class="number">17</span>, <span class="number">18</span>, <span class="number">19</span>],</span><br><span class="line">        [<span class="number">20</span>, <span class="number">21</span>, <span class="number">22</span>, <span class="number">23</span>]]])</span><br><span class="line">a[<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>] <span class="comment">#23</span></span><br><span class="line"><span class="comment">#第一个维度的第1个，第二维度的第2个，第三维度的第三个</span></span><br><span class="line"><span class="comment">#从0开始</span></span><br><span class="line"></span><br><span class="line">a[<span class="number">-1</span>,<span class="number">-2</span>,<span class="number">-3</span>]<span class="comment">#17</span></span><br><span class="line"><span class="comment">#负数从右向左，-1就是右边第一个</span></span><br><span class="line"></span><br><span class="line"><span class="comment">#切片</span></span><br><span class="line">a[:,<span class="number">1</span>,<span class="number">-3</span>] <span class="comment">#array([ 5, 17])</span></span><br><span class="line"><span class="comment">#不考虑第一维度，只考虑第二维度是1，和第三维度是-3的。</span></span><br><span class="line">a[:,:,::<span class="number">2</span>] <span class="comment"># 第三维度步长跳跃切片</span></span><br><span class="line">array([[[ <span class="number">0</span>,  <span class="number">2</span>],</span><br><span class="line">        [ <span class="number">4</span>,  <span class="number">6</span>],</span><br><span class="line">        [ <span class="number">8</span>, <span class="number">10</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">12</span>, <span class="number">14</span>],</span><br><span class="line">        [<span class="number">16</span>, <span class="number">18</span>],</span><br><span class="line">        [<span class="number">20</span>, <span class="number">22</span>]]])</span><br></pre></td></tr></table></figure>
+<h3 id="ndarray数组运算"><a href="#ndarray数组运算" class="headerlink" title="ndarray数组运算"></a><strong>ndarray数组运算</strong></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#数组与标量计算</span></span><br><span class="line">a = np.arange(<span class="number">24</span>).reshape((<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>))</span><br><span class="line">a.mean() <span class="comment">#平均值</span></span><br><span class="line">a = a/a.mean()</span><br><span class="line">a</span><br><span class="line">array([[[<span class="number">0.</span>        , <span class="number">0.08695652</span>, <span class="number">0.17391304</span>, <span class="number">0.26086957</span>],</span><br><span class="line">        [<span class="number">0.34782609</span>, <span class="number">0.43478261</span>, <span class="number">0.52173913</span>, <span class="number">0.60869565</span>],</span><br><span class="line">        [<span class="number">0.69565217</span>, <span class="number">0.7826087</span> , <span class="number">0.86956522</span>, <span class="number">0.95652174</span>]],</span><br><span class="line"></span><br><span class="line">       [[<span class="number">1.04347826</span>, <span class="number">1.13043478</span>, <span class="number">1.2173913</span> , <span class="number">1.30434783</span>],</span><br><span class="line">        [<span class="number">1.39130435</span>, <span class="number">1.47826087</span>, <span class="number">1.56521739</span>, <span class="number">1.65217391</span>],</span><br><span class="line">        [<span class="number">1.73913043</span>, <span class="number">1.82608696</span>, <span class="number">1.91304348</span>, <span class="number">2.</span>        ]]])</span><br></pre></td></tr></table></figure>
+<p><em>注意数组是否真实改变</em></p>
+<p>numpy 函数是对对应元素进行计算</p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a><strong>小结</strong></h3><p><img src="./pydv/np-week1.JPG" alt="np-week1"></p>
+<h3 id="csv文件：存取一维、二维数组"><a href="#csv文件：存取一维、二维数组" class="headerlink" title="csv文件：存取一维、二维数组"></a><strong>csv文件：存取一维、二维数组</strong></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">np.savetxt(frame, array,fmt = <span class="string">'%18e'</span>,delimiter=<span class="keyword">None</span>)<span class="comment">#读取</span></span><br><span class="line">np.loadtxt(frame, dtype=float,delimiter=<span class="keyword">None</span>,unpack=false)<span class="comment">#写入</span></span><br><span class="line"><span class="comment">#'%18e' 18位小数的浮点数</span></span><br><span class="line">a = np.arange(<span class="number">12</span>).reshape(<span class="number">3</span>,<span class="number">4</span>)</span><br><span class="line">np.savetxt(<span class="string">'a.csv'</span>,a,fmt=<span class="string">'%d'</span>,delimiter=<span class="string">','</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.tofile(frame,sep=<span class="string">","</span>,format=<span class="string">'%s'</span>)<span class="comment">#存</span></span><br><span class="line">.fromfile(frame,dtype=float,count=<span class="number">-1</span>,sep=<span class="string">''</span>)<span class="comment">#取 </span></span><br><span class="line"><span class="comment">#sep为空，存取的是二进制</span></span><br><span class="line">a = np.arange(<span class="number">100</span>).reshape(<span class="number">5</span>,<span class="number">10</span>,<span class="number">2</span>)</span><br><span class="line">a.tofile(<span class="string">"b.dat"</span>,sep=<span class="string">","</span>,format=<span class="string">'%d'</span>)</span><br></pre></td></tr></table></figure>
+<p>这种方法在存取过程需要知道原始数据的信息，需要新建一个元数据文件，存原始数据的维度信息。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">np.save(frame, array)</span><br><span class="line">np.load(frame, array)</span><br><span class="line">np.savez(frame, array)<span class="comment"># zip</span></span><br><span class="line"><span class="comment">#frame = .npy /.npz 格式</span></span><br></pre></td></tr></table></figure>
+<h3 id="随机数函数"><a href="#随机数函数" class="headerlink" title="随机数函数"></a><strong>随机数函数</strong></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">np.random.randn(d0,d1,....,dn) <span class="comment"># 有n 表示正态分布</span></span><br></pre></td></tr></table></figure>
+<p><img src="./pydv/seed.JPG" alt="seed"></p>
+<p><em>seed函数，每次生成相同的随机数组。</em></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a = np.random.randint(<span class="number">100</span>,<span class="number">200</span>,(<span class="number">3</span>,<span class="number">4</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.random.shuffle(a)</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.random.permutation(a) <span class="comment">#a 不变</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.random.choice(a,size,replace=false,p=b/np.sum(b))</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">uniform(low,high,size) </span><br><span class="line"><span class="comment">#产生具有均匀分布的数组,low起始值,high结束值,size形状</span></span><br><span class="line">normal(loc,scale,size)</span><br><span class="line"><span class="comment">#产生具有正态分布的数组,loc均值,scale标准差,size形状</span></span><br><span class="line">poisson(lam,size)</span><br><span class="line"><span class="comment">#产生具有泊松分布的数组,lam随机事件发生率,size形状</span></span><br></pre></td></tr></table></figure>
+<h3 id="统计函数"><a href="#统计函数" class="headerlink" title="统计函数"></a><strong>统计函数</strong></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">std(a, axis=<span class="keyword">None</span>) </span><br><span class="line"><span class="comment">#根据给定轴axis计算数组a相关元素的标准差</span></span><br><span class="line">var(a, axis=<span class="keyword">None</span>)</span><br><span class="line"><span class="comment">#根据给定轴axis计算数组a相关元素的方差</span></span><br></pre></td></tr></table></figure>
+<h3 id="梯度函数"><a href="#梯度函数" class="headerlink" title="梯度函数"></a><strong>梯度函数</strong></h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span>a=np.random.randint(<span class="number">0</span>,<span class="number">20</span>,(<span class="number">5</span>))</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>a</span><br><span class="line">array([<span class="number">18</span>, <span class="number">10</span>, <span class="number">18</span>,  <span class="number">9</span>, <span class="number">16</span>])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.gradient(a)</span><br><span class="line">array([<span class="number">-8.</span> ,  <span class="number">0.</span> , <span class="number">-0.5</span>, <span class="number">-1.</span> ,  <span class="number">7.</span> ])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c= np.random.randint(<span class="number">0</span>,<span class="number">50</span>,(<span class="number">3</span>,<span class="number">5</span>))</span><br><span class="line"></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>c <span class="comment">#二维数组？？？？</span></span><br><span class="line">array([[<span class="number">11</span>, <span class="number">44</span>, <span class="number">10</span>, <span class="number">38</span>, <span class="number">20</span>],</span><br><span class="line">       [<span class="number">46</span>, <span class="number">33</span>, <span class="number">19</span>, <span class="number">13</span>, <span class="number">33</span>],</span><br><span class="line">       [ <span class="number">7</span>, <span class="number">32</span>, <span class="number">22</span>, <span class="number">19</span>, <span class="number">38</span>]])</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>np.gradient(c)</span><br><span class="line">[array([[ <span class="number">35.</span> , <span class="number">-11.</span> ,   <span class="number">9.</span> , <span class="number">-25.</span> ,  <span class="number">13.</span> ],</span><br><span class="line">       [ <span class="number">-2.</span> ,  <span class="number">-6.</span> ,   <span class="number">6.</span> ,  <span class="number">-9.5</span>,   <span class="number">9.</span> ],</span><br><span class="line">       [<span class="number">-39.</span> ,  <span class="number">-1.</span> ,   <span class="number">3.</span> ,   <span class="number">6.</span> ,   <span class="number">5.</span> ]]), array([[ <span class="number">33.</span> ,  <span class="number">-0.5</span>,  <span class="number">-3.</span> ,   <span class="number">5.</span> , <span class="number">-18.</span> ],</span><br><span class="line">       [<span class="number">-13.</span> , <span class="number">-13.5</span>, <span class="number">-10.</span> ,   <span class="number">7.</span> ,  <span class="number">20.</span> ],</span><br><span class="line">       [ <span class="number">25.</span> ,   <span class="number">7.5</span>,  <span class="number">-6.5</span>,   <span class="number">8.</span> ,  <span class="number">19.</span> ]])]</span><br></pre></td></tr></table></figure>
+<h2 id="Matplotlib"><a href="#Matplotlib" class="headerlink" title="Matplotlib"></a>Matplotlib</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">plt.plot((xList,)yList（， ‘—-’）)</span><br><span class="line">plt. show()</span><br><span class="line">plt.savefig(‘test’,dpi=<span class="number">300</span>) <span class="comment">#.png</span></span><br><span class="line">plt.axis(xStart,xEnd,yStart,yEnd)<span class="comment">#图的坐标轴范围</span></span><br><span class="line">plt.subplot(nrows,ncols,plot_number)<span class="comment">#横轴数，纵轴数，绘图区域序号</span></span><br></pre></td></tr></table></figure>
+<h3 id="plot-函数"><a href="#plot-函数" class="headerlink" title="plot()函数"></a>plot()函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">plt.plot(x,y,format_string,**kwargs)</span><br><span class="line"><span class="comment">#可绘制多条曲线，此时x是必须的</span></span><br><span class="line"><span class="comment">#format_string 格式：颜色/风格/标记字符</span></span><br></pre></td></tr></table></figure>
+<p>format_string<br>颜色：’b’ 蓝色‘w’白色 ’#444’<br>风格：’-‘/’—‘/’-.‘ etc.<br>标记：’.’/‘,’/‘o’/‘v’/‘^’/‘&gt;’/‘&lt;‘/‘1’ etc.</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#example</span></span><br><span class="line">a = np.arange(<span class="number">10</span>)</span><br><span class="line">plt.plot(a,a*<span class="number">1.5</span>,’go-‘,a,a*<span class="number">2.5</span>,’r-‘) <span class="comment"># g means green</span></span><br><span class="line"><span class="comment">#markerfacecolor 只改变标记的颜色，使得线与标记颜色不一样</span></span><br></pre></td></tr></table></figure>
+<h3 id="plot-中文显示"><a href="#plot-中文显示" class="headerlink" title="plot() 中文显示"></a>plot() 中文显示</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib</span><br><span class="line">matplotlib.rcParams[‘font.family’]=‘SImHei’<span class="comment">#黑体</span></span><br><span class="line"><span class="comment">#font.family字体</span></span><br><span class="line"><span class="comment">#font_size大小</span></span><br><span class="line"><span class="comment">#font.style斜体，加粗等风格</span></span><br><span class="line">plt.xlabel(‘横轴：时间’)</span><br><span class="line"></span><br><span class="line"><span class="comment">#只改变输出的字体，在有中文输出的位置，加入fontproperties</span></span><br><span class="line">plt.xlabel(‘横轴：时间’,fontproperties=‘SimHei’,font.size = <span class="number">20</span>)</span><br></pre></td></tr></table></figure>
+<h3 id="pyplot文本显示方法"><a href="#pyplot文本显示方法" class="headerlink" title="pyplot文本显示方法"></a>pyplot文本显示方法</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">plt.title(r’余弦函数实例 $ y = cos(<span class="number">2</span>\pi x) $’,fontproperties = ‘SimHei’,font.size = <span class="number">20</span>)</span><br><span class="line"><span class="comment">#  $ $ 属于Latex表示方法</span></span><br><span class="line">plt.xlabel()</span><br><span class="line">plt.text(<span class="number">2</span>, <span class="number">1</span>, r’$\mu=<span class="number">100</span>’ ,font.size = <span class="number">10</span>)<span class="comment">#任意位置文本</span></span><br><span class="line">plt.anotate(‘this <span class="keyword">is</span> ‘, xy=(<span class="number">2</span>,<span class="number">1</span>), xytext=(<span class="number">3</span>,<span class="number">1.5</span>), arrowprops = dict(facecolor = ‘black’,shrink = <span class="number">0.1</span>, width = <span class="number">3</span>))</span><br><span class="line"><span class="comment">#带箭头的注释 shrink 表示箭头指向的缩进</span></span><br></pre></td></tr></table></figure>
+<h3 id="子绘图区域设计方法"><a href="#子绘图区域设计方法" class="headerlink" title="子绘图区域设计方法"></a>子绘图区域设计方法</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">plt.subplot2grid((<span class="number">3</span>,<span class="number">3</span>),(<span class="number">1</span>,<span class="number">0</span>),colspan=<span class="number">2</span>)</span><br><span class="line"><span class="comment"># 区域分为3x3的区域，选中第二行第一个，长度为2个格子</span></span><br><span class="line"><span class="comment">#colspan/rowspan</span></span><br><span class="line"><span class="keyword">import</span> matplotlib.gridspec <span class="keyword">as</span> gridspec</span><br><span class="line">gs = grispec.GridSpec(<span class="number">3</span>,<span class="number">3</span>)</span><br><span class="line">ax1 = plt.subplot(gs[<span class="number">0</span>,:])</span><br></pre></td></tr></table></figure>
+<h3 id="16种常用pyplot函数方法"><a href="#16种常用pyplot函数方法" class="headerlink" title="16种常用pyplot函数方法"></a>16种常用pyplot函数方法</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">plt.plot()</span><br><span class="line">plt.bar()</span><br><span class="line">plt.polar()</span><br><span class="line">plt.pie()</span><br><span class="line">plt.psd()<span class="comment">#功率谱密度图</span></span><br><span class="line">plt.scatter()<span class="comment">#散点图</span></span><br><span class="line">plt.hist()<span class="comment">#直方图</span></span><br><span class="line">plt.plot_date()<span class="comment">#图表日期</span></span><br></pre></td></tr></table></figure>
+<h3 id="饼图"><a href="#饼图" class="headerlink" title="饼图"></a>饼图</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">labels = <span class="string">'1'</span>,<span class="string">'2'</span>,<span class="string">'3'</span>,<span class="string">'4'</span></span><br><span class="line"><span class="comment">#尺寸</span></span><br><span class="line">sizes = [<span class="number">15</span>,<span class="number">30</span>,<span class="number">45</span>,<span class="number">10</span>]</span><br><span class="line"><span class="comment">#突出</span></span><br><span class="line">explode = (<span class="number">0</span>,<span class="number">0.1</span>,<span class="number">0</span>,<span class="number">0</span>)</span><br><span class="line"><span class="comment">#auotopct 百分数显示方式</span></span><br><span class="line"><span class="comment">#startangle 起始角度</span></span><br><span class="line">plt.pie(sizes,explode = explode,labels = labels,autopct = <span class="string">'%1.1f%%'</span>,shadow = <span class="keyword">False</span>,startangle = <span class="number">90</span>)</span><br><span class="line"><span class="comment">#变成正圆---todo</span></span><br><span class="line">plt.axis(<span class="string">'equal'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="./pydv/pieEqual.png" alt="pieEqual"></p>
+<h3 id="直方图"><a href="#直方图" class="headerlink" title="直方图"></a>直方图</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">np.random.seed(<span class="number">0</span>)</span><br><span class="line">mu,sigma = <span class="number">100</span>,<span class="number">20</span> <span class="comment"># 均值和标准差</span></span><br><span class="line">a = np.random.normal(mu, sigma, size=<span class="number">100</span>)</span><br><span class="line"><span class="comment">#bin:直方图个数</span></span><br><span class="line"><span class="comment"># normed =0 显示个数 =1归一化</span></span><br><span class="line"><span class="comment"># alpha尺寸比例</span></span><br><span class="line">plt.hist(a,bin=<span class="number">10</span>,normed=<span class="number">1</span>,histtype=<span class="string">'stepfilled'</span>, facecolor=<span class="string">'b'</span>, alpha = <span class="number">0.75</span>)</span><br><span class="line">plt.title(<span class="string">'Histogram'</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="./pydv/histogram.png" alt="histograml"></p>
+<h3 id="极坐标图"><a href="#极坐标图" class="headerlink" title="极坐标图"></a>极坐标图</h3><p>面向对象的绘制方法</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line">N=<span class="number">10</span></span><br><span class="line">theta=np.linspace(<span class="number">0.0</span>,<span class="number">2</span>*np.pi,N,endpoint=<span class="keyword">False</span>)</span><br><span class="line">radii=<span class="number">10</span>*np.random.rand(N)</span><br><span class="line">width=np.pi/<span class="number">2</span>*np.random.rand(N)</span><br><span class="line">ax = plt.subplot(<span class="number">111</span>,projection=<span class="string">'polar'</span>)</span><br><span class="line">bars = ax.bar(theta,radii,width,bottom=<span class="number">0.0</span>)</span><br><span class="line"><span class="keyword">for</span> r, bar <span class="keyword">in</span> zip(radii,bars):</span><br><span class="line">    bar.set_facecolor(plt.cm.viridis(r/<span class="number">10.</span>))</span><br><span class="line">    bar.set_alpha(<span class="number">0.5</span>)</span><br></pre></td></tr></table></figure>
+<p><img src="./pydv/polar.png" alt="polar"></p>
+<h3 id="散点图"><a href="#散点图" class="headerlink" title="散点图"></a>散点图</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="comment">#建立一个fig对象，建立一个axis对象。</span></span><br><span class="line">fig,ax = plt.subplots()</span><br><span class="line">ax.plot(<span class="number">10</span>*np.random.randn(<span class="number">100</span>), <span class="number">10</span>*np.random.randn(<span class="number">100</span>),<span class="string">'o'</span>)</span><br><span class="line">ax.set_title(<span class="string">'Simple Scatter'</span>)</span><br><span class="line">plt.show()</span><br></pre></td></tr></table></figure>
+<p><img src="./pydv/simpleScatter.png" alt="simple scatterl"></p>
+<h3 id="引力波绘制"><a href="#引力波绘制" class="headerlink" title="引力波绘制"></a>引力波绘制</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">from</span> scipy.io <span class="keyword">import</span> wavfile</span><br><span class="line"> </span><br><span class="line">rate_h, hstrain= wavfile.read(<span class="string">r"F:\\code\\c\\DataScience\\pyDV\\grawave\\H1_Strain.wav"</span>,<span class="string">"rb"</span>)</span><br><span class="line">rate_l, lstrain= wavfile.read(<span class="string">r"F:\\code\\c\\DataScience\\pyDV\\grawave\\L1_Strain.wav"</span>,<span class="string">"rb"</span>)</span><br><span class="line"><span class="comment">#reftime, ref_H1 = np.genfromtxt('GW150914_4_NR_waveform_template.txt').transpose()</span></span><br><span class="line">reftime, ref_H1 = np.genfromtxt(<span class="string">'F:\\code\\c\\DataScience\\pyDV\\grawave\\wf_template.txt'</span>).transpose() <span class="comment">#使用python123.io下载文件</span></span><br><span class="line"> </span><br><span class="line">htime_interval = <span class="number">1</span>/rate_h</span><br><span class="line">ltime_interval = <span class="number">1</span>/rate_l</span><br><span class="line">fig = plt.figure(figsize=(<span class="number">12</span>, <span class="number">6</span>))</span><br><span class="line"> </span><br><span class="line"><span class="comment"># 丢失信号起始点</span></span><br><span class="line">htime_len = hstrain.shape[<span class="number">0</span>]/rate_h</span><br><span class="line">htime = np.arange(-htime_len/<span class="number">2</span>, htime_len/<span class="number">2</span> , htime_interval)</span><br><span class="line">plth = fig.add_subplot(<span class="number">221</span>)</span><br><span class="line">plth.plot(htime, hstrain, <span class="string">'y'</span>)</span><br><span class="line">plth.set_xlabel(<span class="string">'Time (seconds)'</span>)</span><br><span class="line">plth.set_ylabel(<span class="string">'H1 Strain'</span>)</span><br><span class="line">plth.set_title(<span class="string">'H1 Strain'</span>)</span><br><span class="line"> </span><br><span class="line">ltime_len = lstrain.shape[<span class="number">0</span>]/rate_l</span><br><span class="line">ltime = np.arange(-ltime_len/<span class="number">2</span>, ltime_len/<span class="number">2</span> , ltime_interval)</span><br><span class="line">pltl = fig.add_subplot(<span class="number">222</span>)</span><br><span class="line">pltl.plot(ltime, lstrain, <span class="string">'g'</span>)</span><br><span class="line">pltl.set_xlabel(<span class="string">'Time (seconds)'</span>)</span><br><span class="line">pltl.set_ylabel(<span class="string">'L1 Strain'</span>)</span><br><span class="line">pltl.set_title(<span class="string">'L1 Strain'</span>)</span><br><span class="line"> </span><br><span class="line">pltref = fig.add_subplot(<span class="number">212</span>)</span><br><span class="line">pltref.plot(reftime, ref_H1)</span><br><span class="line">pltref.set_xlabel(<span class="string">'Time (seconds)'</span>)</span><br><span class="line">pltref.set_ylabel(<span class="string">'Template Strain'</span>)</span><br><span class="line">pltref.set_title(<span class="string">'Template'</span>)</span><br><span class="line">fig.tight_layout()</span><br><span class="line"> </span><br><span class="line">plt.savefig(<span class="string">"F:\\code\\c\\DataScience\\pyDV\\pic\\Gravitational_Waves_Original.png"</span>)</span><br><span class="line">plt.show()</span><br><span class="line"><span class="comment">#plt.close(fig)</span></span><br></pre></td></tr></table></figure>
+<p><img src="./pydv/grawave.png" alt="grawave"></p>
+<h2 id="Pandas"><a href="#Pandas" class="headerlink" title="Pandas"></a>Pandas</h2><ul>
+<li>易操作的数据类型<code>Series &amp; DataFrame</code></li>
+<li>分析工具</li>
+</ul>
+<p><code>import pandas as pd</code> pandas 与<code>NUMPY</code>关系紧密</p>
+<h3 id="Series-类型"><a href="#Series-类型" class="headerlink" title="Series 类型"></a>Series 类型</h3><p>一组数据加数据索引的显式关系</p>
+<p><code>index_0 =&gt; data_a</code></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</span><br><span class="line"></span><br><span class="line">a = pd.Series([<span class="number">9</span>,<span class="number">8</span>,<span class="number">7</span>,<span class="number">6</span>]) <span class="comment">#default 0-&gt;9</span></span><br><span class="line">   </span><br><span class="line">a = pd.Series([<span class="number">9</span>,<span class="number">8</span>,<span class="number">7</span>,<span class="number">6</span>], index=[<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'d'</span>])</span><br><span class="line">Out[<span class="number">5</span>]: </span><br><span class="line">a    <span class="number">9</span>	b    <span class="number">8</span>	c    <span class="number">7</span>	d    <span class="number">6</span></span><br><span class="line">dtype: int64</span><br><span class="line"><span class="comment">#标量创建 a/b/c-&gt; 25</span></span><br><span class="line">pd.Series(<span class="number">25</span>, index=[<span class="string">'a'</span>,<span class="string">'b'</span>,<span class="string">'c'</span>,<span class="string">'d'</span>])</span><br><span class="line"><span class="comment">#字典创建 </span></span><br><span class="line">pd.Series(&#123;<span class="string">'a'</span>:<span class="number">9</span>,<span class="string">'b'</span>:<span class="number">8</span>&#125;)</span><br><span class="line">pd.Series(&#123;<span class="string">'a'</span>:<span class="number">9</span>,<span class="string">'b'</span>:<span class="number">8</span>&#125;, index=[<span class="string">'b'</span>,<span class="string">'a'</span>,<span class="string">'c'</span>])</span><br><span class="line"><span class="comment"># c-&gt; NaN</span></span><br></pre></td></tr></table></figure>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/Python/">Python</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2018/12/30/你有没有给自己设置一个长期的目标/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">你有没有给自己设置一个长期的目标</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2018 -
+    
+    2019
+    <span class="footer-author">Xu Jianxiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

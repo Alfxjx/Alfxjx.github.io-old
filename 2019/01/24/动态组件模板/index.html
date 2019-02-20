@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="组件并不总是有着相同的结构，有时一些组件需要去管理很多的状态（state），因此需要程序去异步（asynchronously）地管理这些状态。">
+
+
+
+
+  <meta name="keywords" content="Vue,Translation,">
+
+
+
+
+
+  <link rel="alternate" href="/default" title="Alfred's">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://yoursite.com/2019/01/24/动态组件模板/">
+
+
+<meta name="description" content="组件并不总是有着相同的结构，有时一些组件需要去管理很多的状态（state），因此需要程序去异步（asynchronously）地管理这些状态。">
+<meta name="keywords" content="Vue,Translation">
+<meta property="og:type" content="article">
+<meta property="og:title" content="译-在Vue.js中使用动态组件模板">
+<meta property="og:url" content="http://yoursite.com/2019/01/24/动态组件模板/index.html">
+<meta property="og:site_name" content="Alfred&#39;s">
+<meta property="og:description" content="组件并不总是有着相同的结构，有时一些组件需要去管理很多的状态（state），因此需要程序去异步（asynchronously）地管理这些状态。">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/01/24/动态组件模板/动态组件模板/1_Dr9qaaVrBy3Yv2c5WRswHQ.jpeg">
+<meta property="og:image" content="http://yoursite.com/2019/01/24/动态组件模板/动态组件模板/1_mAqwoWbkZwspc_W7sYLwAA.jpeg">
+<meta property="og:updated_time" content="2019-02-20T08:58:16.550Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="译-在Vue.js中使用动态组件模板">
+<meta name="twitter:description" content="组件并不总是有着相同的结构，有时一些组件需要去管理很多的状态（state），因此需要程序去异步（asynchronously）地管理这些状态。">
+<meta name="twitter:image" content="http://yoursite.com/2019/01/24/动态组件模板/动态组件模板/1_Dr9qaaVrBy3Yv2c5WRswHQ.jpeg">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: true
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> 译-在Vue.js中使用动态组件模板 - Alfred's </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">Alfred's</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          译-在Vue.js中使用动态组件模板
+        
+      </h1>
+
+      <time class="post-time">
+          Jan 24 2019
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>原作者： <a href="https://medium.com/@philippkuehn" target="_blank" rel="noopener">Philipp Kühn</a>    </p>
+<p>翻译： <a href="https://github.com/Alfxjx" target="_blank" rel="noopener">Alfxjx</a></p>
+<blockquote>
+<p>组件并不总是有着相同的结构，有时一些组件需要去管理很多的状态（state），因此需要程序去异步（asynchronously）地管理这些状态。</p>
+</blockquote>
+<h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p>我们在<a href="">Scrumpy</a>（一个在线工作平台）中使用了很多的组件模板，例如通知、评论以及附件等等。首先让我以评论组件为例。</p>
+<p>目前来说，评论栏早已经不是一个简简单单的文本域了。用户在评论的时候不可避免的需要加入诸如超链接、图片、短视频等等多媒体材料。这些复杂的元素都需要在评论中被渲染出来。但是如果你决定在一个组件中把所有工作都做了，这个组件的复杂度将会变得太高，失去了组建的意义。</p>
+<p><img src="./动态组件模板/1_Dr9qaaVrBy3Yv2c5WRswHQ.jpeg" alt="The most common previews"></p>
+<p>​        The most common previews for links — open graph data, images &amp; videos</p>
+<p>那么我们该如何解决这个问题呢。大多数的程序员会检查所有的可能性，然后分别为此设置特定的组件。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div class=&quot;comment&quot;&gt;</span><br><span class="line">        // comment text    </span><br><span class="line">        &lt;p&gt;...&lt;/p&gt;</span><br><span class="line">    </span><br><span class="line">        // open graph image</span><br><span class="line">        &lt;link-open-graph v-if=&quot;link.type === &apos;open-graph&apos;&quot; /&gt;</span><br><span class="line">        // regular image</span><br><span class="line">        &lt;link-image v-else-if=&quot;link.type === &apos;image&apos;&quot; /&gt;</span><br><span class="line">        // video embed</span><br><span class="line">        &lt;link-video v-else-if=&quot;link.type === &apos;video&apos;&quot; /&gt;</span><br><span class="line">        ...</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure>
+<p>但是，这样一来，随着支持的类型越来越多，模板也会变得越来越复杂。例如我们的评论模板支持包括油管、推特、Github、SoundCloud、vimeo、Figma等等等等，这样的模板就会变得非常复杂。</p>
+<h2 id="组件的动态模板"><a href="#组件的动态模板" class="headerlink" title="组件的动态模板"></a>组件的动态模板</h2><p>另一种解决方案就是使用加载器（loader）在特定情况下来加载对应的模板。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div class=&quot;comment&quot;&gt;</span><br><span class="line">        // comment text    </span><br><span class="line">        &lt;p&gt;...&lt;/p&gt;</span><br><span class="line">    </span><br><span class="line">        // type can be &apos;open-graph&apos;, &apos;image&apos;, &apos;video&apos;...</span><br><span class="line">        &lt;dynamic-link :data=&quot;someData&quot; :type=&quot;type&quot; /&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure>
+<p>看起来好多了，对吗？</p>
+<p>现在让我们来看看这些组件具体是如何工作的。首先我们需要改变一下文件的结构。</p>
+<p><img src="./动态组件模板/1_mAqwoWbkZwspc_W7sYLwAA.jpeg" alt="folder structure"></p>
+<p>​                    folder structure for dynamic component templates</p>
+<p>就我个人而言，我偏向于将每一个组件包裹在一个文件夹里，这样之后可以添加样式以及测试文件。当然文件的结构如何组织其实完全取决于你自己。</p>
+<p>接下来，我们看看<code>&lt;dynamic-link /&gt;</code>是如何工作的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;component :is=&quot;component&quot; :data=&quot;data&quot; v-if=&quot;component&quot; /&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">    name: &apos;dynamic-link&apos;,</span><br><span class="line">    props: [&apos;data&apos;, &apos;type&apos;],</span><br><span class="line">    data() &#123;</span><br><span class="line">        return &#123;</span><br><span class="line">            component: null,</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">    computed: &#123;</span><br><span class="line">        loader() &#123;</span><br><span class="line">            if (!this.type) &#123;</span><br><span class="line">                return null</span><br><span class="line">            &#125;</span><br><span class="line">            return () =&gt; import(`templates/$&#123;this.type&#125;`)</span><br><span class="line">        &#125;,</span><br><span class="line">    &#125;,</span><br><span class="line">    mounted() &#123;</span><br><span class="line">        this.loader()</span><br><span class="line">            .then(() =&gt; &#123;</span><br><span class="line">                this.component = () =&gt; this.loader()</span><br><span class="line">            &#125;)</span><br><span class="line">            .catch(() =&gt; &#123;</span><br><span class="line">                this.component = () =&gt; import(&apos;templates/default&apos;)</span><br><span class="line">            &#125;)</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>接下来该怎么做？Vue.js默认提供了<a href="https://cn.vuejs.org/v2/guide/components-dynamic-async.html" target="_blank" rel="noopener">动态组件</a>，但是他的缺点就是你需要将你需要的使用的所有组件都导入进来。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;component :is=&quot;someComponent&quot;&gt;&lt;/component&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">import someComponent from &apos;./someComponent&apos;</span><br><span class="line">export default &#123;</span><br><span class="line">    components: &#123;</span><br><span class="line">        someComponent,</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>这事实上也没有解决我们的问题。</p>
+<p>为了解决这个问题，我们使用Webpack的<a href="https://medium.com/front-end-hacking/webpack-and-dynamic-imports-doing-it-right-72549ff49234" target="_blank" rel="noopener">动态加载技术</a>，配合上计算属性返回的方法，可以实现动态组件模板了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">computed: &#123;</span><br><span class="line">    loader() &#123;</span><br><span class="line">        if (!this.type) &#123;</span><br><span class="line">           return null</span><br><span class="line">        &#125;</span><br><span class="line">        return () =&gt; import(`templates/$&#123;this.type&#125;`)</span><br><span class="line">    &#125;,</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<p>组件在mounted之后，模板开始加载，为了能够向用户展示错误信息，我们设置了一个报错的模板。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mounted() &#123;</span><br><span class="line">    this.loader()</span><br><span class="line">        .then(() =&gt; &#123;</span><br><span class="line">           this.component = () =&gt; this.loader()</span><br><span class="line">        &#125;)</span><br><span class="line">        .catch(() =&gt; &#123;</span><br><span class="line">           this.component = () =&gt; import(&apos;templates/default&apos;)</span><br><span class="line">        &#125;)</span><br><span class="line">&#125;,</span><br></pre></td></tr></table></figure>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><ul>
+<li>当一个组件里面需要很多界面的时候，很有必要使用动态组件模板</li>
+<li>具有很好的扩展性</li>
+<li>异步加载，模板只在需要的时候加载</li>
+<li>让你的代码保持<a href="https://en.wikipedia.org/wiki/Don%27t_repeat_yourself" target="_blank" rel="noopener">DRY</a></li>
+</ul>
+<p><a href="https://medium.com/scrumpy/dynamic-component-templates-with-vue-js-d9236ab183bb" target="_blank" rel="noopener"><strong>原文链接</strong></a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/Vue/">Vue</a>
+		  
+			<a href="/tags/Translation/">Translation</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2019/01/25/ES6中的Proxy/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">ES6中的Proxy</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2019/01/23/浏览器跨域/">
+        <span class="next-text nav-default">浏览器跨域</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2018 -
+    
+    2019
+    <span class="footer-author">Xu Jianxiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

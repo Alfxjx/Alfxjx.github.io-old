@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="ES6新增数据类型Symbol">
+
+
+
+
+  <meta name="keywords" content="JavaScript,ES6,">
+
+
+
+
+
+  <link rel="alternate" href="/default" title="Alfred's">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://yoursite.com/2019/01/27/ES6新增数据类型Symbol/">
+
+
+<meta name="description" content="es6中新增一种原始数据类型Symbol,最大的特点是唯一性，Symbol值通过Symbol函数生成, 在es5中对象的属性都是字符串，我们使用他人定义的对象，然后去新增自己的属性，这样容易起冲突覆盖原有的属性, Symbol也可以看成为一个字符串，不过这个字符能保证是独一无二的">
+<meta name="keywords" content="JavaScript,ES6">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6新增数据类型Symbol">
+<meta property="og:url" content="http://yoursite.com/2019/01/27/ES6新增数据类型Symbol/index.html">
+<meta property="og:site_name" content="Alfred&#39;s">
+<meta property="og:description" content="es6中新增一种原始数据类型Symbol,最大的特点是唯一性，Symbol值通过Symbol函数生成, 在es5中对象的属性都是字符串，我们使用他人定义的对象，然后去新增自己的属性，这样容易起冲突覆盖原有的属性, Symbol也可以看成为一个字符串，不过这个字符能保证是独一无二的">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-02-20T08:49:20.473Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES6新增数据类型Symbol">
+<meta name="twitter:description" content="es6中新增一种原始数据类型Symbol,最大的特点是唯一性，Symbol值通过Symbol函数生成, 在es5中对象的属性都是字符串，我们使用他人定义的对象，然后去新增自己的属性，这样容易起冲突覆盖原有的属性, Symbol也可以看成为一个字符串，不过这个字符能保证是独一无二的">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: true
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> ES6新增数据类型Symbol - Alfred's </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">Alfred's</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          ES6新增数据类型Symbol
+        
+      </h1>
+
+      <time class="post-time">
+          Jan 27 2019
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>es6中新增一种原始数据类型Symbol,最大的特点是唯一性，Symbol值通过Symbol函数生成, 在es5中对象的属性都是字符串，我们使用他人定义的对象，然后去新增自己的属性，这样容易起冲突覆盖原有的属性, Symbol也可以看成为一个字符串，不过这个字符能保证是独一无二的</p>
+<a id="more"></a>
+<p>基本示例:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Object</span></span><br><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    name:<span class="string">'i am object'</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// Symbol</span></span><br><span class="line"><span class="comment">// 这里的参数没有特殊意义，可以看成为Symbol加了一个标记</span></span><br><span class="line"><span class="keyword">const</span> name = <span class="built_in">Symbol</span>(<span class="string">'name'</span>)</span><br><span class="line">obj[name] = <span class="string">'i am symbol'</span></span><br></pre></td></tr></table></figure>
+<h3 id="Symbol用法"><a href="#Symbol用法" class="headerlink" title="Symbol用法"></a>Symbol用法</h3><p>Symbol 目前有多种写法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> title = <span class="built_in">Symbol</span>()</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj = &#123;&#125;</span><br><span class="line">obj[title] = <span class="string">'Symbol'</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> obj = &#123;</span><br><span class="line">    [title]: <span class="string">'Symbol'</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">Object</span>.defineProperty(obj,title,&#123;<span class="attr">value</span>:<span class="string">'Symbol'</span>&#125;)</span><br><span class="line"></span><br><span class="line">obj[title]<span class="comment">// 输出的结果都为Symbol</span></span><br></pre></td></tr></table></figure>
+<p>这里注意一下，Symbol做为属性名时，不能用点去读取，<code>obj.title // undefined</code></p>
+<p>Symbol作为属性名，只有通过<code>Object.getOwnPropertySymbols</code>方法返回</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> attrs  =<span class="built_in">Object</span>.getOwnPropertySymbols(obj)</span><br><span class="line"><span class="comment">// [Symbol[title]]</span></span><br></pre></td></tr></table></figure>
+<h3 id="Symbol-for"><a href="#Symbol-for" class="headerlink" title="Symbol.for()"></a>Symbol.for()</h3><p>如果我们想要重复Symbol可以使用Symbol.for， Smybol.for()及Smybol()的区别在于Symbol.for()会先去查找全局下有没有声明过，如果有就返回该值，没有就新建一个，Symbol()每一次调用都会新建一个</p>
+<p>代码理解:</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> title = <span class="built_in">Symbol</span>.for(<span class="string">'symbol'</span>)</span><br><span class="line">....Symbol.for(<span class="string">'symbol'</span>)<span class="comment">//调用多次都是使用的第一次声明的值</span></span><br><span class="line"><span class="built_in">Symbol</span>.for(<span class="string">'JS每日一题'</span>)  === <span class="built_in">Symbol</span>.for(<span class="string">'JS每日一题'</span>)  <span class="comment">// true</span></span><br><span class="line"><span class="keyword">const</span> title = <span class="built_in">Symbol</span>(<span class="string">'symbol'</span>)</span><br><span class="line"><span class="built_in">Symbol</span>(<span class="string">'JS每日一题'</span>)  === <span class="built_in">Symbol</span>(<span class="string">'JS每日一题'</span>)  <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>Symbol的特点</p>
+<ul>
+<li>独一无二</li>
+<li>不能隐式转换</li>
+<li>不能与其它数据类型做运算</li>
+<li>不能使用点运算符进行操作</li>
+</ul>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/JavaScript/">JavaScript</a>
+		  
+			<a href="/tags/ES6/">ES6</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2019/01/28/内存泄漏/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">内存泄漏</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2019/01/26/ES6中的Decorator/">
+        <span class="next-text nav-default">ES6中的Decorator</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2018 -
+    
+    2019
+    <span class="footer-author">Xu Jianxiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

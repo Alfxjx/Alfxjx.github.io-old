@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="前端的缓存">
+
+
+
+
+  <meta name="keywords" content="FE,">
+
+
+
+
+
+  <link rel="alternate" href="/default" title="Alfred's">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://yoursite.com/2019/01/21/前端的缓存/">
+
+
+<meta name="description" content="前端缓存分为两部分:  http 缓存 浏览器缓存">
+<meta name="keywords" content="FE">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端的缓存">
+<meta property="og:url" content="http://yoursite.com/2019/01/21/前端的缓存/index.html">
+<meta property="og:site_name" content="Alfred&#39;s">
+<meta property="og:description" content="前端缓存分为两部分:  http 缓存 浏览器缓存">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-02-20T08:57:58.621Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端的缓存">
+<meta name="twitter:description" content="前端缓存分为两部分:  http 缓存 浏览器缓存">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: true
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> 前端的缓存 - Alfred's </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">Alfred's</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          前端的缓存
+        
+      </h1>
+
+      <time class="post-time">
+          Jan 21 2019
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>前端缓存分为两部分:</p>
+<ul>
+<li>http 缓存</li>
+<li>浏览器缓存</li>
+</ul>
+<a id="more"></a>
+<h4 id="http-缓存"><a href="#http-缓存" class="headerlink" title="http 缓存"></a>http 缓存</h4><ul>
+<li>强缓存</li>
+</ul>
+<p>强缓存主要是采用响应头中的Cache-Control和Expires两个字段进行控制的</p>
+<h5 id="Cache-Control-值理解"><a href="#Cache-Control-值理解" class="headerlink" title="Cache-Control 值理解:"></a>Cache-Control 值理解:</h5><p>max-age 指定设置缓存最大的有效时间(单位为s)<br>public 指定响应会被缓存，并且在多用户间共享<br>private 响应只作为私有的缓存，不能在用户间共享<br>no-cache 指定不缓存响应，表明资源不进行缓存<br>no-store 绝对禁止缓存</p>
+<h5 id="Expires-理解"><a href="#Expires-理解" class="headerlink" title="Expires 理解:"></a>Expires 理解:</h5><p>缓存过期时间，用来指定资源到期的时间，是服务器端的具体的时间点, 需要和Last-modified结合使用</p>
+<h5 id="Last-modified-理解"><a href="#Last-modified-理解" class="headerlink" title="Last-modified 理解"></a>Last-modified 理解</h5><p>服务器端文件的最后修改时间，需要和cache-control共同使用，是检查服务器端资源是否更新的一种方式</p>
+<h5 id="ETag-理解"><a href="#ETag-理解" class="headerlink" title="ETag 理解"></a>ETag 理解</h5><p>根据实体内容生成一段hash字符串，标识资源的状态，由服务端产生。浏览器会将这串字符串传回服务器，验证资源是否已经修改</p>
+<ul>
+<li>协商缓存(304)</li>
+</ul>
+<p>协商缓存是指当强缓存机制如果检测到缓存失效，就需要进行服务器再验证</p>
+<h4 id="浏览器缓存"><a href="#浏览器缓存" class="headerlink" title="浏览器缓存"></a>浏览器缓存</h4><ul>
+<li>Cookie</li>
+<li>LocalStorage</li>
+<li>SessionStorage</li>
+<li>Service Worker</li>
+</ul>
+<h5 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h5><p>Cookie主要用于用户信息的存储, 容量为4KB</p>
+<h5 id="LocalStorage"><a href="#LocalStorage" class="headerlink" title="LocalStorage"></a>LocalStorage</h5><p>LocalStorage的数据将一直保存在浏览器内，直到用户清除浏览器缓存数据为止, 容量为5MB</p>
+<h5 id="SessionStorage"><a href="#SessionStorage" class="headerlink" title="SessionStorage"></a>SessionStorage</h5><p>SessionStorage的其他属性同LocalStorage, 不同是的当页面关闭时会随之清除</p>
+<h5 id="Service-Worker"><a href="#Service-Worker" class="headerlink" title="Service Worker"></a>Service Worker</h5><p>主要是为了提高web app的用户体验，可以实现离线应用消息推送等等一系列的功能, 可以看做是一个独立于浏览器的Javascript代理脚本, 在离线状态下也能提供基本的功能。 出于安全性的考虑，Service Worker 只能在https协议下使用</p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/FE/">FE</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2019/01/22/类-class/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">ES6中的类(class)</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2019/01/21/前端优化手段/">
+        <span class="next-text nav-default">前端优化手段</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2018 -
+    
+    2019
+    <span class="footer-author">Xu Jianxiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

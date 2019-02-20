@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="浏览器渲染页面的过程">
+
+
+
+
+  <meta name="keywords" content="FE,HTTP,">
+
+
+
+
+
+  <link rel="alternate" href="/default" title="Alfred's">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://yoursite.com/2019/01/11/浏览器渲染页面的过程/">
+
+
+<meta name="description" content="发起请求； 解析HTML； 解析样式； 执行JavaScript； 布局； 绘制;">
+<meta name="keywords" content="FE,HTTP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浏览器渲染页面的过程">
+<meta property="og:url" content="http://yoursite.com/2019/01/11/浏览器渲染页面的过程/index.html">
+<meta property="og:site_name" content="Alfred&#39;s">
+<meta property="og:description" content="发起请求； 解析HTML； 解析样式； 执行JavaScript； 布局； 绘制;">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/01/11/浏览器渲染页面的过程/static/webkit.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/11/浏览器渲染页面的过程/static/Mozilla.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/11/浏览器渲染页面的过程/static/domTree.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/11/浏览器渲染页面的过程/static/css.png">
+<meta property="og:image" content="http://yoursite.com/2019/01/11/浏览器渲染页面的过程/static/render.png">
+<meta property="og:updated_time" content="2019-02-20T08:59:47.423Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浏览器渲染页面的过程">
+<meta name="twitter:description" content="发起请求； 解析HTML； 解析样式； 执行JavaScript； 布局； 绘制;">
+<meta name="twitter:image" content="http://yoursite.com/2019/01/11/浏览器渲染页面的过程/static/webkit.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: true
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> 浏览器渲染页面的过程 - Alfred's </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">Alfred's</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          浏览器渲染页面的过程
+        
+      </h1>
+
+      <time class="post-time">
+          Jan 11 2019
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <ol>
+<li>发起请求；</li>
+<li>解析HTML；</li>
+<li>解析样式；</li>
+<li>执行JavaScript；</li>
+<li>布局；</li>
+<li>绘制;</li>
+</ol>
+<a id="more"></a>
+<h2 id="浏览器渲染主要流程"><a href="#浏览器渲染主要流程" class="headerlink" title="浏览器渲染主要流程"></a>浏览器渲染主要流程</h2><ul>
+<li>webkit<br><img src="./static/webkit.png" alt="webkit"></li>
+<li>Mozilla<br><img src="./static/Mozilla.png" alt="Mozilla"></li>
+</ul>
+<p><strong>所以可以分析出基本过程：</strong></p>
+<ol>
+<li><p>HTML解析出DOM Tree</p>
+</li>
+<li><p>CSS解析出Style Rules</p>
+</li>
+<li><p>将二者关联生成Render Tree</p>
+</li>
+<li><p>Layout 根据Render Tree计算每个节点的信息</p>
+</li>
+<li><p>Painting 根据计算好的信息绘制整个页面</p>
+</li>
+</ol>
+<p>##HTML解析出DOM Tree</p>
+<p>HTML Parser的任务是将HTML标记解析成<strong>DOM Tree</strong><br>这个解析可以参考React解析DOM的过程，<br>但是这里面有很多别的规则和操作，比如容错机制，识别<code>&lt;/br&gt;</code>和<code>&lt;br&gt;</code>等等。<br>感兴趣的可以参考 <a href="https://www.html5rocks.com/en/tutorials/internals/howbrowserswork/" target="_blank" rel="noopener">《How Browser Work》</a>，<a href="https://www.html5rocks.com/zh/tutorials/internals/howbrowserswork/" target="_blank" rel="noopener">中文翻译</a></p>
+<p><img src="./static/domTree.png" alt="DOM Tree"></p>
+<p>将文本的HTML文档，提炼出关键信息，嵌套层级的树形结构，便于计算拓展。这就是HTML Parser的作用。</p>
+<h2 id="CSS解析出Style-Rules"><a href="#CSS解析出Style-Rules" class="headerlink" title="CSS解析出Style Rules"></a>CSS解析出Style Rules</h2><p>CSS Parser将CSS解析成Style Rules，Style Rules也叫CSSOM（CSS Object Model）。<br>StyleRules也是一个树形结构，根据CSS文件整理出来的类似DOM Tree的树形结构：</p>
+<p><img src="./static/css.png" alt="css"></p>
+<h2 id="处理-lt-script-gt-脚本"><a href="#处理-lt-script-gt-脚本" class="headerlink" title="处理&lt;script&gt;脚本"></a>处理<code>&lt;script&gt;</code>脚本</h2><p>浏览器解析文档，当遇到<code>&lt;script&gt;</code>标签的时候，会立即解析脚本，停止解析文档（因为JS可能会改动DOM和CSS，所以继续解析会造成浪费）。<br>如果脚本是外部的，会等待脚本下载完毕，再继续解析文档。现在可以在script标签上增加属性 <code>defer</code>或者<code>async</code>。<br>脚本解析会将脚本中改变DOM和CSS的地方分别解析出来，追加到DOM Tree和Style Rules上。</p>
+<h2 id="Render-Tree"><a href="#Render-Tree" class="headerlink" title="Render Tree"></a>Render Tree</h2><p>Render Tree的构建其实就是DOM Tree和CSSOM Attach的过程。<br>呈现器是和 DOM 元素相对应的，但并非一一对应。Render Tree实际上就是一个计算好样式，与HTML对应的（包括哪些显示，那些不显示）的Tree。</p>
+<blockquote>
+<p> 在 WebKit 中，解析样式和创建呈现器的过程称为“附加”。每个 DOM 节点都有一个“attach”方法。附加是同步进行的，将节点插入 DOM 树需要调用新的节点“attach”方法。</p>
+</blockquote>
+<p><img src="./static/render.png" alt="render"></p>
+<h3 id="计算样式"><a href="#计算样式" class="headerlink" title="计算样式"></a>计算样式</h3><p>样式计算是个很复杂的问题。DOM中的一个元素可以对应样式表中的多个元素。样式表包括了所有样式：浏览器默认样式表，自定义样式表，inline样式元素，<strong>HTML可视化属性如：width=100。后者将转化以匹配CSS样式。</strong></p>
+<blockquote>
+<p>WebKit 节点会引用样式对象 (RenderStyle)。这些对象在某些情况下可以由不同节点共享。这些节点是同级关系，并且：</p>
+<ol>
+<li>这些元素必须处于相同的鼠标状态（例如，不允许其中一个是“:hover”状态，而另一个不是）</li>
+<li>任何元素都没有 ID</li>
+<li>标记名称应匹配</li>
+<li>类属性应匹配</li>
+<li>映射属性的集合必须是完全相同的</li>
+<li>链接状态必须匹配</li>
+<li>焦点状态必须匹配</li>
+<li>任何元素都不应受属性选择器的影响，这里所说的“影响”是指在选择器中的任何位置有任何使用了属性选择器的选择器匹配</li>
+<li>元素中不能有任何 inline 样式属性</li>
+<li>不能使用任何同级选择器。WebCore 在遇到任何同级选择器时，只会引发一个全局开关，并停用整个文档的样式共享（如果存在）。这包括 + 选择器以及 :first-child 和 :last-child 等选择器。</li>
+</ol>
+</blockquote>
+<h3 id="层叠顺序"><a href="#层叠顺序" class="headerlink" title="层叠顺序"></a>层叠顺序</h3><p>当解析html的时候，会把新来的元素插入dom树里面，同时去查找css，然后把对应的样式规则应用到元素上，查找样式表是按照从右到左的顺序去匹配的。</p>
+<blockquote>
+<p>例如： div p {font-size: 16px}，会先寻找所有p标签并判断它的父标签是否为div之后才会决定要不要采用这个样式进行渲染）。<br>所以，我们平时写CSS时，尽量用id和class，千万不要过渡层叠。</p>
+</blockquote>
+<h2 id="Layout-：根据Render-Tree计算每个节点的信息"><a href="#Layout-：根据Render-Tree计算每个节点的信息" class="headerlink" title="Layout ：根据Render Tree计算每个节点的信息"></a>Layout ：根据Render Tree计算每个节点的信息</h2><p>布局阶段会从渲染树的根节点开始遍历，然后确定每个节点对象在页面上的确切大小与位置，布局阶段的输出是一个盒子模型，它会精确地捕获每个元素在屏幕内的确切位置与大小。</p>
+<p>对渲染树的布局可以分为全局和局部的，全局即对整个渲染树进行重新布局，如当我们改变了窗口尺寸或方向或者是修改了根元素的尺寸或者字体大小等；而局部布局可以是对渲染树的某部分或某一个渲染对象进行重新布局。</p>
+<p>大多数web应用对DOM的操作都是比较频繁，这意味着经常需要对DOM进行布局和回流，而如果仅仅是一些小改变，就触发整个渲染树的回流，这显然是不好的，为了避免这种情况，浏览器使用了<strong>脏位</strong>系统，只有一个渲染对象改变了或者某渲染对象及其子渲染对象脏位值为”dirty”时，说明需要回流。</p>
+<p>表示需要布局的脏位值有两种：</p>
+<ul>
+<li>“dirty”–自身改变，需要回流</li>
+<li>“children are dirty”–子节点改变，需要回流</li>
+</ul>
+<p>布局是一个<strong>从上到下，从外到内</strong>进行的递归过程，从根渲染对象，即对应着HTML文档根元素，然后下一级渲染对象，如对应着元素，如此层层递归，依次计算每一个渲染对象的几何信息（位置和尺寸）。</p>
+<p>每一个渲染对象的布局流程基本如：</p>
+<ul>
+<li>计算此渲染对象的宽度（width）；</li>
+<li>遍历此渲染对象的所有子级，依次：<ul>
+<li>设置子级渲染对象的坐标</li>
+<li>判断是否需要触发子渲染对象的<strong>布局或回流</strong>方法，计算子渲染对象的高度（height）</li>
+</ul>
+</li>
+<li>设置此渲染对象的高度：根据子渲染对象的累积高，margin和padding的高度设置其高度；</li>
+<li>设置此渲染对象脏位值为false。</li>
+</ul>
+<h2 id="Painting-：根据计算好的信息绘制整个页面"><a href="#Painting-：根据计算好的信息绘制整个页面" class="headerlink" title="Painting ：根据计算好的信息绘制整个页面"></a>Painting ：根据计算好的信息绘制整个页面</h2><p>在绘制阶段，系统会遍历呈现树，并调用呈现器的“paint”方法，将呈现器的内容显示在屏幕上。绘制工作是使用用户界面基础组件完成的。</p>
+<p>CSS2 规范定义了绘制流程的顺序。绘制的顺序其实就是元素进入堆栈样式上下文的顺序。这些堆栈会从后往前绘制，因此这样的顺序会影响绘制。块呈现器的堆栈顺序如下：</p>
+<ol>
+<li>背景颜色</li>
+<li>背景图片</li>
+<li>边框</li>
+<li>子代</li>
+<li>轮廓</li>
+</ol>
+<h3 id="Reflow与Repaint："><a href="#Reflow与Repaint：" class="headerlink" title="Reflow与Repaint："></a>Reflow与Repaint：</h3><p>根据渲染树布局，计算CSS样式，即每个节点在页面中的大小和位置等几何信息。HTML默认是流式布局的，CSS和js会打破这种布局，改变DOM的外观样式以及大小和位置。这时就要提到两个重要概念：replaint和reflow。</p>
+<blockquote>
+<p>replaint：屏幕的一部分重画，不影响整体布局，比如某个CSS的背景色变了，但元素的几何尺寸和位置不变。</p>
+<p>reflow：<br>意味着元件的几何尺寸变了，我们需要重新验证并计算渲染树。是渲染树的一部分或全部发生了变化。这就是Reflow，或是Layout。</p>
+</blockquote>
+<p>所以我们应该尽量减少reflow和replaint，我想这也是为什么现在很少有用table布局的原因之一。</p>
+<p><code>display:none</code> 会触发 reflow，<code>visibility: hidden</code>属性并不算是不可见属性，它的语义是隐藏元素，但元素仍然占据着布局空间，它会被渲染成一个空框，所以<code>visibility:hidden</code>只会触发 repaint，因为没有发生位置变化。</p>
+<p>有些情况下，比如修改了元素的样式，浏览器并不会立刻 reflow 或 repaint 一次，而是会把这样的操作积攒一批，然后做一次 reflow，这又叫<strong>异步 reflow 或增量异步 reflow</strong>。<br>有些情况下，比如 resize 窗口，改变了页面默认的字体等。对于这些操作，浏览器会马上进行 reflow。</p>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p><a href="https://segmentfault.com/a/1190000010298038" target="_blank" rel="noopener">浏览器渲染页面过程与页面优化</a></p>
+<p><a href="https://segmentfault.com/a/1190000013904479" target="_blank" rel="noopener">[干货]十分钟读懂浏览器渲染流程</a></p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/FE/">FE</a>
+		  
+			<a href="/tags/HTTP/">HTTP</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2019/01/12/EventLoop/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">EventLoop</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2019/01/11/函数防抖与函数节流/">
+        <span class="next-text nav-default">函数防抖与函数节流</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2018 -
+    
+    2019
+    <span class="footer-author">Xu Jianxiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

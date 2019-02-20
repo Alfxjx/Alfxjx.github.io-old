@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="xss, SQL注入, DDOS, CSRF跨站请求伪造...">
+
+
+
+
+  <meta name="keywords" content="HTTP,">
+
+
+
+
+
+  <link rel="alternate" href="/default" title="Alfred's">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://yoursite.com/2019/01/12/常见WEB攻击手段与预防措施/">
+
+
+<meta name="description" content="xss, SQL注入, DDOS, CSRF跨站请求伪造...">
+<meta name="keywords" content="HTTP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常见WEB攻击手段与预防措施">
+<meta property="og:url" content="http://yoursite.com/2019/01/12/常见WEB攻击手段与预防措施/index.html">
+<meta property="og:site_name" content="Alfred&#39;s">
+<meta property="og:description" content="xss, SQL注入, DDOS, CSRF跨站请求伪造...">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="http://yoursite.com/2019/01/12/常见WEB攻击手段与预防措施/static/csrf.png">
+<meta property="og:updated_time" content="2019-02-20T08:59:30.869Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="常见WEB攻击手段与预防措施">
+<meta name="twitter:description" content="xss, SQL注入, DDOS, CSRF跨站请求伪造...">
+<meta name="twitter:image" content="http://yoursite.com/2019/01/12/常见WEB攻击手段与预防措施/static/csrf.png">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: true
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> 常见WEB攻击手段与预防措施 - Alfred's </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">Alfred's</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          常见WEB攻击手段与预防措施
+        
+      </h1>
+
+      <time class="post-time">
+          Jan 12 2019
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <h2 id="常见WEB攻击手段与预防措施"><a href="#常见WEB攻击手段与预防措施" class="headerlink" title="常见WEB攻击手段与预防措施"></a>常见WEB攻击手段与预防措施</h2><h3 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h3><p>XSS攻击：跨站脚本攻击(Cross-Site Scripting)，为了不和层叠样式表(Cascading Style Sheets, CSS)的缩写混淆，故将跨站脚本攻击缩写为XSS。XSS是一种常见的web安全漏洞，它允许攻击者将恶意代码植入到提供给其它用户使用的页面中。不同于大多数攻击(一般只涉及攻击者和受害者)，XSS涉及到三方，即攻击者、客户端与Web应用。XSS的攻击目标是为了盗取存储在客户端的cookie或者其他网站用于识别客户端身份的敏感信息。一旦获取到合法用户的信息后，攻击者甚至可以假冒合法用户与网站进行交互。</p>
+<p>XSS通常可以分为两大类：</p>
+<ol>
+<li>存储型XSS，主要出现在让用户输入数据，供其他浏览此页的用户进行查看的地方，包括留言、评论、博客日志和各类表单等。应用程序从数据库中查询数据，在页面中显示出来，攻击者在相关页面输入恶意的脚本数据后，用户浏览此类页面时就可能受到攻击。这个流程简单可以描述为：<code>恶意用户的Html输入Web程序-&gt;进入数据库-&gt;Web程序-&gt;用户浏览器</code>。</li>
+<li>反射型XSS，主要做法是将脚本代码加入URL地址的请求参数里，请求参数进入程序后在页面直接输出，用户点击类似的恶意链接就可能受到攻击。</li>
+</ol>
+<h3 id="如何预防XSS"><a href="#如何预防XSS" class="headerlink" title="如何预防XSS"></a>如何预防XSS</h3><p>答案很简单，坚决不要相信用户的任何输入，并过滤掉输入中的所有特殊字符。这样就能消灭绝大部分的XSS攻击。</p>
+<p>目前防御XSS主要有如下几种方式：</p>
+<ol>
+<li>过滤特殊字符<br>避免XSS的方法之一主要是将用户所提供的内容进行过滤(如上面的<code>script</code>标签)。</li>
+<li>使用HTTP头指定类型<br><code>w.Header().Set(&quot;Content-Type&quot;,&quot;text/javascript&quot;)</code><br>这样就可以让浏览器解析javascript代码，而不会是html输出。</li>
+</ol>
+<h3 id="SQL注入"><a href="#SQL注入" class="headerlink" title="SQL注入"></a>SQL注入</h3><p>攻击者成功的向服务器提交恶意的SQL查询代码，程序在接收后错误的将攻击者的输入作为查询语句的一部分执行，导致原始的查询逻辑被改变，额外的执行了攻击者精心构造的恶意代码。</p>
+<p>举例：<code>&#39; OR &#39;1&#39;=&#39;1</code></p>
+<p>这是最常见的 SQL注入攻击，当我们输如用户名 admin ，然后密码输如<code>&#39; OR &#39;1&#39;=1=&#39;1</code>的时候，我们在查询用户名和密码是否正确的时候，本来要执行的是<code>SELECT * FROM user WHERE username=&#39;&#39; and password=&#39;&#39;</code>,经过参数拼接后，会执行 SQL语句 <code>SELECT * FROM user WHERE username=&#39;&#39; and password=&#39;&#39; OR &#39;1&#39;=&#39;1&#39;</code>，这个时候1=1是成立，自然就跳过验证了。</p>
+<h3 id="如何预防SQL注入"><a href="#如何预防SQL注入" class="headerlink" title="如何预防SQL注入"></a>如何预防SQL注入</h3><ul>
+<li>预编译语句，使得输入是一个String，不起作用。</li>
+<li>对进入数据库的特殊字符（<code>&#39;&quot;\尖括号&amp;*</code>;等）进行转义处理，或编码转换。</li>
+<li>在应用发布之前建议使用专业的SQL注入检测工具进行检测，以及时修补被发现的SQL注入漏洞。网上有很多这方面的开源工具，例如sqlmap、SQLninja等。</li>
+<li>避免网站打印出SQL错误信息，比如类型错误、字段不匹配等，把代码里的SQL语句暴露出来，以防止攻击者利用这些错误信息进行SQL注入。</li>
+</ul>
+<h3 id="DDOS"><a href="#DDOS" class="headerlink" title="DDOS"></a>DDOS</h3><p>DDOS：分布式拒绝服务攻击（Distributed Denial of Service），简单说就是发送大量请求是使服务器瘫痪。DDos攻击是在DOS攻击基础上的，可以通俗理解，dos是单挑，而ddos是群殴，因为现代技术的发展，dos攻击的杀伤力降低，所以出现了DDOS，攻击者借助公共网络，将大数量的计算机设备联合起来，向一个或多个目标进行攻击。</p>
+<h3 id="如何预防DDOS"><a href="#如何预防DDOS" class="headerlink" title="如何预防DDOS"></a>如何预防DDOS</h3><p>DDoS 防御产品的核心是检测技术和清洗技术。检测技术就是检测网站是否正在遭受 DDoS 攻击，而清洗技术就是清洗掉异常流量。而检测技术的核心在于对业务深刻的理解，才能快速精确判断出是否真的发生了 DDoS 攻击。清洗技术对检测来讲，不同的业务场景下要求的粒度不一样。</p>
+<h3 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h3><p>CSRF（Cross-site request forgery），中文名称：跨站请求伪造，也被称为：one click attack/session riding，缩写为：CSRF/XSRF。</p>
+<p>你这可以这么理解CSRF攻击：攻击者盗用了你的身份，以你的名义发送恶意请求。CSRF能够做的事情包括：以你名义发送邮件，发消息，盗取你的账号，甚至于购买商品，虚拟货币转账……造成的问题包括：个人隐私泄露以及财产安全</p>
+<p><img src="./static/csrf.png" alt="csrf"></p>
+<h3 id="预防CSRF"><a href="#预防CSRF" class="headerlink" title="预防CSRF"></a>预防CSRF</h3><p><strong>Synchronizer Tokens</strong></p>
+<p>Synchronizer Tokens： 在表单里隐藏一个随机变化的 csrf_token csrf_token 提交到后台进行验证，如果验证通过则可以继续执行操作。这种情况有效的主要原因是网站 B 拿不到网站 A 表单里的 csrf_token</p>
+<p>这种方式的使用条件是PHP和JSP等。因为cookie已经不安全了，因此把csrf_token值存储在session中，然后每次表单提交时都从session取出来放到form表单的隐藏域中，这样B网站不可以得到这个存储到session中的值。</p>
+<p>下面是JSP的：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type="hidden" name="random_form" value=&lt;%=random%&gt;&gt;&lt;/input&gt;</span><br></pre></td></tr></table></figure>
+<p>但是我现在的情况是html，不是JSP，并不能动态的从session中取出csrf_token值。只能采用加密的方式了。</p>
+<p><strong>Hash加密cookie中csrf_token值</strong></p>
+<p>这可能是最简单的解决方案了，因为攻击者不能获得第三方的Cookie(理论上)，所以表单中的数据也就构造失败了。</p>
+<p>我采用的hash加密方法是JS实现Java的HashCode方法，得到hash值，这个比较简单。也可以采用其他的hash算法。</p>
+<p>前端向后台传递hash之后的csrf_token值和cookie中的csrf_token值，后台拿到cookie中的csrf_token值后得到hashCode值然后与前端传过来的值进行比较，一样则通过。</p>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/HTTP/">HTTP</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2019/01/14/前端模块化/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">理解前端模块化</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2019/01/12/EventLoop/">
+        <span class="next-text nav-default">EventLoop</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2018 -
+    
+    2019
+    <span class="footer-author">Xu Jianxiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="Vue.js 2.5饿了么移动App笔记">
+
+
+
+
+  <meta name="keywords" content="Vue,">
+
+
+
+
+
+  <link rel="alternate" href="/default" title="Alfred's">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://yoursite.com/2019/01/10/饿了么App笔记/">
+
+
+<meta name="description" content="注意 本文主要记录的是课程中需要改动的部分，其他的还是看视频吧。需要Vue&amp;amp;React视频的可以联系我。">
+<meta name="keywords" content="Vue">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue.js 2.5饿了么移动App笔记">
+<meta property="og:url" content="http://yoursite.com/2019/01/10/饿了么App笔记/index.html">
+<meta property="og:site_name" content="Alfred&#39;s">
+<meta property="og:description" content="注意 本文主要记录的是课程中需要改动的部分，其他的还是看视频吧。需要Vue&amp;amp;React视频的可以联系我。">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-02-20T09:01:12.921Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue.js 2.5饿了么移动App笔记">
+<meta name="twitter:description" content="注意 本文主要记录的是课程中需要改动的部分，其他的还是看视频吧。需要Vue&amp;amp;React视频的可以联系我。">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: true
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> Vue.js 2.5饿了么移动App笔记 - Alfred's </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">Alfred's</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Vue.js 2.5饿了么移动App笔记
+        
+      </h1>
+
+      <time class="post-time">
+          Jan 10 2019
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p><strong>注意</strong> 本文主要记录的是课程中需要改动的部分，其他的还是看视频吧。需要Vue&amp;React视频的可以联系我。</p>
+<a id="more"></a>
+<h3 id="icon"><a href="#icon" class="headerlink" title="icon"></a>icon</h3><p>SVG格式转换 <a href="https://icomoon.io/app/#/select" target="_blank" rel="noopener">icomoon</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">import icons</span><br><span class="line">generate fonts</span><br><span class="line">preference</span><br><span class="line">download</span><br></pre></td></tr></table></figure>
+<p>主要使用的是<code>fonts</code>以及<code>style.css</code></p>
+<p>将<code>fonts</code>放在<code>common/fonts</code>,<code>style.css-&gt;icon.styl</code>,并把css里面的{};都删了</p>
+<h3 id="Mock数据"><a href="#Mock数据" class="headerlink" title="Mock数据"></a>Mock数据</h3><p><code>data.json</code>拷贝到根目录下</p>
+<p>Vue 2.5 /prod.server.js</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Mock数据</span></span><br><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">'express'</span>)</span><br><span class="line"><span class="keyword">const</span> app = express()</span><br><span class="line"><span class="keyword">const</span> appData = <span class="built_in">require</span>(<span class="string">'../data.json'</span>)</span><br><span class="line"><span class="keyword">const</span> seller = appData.seller</span><br><span class="line"><span class="keyword">const</span> goods = appData.goods</span><br><span class="line"><span class="keyword">const</span> ratings = appData.ratings</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">apiRoutes.get(<span class="string">'/seller'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res</span>) </span>&#123;</span><br><span class="line">	res.json(&#123;</span><br><span class="line">		errno: <span class="number">0</span>,</span><br><span class="line">		data: seller</span><br><span class="line">	&#125;);</span><br><span class="line">&#125;);</span><br><span class="line"><span class="comment">//注意最后登录的网址localhost:8080/api/seller</span></span><br></pre></td></tr></table></figure>
+<h3 id="Webstorm默认模板"><a href="#Webstorm默认模板" class="headerlink" title="Webstorm默认模板"></a>Webstorm默认模板</h3><p>setting-搜索 templates</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;script&gt;</span><br><span class="line">export default &#123;</span><br><span class="line">name: &quot;$&#123;COMPONENT_NAME&#125;&quot;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script type=&quot;text/ecmascript-6&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;style lang=&quot;stylus&quot; rel=&quot;stylesheet/stylus&quot;&gt;</span><br><span class="line"></span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="reset-css"><a href="#reset-css" class="headerlink" title="reset.css"></a>reset.css</h3><p>覆盖原始元素的样式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Eric Meyer&apos;s Reset CSS v2.0 (http://meyerweb.com/eric/tools/css/reset/)</span><br></pre></td></tr></table></figure>
+<h3 id="代码格式化"><a href="#代码格式化" class="headerlink" title="代码格式化"></a>代码格式化</h3><p><code>ctrl+alt+L</code></p>
+<h3 id="index-html"><a href="#index-html" class="headerlink" title="index.html"></a>index.html</h3><p>移动端适配</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">content</span>=<span class="string">"width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">type</span>=<span class="string">"text/css"</span> <span class="attr">href</span>=<span class="string">"static/css/reset.css"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="Vue组件-amp-Router"><a href="#Vue组件-amp-Router" class="headerlink" title="Vue组件&amp;Router"></a>Vue组件&amp;Router</h3><p><code>app.vue</code>中导入（<code>import</code>）组件，再<code>export</code> 到自己的<code>&lt;template&gt;</code>里面。</p>
+<p>路由需要在<code>router/index.js</code>中引入路由，定义对应的路径，接着在<code>App.vue</code>中：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;tab-item&quot;&gt;</span><br><span class="line">        &lt;router-link to=&quot;/seller&quot;&gt;商家&lt;/router-link&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;router-view&gt;&lt;/router-view&gt;</span><br></pre></td></tr></table></figure>
+<p>组织</p>
+<h3 id="a-标签-按钮"><a href="#a-标签-按钮" class="headerlink" title="a 标签 按钮"></a>a 标签 按钮</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&amp; &gt; a</span><br><span class="line">        display: block</span><br></pre></td></tr></table></figure>
+<p><strong>疑问</strong> 现在给<code>linkActiveClass</code> 添加别名是在哪里</p>
+<h3 id="1px问题"><a href="#1px问题" class="headerlink" title="1px问题"></a>1px问题</h3><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">border-1px($color)</span><br><span class="line">  <span class="selector-tag">position</span> <span class="selector-tag">relative</span></span><br><span class="line">  &amp;<span class="selector-pseudo">:after</span></span><br><span class="line">    <span class="selector-tag">display</span> <span class="selector-tag">block</span></span><br><span class="line">    <span class="selector-tag">position</span> <span class="selector-tag">absolute</span></span><br><span class="line">    <span class="selector-tag">left</span> 0</span><br><span class="line">    <span class="selector-tag">bottom</span> 0</span><br><span class="line">    <span class="selector-tag">width</span> 100%</span><br><span class="line">    border-top 1px solid $color</span><br><span class="line">    content ''</span><br></pre></td></tr></table></figure>
+<p>按此先设置，接着对不同的屏幕尺寸进行检查，设置一个<code>.border-1px</code>，进行缩放：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@media (-webkit-min-device-pixel-ratio: 1.5),(min-device-pixel-ratio: 1.5)</span><br><span class="line">  .border-1px</span><br><span class="line">    &amp;::after</span><br><span class="line">      -webkit-transform scaleY(0.7)</span><br><span class="line">      transform scaleY(0.7)</span><br><span class="line">@media (-webkit-min-device-pixel-ratio: 2),(min-device-pixel-ratio: 2)</span><br><span class="line">  .border-1px</span><br><span class="line">    &amp;::after</span><br><span class="line">      -webkit-transform scaleY(0.5)</span><br><span class="line">      transform scaleY(0.5)</span><br></pre></td></tr></table></figure>
+<h3 id="vue-resource"><a href="#vue-resource" class="headerlink" title="vue-resource"></a>vue-resource</h3><p><code>main.js</code>引入：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">import VueResource from &apos;vue-resource&apos;</span><br><span class="line">Vue.use(VueResource)</span><br></pre></td></tr></table></figure>
+<p><code>App.vue</code>使用created函数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">created () &#123;</span><br><span class="line">      <span class="keyword">this</span>.$http.get(<span class="string">'/api/seller'</span>).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">        res = res.body</span><br><span class="line">        <span class="keyword">if</span> (res.errno === ERR_OK) &#123;</span><br><span class="line">          <span class="keyword">this</span>.seller = res.data</span><br><span class="line">          <span class="built_in">console</span>.log(<span class="keyword">this</span>.seller)</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">    &#125;,</span><br></pre></td></tr></table></figure>
+<p>改变的是：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">v-header</span> <span class="attr">:seller</span>=<span class="string">"seller"</span>&gt;</span><span class="tag">&lt;/<span class="name">v-header</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>于是<code>header.vue</code>中：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> &#123;</span><br><span class="line">    props: &#123;</span><br><span class="line">      seller: &#123;</span><br><span class="line">        type: <span class="built_in">Object</span></span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
+<p>使用<code>props</code>接受这个信息</p>
+<h3 id="自动折行的样式"><a href="#自动折行的样式" class="headerlink" title="自动折行的样式"></a>自动折行的样式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">white-space: nowrap;</span><br><span class="line">overflow: hidden;</span><br><span class="line">text-overflow: ellipsis;</span><br></pre></td></tr></table></figure>
+<h3 id="v-show-amp-click-”show-”"><a href="#v-show-amp-click-”show-”" class="headerlink" title="v-show &amp; @click=”show()”"></a>v-show &amp; @click=”show()”</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;detail&quot; v-show=&quot;detailShow&quot;&gt;</span><br><span class="line">&lt;div class=&quot;bulletin-wrapper&quot; @click=&quot;showDetail&quot;&gt;&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">data () &#123;</span><br><span class="line">      return &#123;</span><br><span class="line">        detailShow: false</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;,</span><br><span class="line">methods: &#123;</span><br><span class="line">      showDetail () &#123;</span><br><span class="line">        this.detailShow = true</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="Sticky-Footer样式"><a href="#Sticky-Footer样式" class="headerlink" title="Sticky Footer样式"></a><a href="https://www.cnblogs.com/shicongbuct/p/6487122.html" target="_blank" rel="noopener">Sticky Footer样式</a></h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;detail-wrapper clearfix&quot;&gt;</span><br><span class="line">    &lt;div class=&quot;detail-main&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;div class=&quot;detail-close&quot;&gt;</span><br><span class="line">    &lt;i class=&quot;icon-close&quot;&gt;&lt;/i&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">.clearfix</span><br><span class="line">  <span class="attribute">display</span> inline-block</span><br><span class="line">  &amp;:after</span><br><span class="line">    <span class="attribute">content</span> <span class="string">"."</span></span><br><span class="line">    <span class="attribute">display</span> block</span><br><span class="line">    <span class="attribute">height</span> <span class="number">0</span></span><br><span class="line">    <span class="attribute">line-height</span> <span class="number">0</span></span><br><span class="line">    <span class="attribute">clear</span> both</span><br><span class="line">    <span class="attribute">visibility</span> hidden</span><br><span class="line"></span><br><span class="line">.detail-wrapper</span><br><span class="line">        <span class="attribute">min-height</span> <span class="number">100%</span></span><br><span class="line">        .detail-main</span><br><span class="line">          <span class="attribute">margin-top</span> <span class="number">64px</span></span><br><span class="line">          <span class="comment">//important</span></span><br><span class="line">          <span class="attribute">padding-bottom</span> <span class="number">64px</span></span><br><span class="line">      .detail-close</span><br><span class="line">        <span class="attribute">position</span> relative</span><br><span class="line">        <span class="attribute">width</span> <span class="number">32px</span></span><br><span class="line">        <span class="attribute">height</span> <span class="number">32px</span></span><br><span class="line">        <span class="comment">//important</span></span><br><span class="line">        <span class="attribute">margin</span> -<span class="number">64px</span> auto <span class="number">0</span> auto</span><br><span class="line">        <span class="attribute">clear</span> both</span><br><span class="line">        <span class="attribute">font-size</span> <span class="number">32px</span></span><br></pre></td></tr></table></figure>
+<h3 id="向下去整"><a href="#向下去整" class="headerlink" title="向下去整"></a>向下去整</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.floor(<span class="keyword">this</span>.score * <span class="number">2</span>) / <span class="number">2</span></span><br></pre></td></tr></table></figure>
+<h3 id="组件抽象"><a href="#组件抽象" class="headerlink" title="组件抽象"></a>组件抽象</h3><p>见<code>star/star.vue</code></p>
+<p><strong>我在抽象<code>line-title</code>时遇见的一个问题</strong></p>
+<p>就是<code>:title=&quot;bonus&quot;</code>，然后父组件里面添加数据<code>bonus:&#39;优惠信息&#39;</code>，接着子组件的<code>Vue.js 2.5饿了么移动App笔记</code>才会显示，要是不添加<code>bonus:&#39;优惠信息&#39;</code>，而是直接<code>:title=&quot;优惠信息&quot;</code>，就显示不出来了。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//不显示</span><br><span class="line">&lt;lineTitle :title=&quot;优惠信息&quot;&gt;&lt;/lineTitle&gt;</span><br><span class="line">//正确</span><br><span class="line">&lt;lineTitle :title=&quot;&apos;商家公告&apos;&quot;&gt;&lt;/lineTitle&gt;</span><br></pre></td></tr></table></figure>
+<p>这是因为绑定的子组件中的title是一个String类型的，所以<code>:title=&quot;&quot;</code>里面也得是一个String类型的。</p>
+<h3 id="文件别名alias"><a href="#文件别名alias" class="headerlink" title="文件别名alias"></a>文件别名<code>alias</code></h3><p>位置在：<code>webpack.base.conf.js/reslove{&#39;alias&#39;}</code></p>
+<h3 id="v-for"><a href="#v-for" class="headerlink" title="v-for"></a><code>v-for</code></h3><p>for之后的 a in b, 需要加上空格</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">//right</span><br><span class="line">&lt;li class=&quot;support-item&quot; v-for=&quot;(item,index) in seller.supports&quot; :key=&quot;index&quot;&gt;</span><br><span class="line">//wrong</span><br><span class="line">&lt;li class=&quot;support-item&quot; v-for=&quot;(item,index)in seller.supports&quot; :key=&quot;index&quot;&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="api调用"><a href="#api调用" class="headerlink" title="api调用"></a>api调用</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">computed()&#123;</span><br><span class="line">    <span class="keyword">this</span>.$http.get(<span class="string">'/api/goods'</span>).then(<span class="function">(<span class="params">res</span>) =&gt;</span> &#123;</span><br><span class="line">        res = res.body</span><br><span class="line">        <span class="keyword">if</span> (res.errno === ERR_OK) &#123;</span><br><span class="line">          <span class="keyword">this</span>.goods = res.data</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="margin重叠"><a href="#margin重叠" class="headerlink" title="margin重叠"></a><code>margin</code>重叠</h3><p>外边距会重叠起来，因此不会变成想象中两倍的距离。</p>
+<h3 id="ref-绑定DOM"><a href="#ref-绑定DOM" class="headerlink" title="ref 绑定DOM"></a>ref 绑定DOM</h3><p>v-ref、v-el 弃用 统一使用ref属性为元素或组件添加标记，然后通过this.$refs获取。<br>开始我用:<br><code>&lt;div class=&quot;menu-wrapper&quot; ref=&quot;menu-wrapper&quot;&gt;</code><br>来绑定dom对象，然而浏览器报错vue.esm.js?65d7:434 [Vue warn]: Error in nextTick: “TypeError: Cannot read property ‘children’ of undefined”，在经过多次修改后，发现<br><code>&lt;div class=&quot;menu-wrapper&quot; ref=&quot;menuWrapper&quot;&gt;</code><br>将ref里“-”去掉，就不会报错了，应该是修改了命名规则吧。</p>
+<h3 id="圆形图标"><a href="#圆形图标" class="headerlink" title="圆形图标"></a>圆形图标</h3><p><code>border-radius 50%</code></p>
+<h3 id="border-box模型"><a href="#border-box模型" class="headerlink" title="border-box模型"></a>border-box模型</h3><p>看看这个<a href="https://www.jianshu.com/p/006a422afb8e" target="_blank" rel="noopener">链接</a></p>
+<h3 id="props"><a href="#props" class="headerlink" title="props"></a>props</h3><p><code>props</code>接受来自父组件的值，也就是<code>props</code>写在子组件的<code>&lt;script&gt;</code>里面，接受父组件<code>v-bind</code>过来的信息。</p>
+<h3 id="函数柯里化"><a href="#函数柯里化" class="headerlink" title="函数柯里化"></a>函数柯里化</h3><p><a href="https://www.cnblogs.com/pigtail/p/3447660.html" target="_blank" rel="noopener">link</a></p>
+<p>在计算机科学中，柯里化（英语：Currying），又译为卡瑞化或加里化，是把接受多个参数的函数变换成接受一个单一参数（最初函数的第一个参数）的函数，并且返回接受余下的参数而且返回结果的新函数的技术。这个技术由 Christopher Strachey 以逻辑学家哈斯凯尔·加里命名的，尽管它是 Moses Schönfinkel 和 Gottlob Frege 发明的。</p>
+<p>这是来自维基百科的名词解释。顾名思义，柯里化其实本身是固定一个可以预期的参数，并返回一个特定的函数，处理批特定的需求。这增加了函数的适用性，但同时也降低了函数的适用范围</p>
+<h3 id="反引号"><a href="#反引号" class="headerlink" title="反引号"></a>反引号</h3><p>可以比较方便的拼接字符串。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">`还差￥$&#123;diff&#125;元起送`</span><br></pre></td></tr></table></figure>
+<h3 id="计算属性判断对应的样式"><a href="#计算属性判断对应的样式" class="headerlink" title="计算属性判断对应的样式"></a>计算属性判断对应的样式</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;pay&quot; :class=&quot;payClass&quot;&gt;&#123;&#123;payDesc&#125;&#125;&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">      payClass () &#123;</span><br><span class="line">        if (this.totalPrice &lt; this.minPrice) &#123;</span><br><span class="line">          return &apos;not-enough&apos;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">          return &apos;enough&apos;</span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style&gt;</span><br><span class="line">  &amp;.not-enough</span><br><span class="line">    background: #2b333b</span><br><span class="line">  &amp;.enough</span><br><span class="line">    background: #00b43c</span><br><span class="line">    color: #fff</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="如何在vue里面使用stylus"><a href="#如何在vue里面使用stylus" class="headerlink" title="如何在vue里面使用stylus"></a>如何在vue里面使用stylus</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">npm install stylus</span><br><span class="line"></span><br><span class="line">// in project</span><br><span class="line"></span><br><span class="line">npm install stylus --save-dev</span><br><span class="line">npm install stylus-loader --save-dev</span><br><span class="line"></span><br><span class="line">// in .vue </span><br><span class="line"></span><br><span class="line">&lt;style lang=&quot;stylus&quot;&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="translate3d"><a href="#translate3d" class="headerlink" title="translate3d()"></a><code>translate3d()</code></h3><p>样式里面的参数代表着移动的距离</p>
+<p>与transition里面的<code>tranform</code>配合，可以形成动画切换的效果。</p>
+<p><a href="https://www.cnblogs.com/xiaohuochai/p/5351477.html" target="_blank" rel="noopener">ref</a></p>
+<h3 id="在图片加载之前为其预留位置，防止页面抖动"><a href="#在图片加载之前为其预留位置，防止页面抖动" class="headerlink" title="在图片加载之前为其预留位置，防止页面抖动"></a>在图片加载之前为其预留位置，防止页面抖动</h3><p>这样图片位置通过<code>padding</code>就留出来了。</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">.img-header</span><br><span class="line">      <span class="attribute">position</span> relative</span><br><span class="line">      <span class="attribute">width</span> <span class="number">100%</span></span><br><span class="line">      <span class="attribute">height</span> <span class="number">0</span></span><br><span class="line">      <span class="attribute">padding-top</span> <span class="number">100%</span></span><br></pre></td></tr></table></figure>
+<h3 id="添加动画来修复food-vue中小球的动画"><a href="#添加动画来修复food-vue中小球的动画" class="headerlink" title="添加动画来修复food.vue中小球的动画"></a>添加动画来修复<code>food.vue</code>中小球的动画</h3><p>给<code>cartcontrol</code>上的按钮添加一个渐隐效果，可以使得计算小球飞出的位置时，能够找到出发的起始点。</p>
+<p>不然点击之后按钮消失，<code>cartcontrol</code>就失去了对位置的检测。</p>
+<h3 id="阻止冒泡"><a href="#阻止冒泡" class="headerlink" title="阻止冒泡"></a>阻止冒泡</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@click.stop.prevent=&quot;decreaseCart&quot;</span><br></pre></td></tr></table></figure>
+<h3 id="Better-scroll"><a href="#Better-scroll" class="headerlink" title="Better-scroll"></a>Better-scroll</h3><p>使用better-scroll的时候，需要将全部的需要滚动的DOM元素包含到对应的DIV里面去。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;!--里面都是待滚动的元素--&gt;</span><br><span class="line">  &lt;div ref=&quot;scroll&quot;&gt;</span><br><span class="line">    &lt;slot&gt;&lt;/slot&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure>
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/Vue/">Vue</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2019/01/11/JS里this的指向/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">JS里this的指向</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2019/01/07/JS中的原型链与继承/">
+        <span class="next-text nav-default">JS中的原型链与继承</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2018 -
+    
+    2019
+    <span class="footer-author">Xu Jianxiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>

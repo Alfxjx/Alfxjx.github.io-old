@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="ES6中的Promise">
+
+
+
+
+  <meta name="keywords" content="JavaScript,ES6,">
+
+
+
+
+
+  <link rel="alternate" href="/default" title="Alfred's">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://yoursite.com/2019/01/25/ES6中的Promise/">
+
+
+<meta name="description" content="js是单线程的，也就是说一次只能完成一个任务，为了解决这个问题，js将任务的执行模式分为两种， 同步和异步, 在es5中我们处理异步只能通过的回调的方式进行处理，在多层异步中，回调会一层一层嵌套，也就是所谓的回调地狱，promise就是异步编程的一种解决方案Promise">
+<meta name="keywords" content="JavaScript,ES6">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ES6中的Promise">
+<meta property="og:url" content="http://yoursite.com/2019/01/25/ES6中的Promise/index.html">
+<meta property="og:site_name" content="Alfred&#39;s">
+<meta property="og:description" content="js是单线程的，也就是说一次只能完成一个任务，为了解决这个问题，js将任务的执行模式分为两种， 同步和异步, 在es5中我们处理异步只能通过的回调的方式进行处理，在多层异步中，回调会一层一层嵌套，也就是所谓的回调地狱，promise就是异步编程的一种解决方案Promise">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-02-20T08:49:23.070Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ES6中的Promise">
+<meta name="twitter:description" content="js是单线程的，也就是说一次只能完成一个任务，为了解决这个问题，js将任务的执行模式分为两种， 同步和异步, 在es5中我们处理异步只能通过的回调的方式进行处理，在多层异步中，回调会一层一层嵌套，也就是所谓的回调地狱，promise就是异步编程的一种解决方案Promise">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: true
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> ES6中的Promise - Alfred's </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">Alfred's</a>
+    </h1>
+
+    <nav id="nav-top">
+        
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+            </ul>
+        
+  </nav>
+</div>
+
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          ES6中的Promise
+        
+      </h1>
+
+      <time class="post-time">
+          Jan 25 2019
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>js是单线程的，也就是说一次只能完成一个任务，为了解决这个问题，js将任务的执行模式分为两种， 同步和异步, 在es5中我们处理异步只能通过的回调的方式进行处理，在多层异步中，回调会一层一层嵌套，也就是所谓的回调地狱，promise就是异步编程的一种解决方案Promise<br><a id="more"></a></p>
+<h3 id="特点"><a href="#特点" class="headerlink" title="特点:"></a>特点:</h3><ul>
+<li>对象的状态不受外界影响, promise对象代表一个异步操作，有三种状态pendding(进行中), fulfilled(成功), rejected(失败)</li>
+<li>一旦状态改变，就不会再变, 状态的改变只有两种可能, pendding =&gt; fulfilled及pendding =&gt; rejected</li>
+</ul>
+<h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法:"></a>基本用法:</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> promise = <span class="keyword">new</span> <span class="built_in">Promise</span>(<span class="function"><span class="keyword">function</span>(<span class="params">resolve,reject</span>)</span>&#123;</span><br><span class="line">    <span class="comment">// ... some code</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="comment">/*异步操作成功*/</span>)&#123;</span><br><span class="line">        resolve(value); <span class="comment">// 将状态从pendding变成fulfilled</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        reject(error); <span class="comment">// 将状态从pendding变成rejected</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>promise 生成实例后可以使用then方法接收resolved状态和rejected状态的回调函数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">promise.then(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'resolved'</span>)</span><br><span class="line">&#125;, ()=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'rejected'</span>)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>promise原型上具有catch方法， catch方法是rejection的别名， 用于指定发生错误时的回调函数</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">promise.then(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'resolved'</span>)</span><br><span class="line">&#125;, ()=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'rejected'</span>)</span><br><span class="line">&#125;).catch(<span class="function">(<span class="params">err</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'catch'</span>)</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>promise原型上具有finally方法，用于不管promise对象最后的状态如何，都会执行的操作</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">promise.then(<span class="function"><span class="params">()</span>=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'resolved'</span>)</span><br><span class="line">&#125;, ()=&gt;&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'rejected'</span>)</span><br><span class="line">&#125;).finally(<span class="function">(<span class="params">err</span>)=&gt;</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'end'</span>)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<h3 id="Promise-all"><a href="#Promise-all" class="headerlink" title="Promise.all"></a>Promise.all</h3><p>Promise.all方法用于将多个 Promise 实例，包装成一个新的 Promise 实例</p>
+<p>简单使用: <code>const p = Promise.all([p1, p2, p3]);</code></p>
+<p>特点:</p>
+<ul>
+<li><p>参数都是promise实例，如果不是会调用promise.resolve方法将其转为promise实例</p>
+</li>
+<li><p>p的奖态由传入的promise实例的状态决定</p>
+</li>
+<li><ul>
+<li>promise实例状态都变成fulfilled,p状态为fulfilled</li>
+<li>promise实例状态一个变成rejected,p状态为rejected</li>
+</ul>
+</li>
+</ul>
+
+            </div>
+          
+
+    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/JavaScript/">JavaScript</a>
+		  
+			<a href="/tags/ES6/">ES6</a>
+		  
+		</div>
+		
+
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2019/01/26/ES6中的Decorator/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">ES6中的Decorator</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2019/01/25/ES6中的Proxy/">
+        <span class="next-text nav-default">ES6中的Proxy</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2018 -
+    
+    2019
+    <span class="footer-author">Xu Jianxiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
+</html>
