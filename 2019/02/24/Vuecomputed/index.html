@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no" name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="Blog">
+    <meta name="author" content="Xu Jianxiang">
+    <meta name="keywords" content="">
+    <title>Vue中的computed（计算属性） ~ Alfred&#39;s</title>
+    <link rel="stylesheet" href="/css/Material_Icons.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    
+        <link rel="stylesheet" href="/css/post.css">
+        
+            <link rel="stylesheet" href="/css/Prettify/github.min.css">
+        
+    
+</head>
+
+<body class=" sidebar-collapse">
+<nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
+    <div class="container">
+        <div class="navbar-translate">
+            <a class="navbar-brand" href="/">
+                Alfred&#39;s</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    
+                        
+                            <li class="nav-item">
+                                <a class="nav-link" href="/archives/">
+                                    archives
+                                </a>
+                            </li>
+                        
+                            <li class="nav-item">
+                                <a class="nav-link" href="/about/">
+                                    about
+                                </a>
+                            </li>
+                        
+                    
+                    
+                        
+                            <li class="nav-item">
+                                <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://github.com/" target="_blank" data-original-title="See me here">
+                                    <i class="fa fa-github"></i>
+                                </a>
+                            </li>
+                        
+                            <li class="nav-item">
+                                <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://twitter.com/" target="_blank" data-original-title="See me here">
+                                    <i class="fa fa-twitter"></i>
+                                </a>
+                            </li>
+                        
+                    
+                </ul>
+            </div>
+    </div>
+</nav>
+    
+  <div class="page-header header-filter" data-parallax="false" style="background-image: url('/img/post-banner.jpg'); height: 75vh;">
+    
+      <div class="container">
+        <h1 class="title text-center post_title">Vue中的computed（计算属性）</h1>
+        <p class="text-center"><b>Sunday, February 24th 2019, 12:57 pm</b></p>
+      </div>
+    
+  </div>
+
+  
+  
+  
+    <div class="row" style="margin: 0 0 0; z-index: 999;">
+  <div class="col-md-8 offset-md-1">
+    <div class="main main-raised">
+      <div class="container">
+        <div class="section">
+          <div class="post_content">
+              <p>computed 又称计算属性, 什么情况下会用到计算属性，我们直接上代码理解一下</p>
+<a id="more"></a>
+<pre><code class="html">// 我们有一个message，结过多次逻辑处理最终显示到页面中
+// 它不是一个简单的声明式逻辑，我们需要看一段时间才能理解message意图
+&lt;div id=&quot;example&quot;&gt;
+    {{ message.split('').reverse().join('') }}
+&lt;/div&gt;
+// 所以，这时候应该尝试使用computed，也就是说对于任何复杂逻辑，你都应当使用计算属性
+&lt;div id=&quot;example&quot;&gt;
+    {{ message }}
+&lt;/div&gt;
+&lt;script&gt;
+    var vm = new Vue({
+        el: &#39;#example&#39;,
+        data(){
+            return{
+                message : &#39;1234&#39;
+            }
+        },
+        computed：{
+        message(){
+            return this.message.split(&#39;&#39;).reverse().join(&#39;&#39;)
+            }
+        }
+    })
+&lt;/script&gt;
+</code></pre>
+<h3 id="computed-vs-methods"><a href="#computed-vs-methods" class="headerlink" title="computed vs methods"></a>computed vs methods</h3><p>计算属性跟方法都能达到同样的效果，那么它们之间有什么不同呢？我们还是看一段代码理解一下</p>
+<pre><code class="html">&lt;p&gt;Reversed message: &quot;{{ reversedMessage() }}&quot;&lt;/p&gt;
+</code></pre>
+<pre><code class="javascript">// 在组件中
+methods: {
+  reversedMessage: function () {
+    return this.message.split(&#39;&#39;).reverse().join(&#39;&#39;)
+  }
+}
+</code></pre>
+<p>我们可以将同一函数定义为一个方法而不是一个计算属性。两种方式的最终结果确实是完全相同的。然而，不同的是<strong>计算属性是基于它们的依赖进行缓存的</strong>。只在相关依赖发生改变时它们才会重新求值。这就意味着只要 <code>message</code> 还没有发生改变，多次访问 <code>reversedMessage</code> 计算属性会立即返回之前的计算结果，而不必再次执行函数。</p>
+<p>这也同样意味着下面的计算属性将不再更新，因为 <code>Date.now()</code> 不是响应式依赖：</p>
+<pre><code class="javascript">computed: {
+  now() {
+    return Date.now()
+  }
+}
+</code></pre>
+<h3 id="源代码"><a href="#源代码" class="headerlink" title="源代码"></a>源代码</h3><p><a href="https://github.com/vuejs/vue/blob/33e669b22f69a1f9c9147528360fe0bba85534f0/src/core/instance/state.js#L169" target="_blank" rel="noopener">link</a></p>
+<pre><code class="javascript">function initComputed (vm: Component, computed: Object) {
+  // $flow-disable-line
+  //新建存储watcher对象，挂载在vm对象执行
+  const watchers = vm._computedWatchers = Object.create(null)
+  // computed properties are just getters during SSR
+  const isSSR = isServerRendering()
+  //遍历computed
+  for (const key in computed) {
+    const userDef = computed[key]
+      // 定义一个计算属性有两种写法，一种是直接跟一个函数，
+    // 另一种是添加 set 和 get 方法的对象形式，
+    // 所以这里首先获取计算属性的定义 userDef，
+    // 再根据 userDef 的类型获取相应的 getter 求值函数
+    const getter = typeof userDef === &#39;function&#39; ? userDef : userDef.get
+    if (process.env.NODE_ENV !== &#39;production&#39; &amp;&amp; getter == null) {
+      warn(
+        `Getter is missing for computed property &quot;${key}&quot;.`,
+        vm
+      )
+    }
+
+    if (!isSSR) {
+      // create internal watcher for the computed property.
+      // 初始化watcher
+      watchers[key] = new Watcher(
+        vm,
+        getter || noop,
+        noop,
+        computedWatcherOptions
+      )
+    }
+
+    // component-defined computed properties are already defined on the
+    // component prototype. We only need to define computed properties defined
+    // at instantiation here.
+    if (!(key in vm)) {
+      // 调用计算属性时会触发其Object.defineProperty的get访问器函数  
+      defineComputed(vm, key, userDef)
+    } else if (process.env.NODE_ENV !== &#39;production&#39;) {
+      if (key in vm.$data) {
+        warn(`The computed property &quot;${key}&quot; is already defined in data.`, vm)
+      } else if (vm.$options.props &amp;&amp; key in vm.$options.props) {
+        warn(`The computed property &quot;${key}&quot; is already defined as a prop.`, vm)
+      }
+    }
+  }
+}
+</code></pre>
+
+          </div>
+          <br><br>
+          <div>
+              <p>
+                       
+                      <span class="badge badge-default">#&nbsp;Vue</span>
+                      &nbsp;
+                      
+              </p>
+          </div>
+        </div>
+      </div>  
+    </div>
+  </div>
+  <!-- TOC -->
+  
+  <div id="toc">
+    <p class="toc-title"><i class="material-icons" style="vertical-align:middle">toc</i>Toc:</p> 
+    <div id="tocbot"></div>
+  </div>
+
+</div>
+
+
+<br>
+<!-- Comments -->
+<div class="comments" id="comments">
+
+    
+    <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script>               
+        var disqus_shortname = '';
+        var disqus_config = function () {
+            this.page.url = 'http://yoursite.com/2019/02/24/Vuecomputed/'; 
+            this.page.identifier = '/2019/02/24/Vuecomputed/';
+        };
+        (function() { 
+            var d = document, s = d.createElement('script');
+            s.type = 'text/javascript';
+            s.src = '//'+disqus_shortname+'.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                                
+</div>
+
+</div>
+  
+
+<footer class="footer footer-default">
+        <div class="container">
+          <div class="float-left" style="padding: 15px 0;">
+              <b>一日看尽长安花</b>
+          </div>
+          <div class="copyright float-right">
+            &copy;
+            <script>
+              document.write(new Date().getFullYear())
+            </script>&nbsp;<a href="https://hexo.io/zh-cn/" target="_blank">HEXO</a>&nbsp;<i class="material-icons">favorite_border</i>
+            <a href="https://github.com/invom/Material-T" target="_blank">Material-T</a>
+          </div>
+        </div>
+</footer>
+      <!--   Core JS Files   -->
+      <script src="/js/core/jquery.min.js?v=3.2.1"></script>
+      <script src="/js/main.js"></script>
+      <script src="/js/core/popper.min.js"></script>
+      <script src="/js/core/bootstrap-material-design.min.js"></script>
+      <script src="/js/plugins/moment.min.js"></script>
+      <!-- Control Center for Material Kit: parallax effects, scripts for the example pages etc -->
+      <script src="/js/material-kit.min.js?v=2.0.5"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+        <script src="/js/post.js"></script>
+        <script src="/js/plugins/prettify.js"></script>
+        <script>
+            $(document).ready(function(){
+                $('pre').addClass('prettyprint linenums');
+                prettyPrint();
+            })
+        </script>
+      
+</body>
+</html>
