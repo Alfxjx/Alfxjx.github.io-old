@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no" name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="Blog">
+    <meta name="author" content="Xu Jianxiang">
+    <meta name="keywords" content="">
+    <title>vueRouterCanDo ~ Alfred&#39;s</title>
+    <link rel="stylesheet" href="/css/Material_Icons.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    
+        <link rel="stylesheet" href="/css/post.css">
+        
+            <link rel="stylesheet" href="/css/Prettify/github.min.css">
+        
+    
+</head>
+
+<body class=" sidebar-collapse">
+<nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
+    <div class="container">
+        <div class="navbar-translate">
+            <a class="navbar-brand" href="/">
+                Alfred&#39;s</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    
+                        
+                            <li class="nav-item">
+                                <a class="nav-link" href="/archives/">
+                                    archives
+                                </a>
+                            </li>
+                        
+                            <li class="nav-item">
+                                <a class="nav-link" href="/about/">
+                                    about
+                                </a>
+                            </li>
+                        
+                    
+                    
+                        
+                            <li class="nav-item">
+                                <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://github.com/" target="_blank" data-original-title="See me here">
+                                    <i class="fa fa-github"></i>
+                                </a>
+                            </li>
+                        
+                            <li class="nav-item">
+                                <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://twitter.com/" target="_blank" data-original-title="See me here">
+                                    <i class="fa fa-twitter"></i>
+                                </a>
+                            </li>
+                        
+                    
+                </ul>
+            </div>
+    </div>
+</nav>
+    
+  <div class="page-header header-filter" data-parallax="false" style="background-image: url('/img/post-banner.jpg'); height: 75vh;">
+    
+      <div class="container">
+        <h1 class="title text-center post_title">vueRouterCanDo</h1>
+        <p class="text-center"><b>Monday, March 11th 2019, 9:42 pm</b></p>
+      </div>
+    
+  </div>
+
+  
+  
+  
+    <div class="row" style="margin: 0 0 0; z-index: 999;">
+  <div class="col-md-8 offset-md-1">
+    <div class="main main-raised">
+      <div class="container">
+        <div class="section">
+          <div class="post_content">
+              <p>本文是关于VueRouter可以做的一些Vue开发人员很少知道的事情。它不是关于VueRouter的介绍性文章。本文假设您了解VueRouter，并且已经使用过几次或更多次并了解您的使用方法。</p>
+<a id="more"></a>
+<p><img src="/2019/03/11/vueRouterCanDo/post_img/VueRouter.jpeg" alt="pic"></p>
+<p>现在你可能永远不需要使用这里提到的东西。但是，请记住这些方法，有备无患。</p>
+<h2 id="查询语句-Query-parameters"><a href="#查询语句-Query-parameters" class="headerlink" title="查询语句/Query parameters"></a>查询语句/Query parameters</h2><p>你以前可能已经看过这些。它们无法在所有网站上看到，但您可以在进行Google搜索时轻松查看它们。当您执行简单搜索时，您会注意到URL在网站名称后面有一些内容：</p>
+<blockquote>
+<p> <a href="https://duckduckgo.com/?q=hey&amp;t=h&amp;atb=v115-6。" target="_blank" rel="noopener">https://duckduckgo.com/?q=hey&amp;t=h&amp;atb=v115-6。</a></p>
+</blockquote>
+<p>这是我在DuckDuckGo（像谷歌这样的搜索引擎）上用嘿这个词做的简单搜索。如果仔细查看该链接，可以看到字母q和其后的一些其他内容。在q之前还有一个问号。问号（？）之后的所有内容都称为查询。它用于以<strong>键值对</strong>的形式提供附加信息。</p>
+<hr>
+<p>VueRouter允许我们非常容易地传递查询参数。在<router-link>中是这样使用查询语句的：</router-link></p>
+<pre><code class="html">&lt;router-link :to=&quot;{
+    name:&#39;pathName&#39;,
+    params:{id:$route.params.id},
+    query:{ locale: &#39;en&#39; }
+}&quot;&gt;
+&lt;/router-link&gt;
+</code></pre>
+<p>这里我们的参数使用params属性传递，下一个属性是查询。它还接受一个对象，各种查询表示为键值对。</p>
+<p>在这种情况下，URL看起来像这样：</p>
+<blockquote>
+<p> <a href="https://something.com/user/456locale=en" target="_blank" rel="noopener">https://something.com/user/456locale=en</a></p>
+</blockquote>
+<h2 id="重定向所有路径"><a href="#重定向所有路径" class="headerlink" title="重定向所有路径"></a>重定向所有路径</h2><p>您已在单独的routes.js文件中准备好所有路径，将它们正确地包含在VueRouter实例中并使用本地开发服务器进行检查。这一切看起来还不错。这样配置的route.js可以包括全部的页面。</p>
+<p>你问一个朋友试一试并提供反馈。你信心满满，什么都不会出错。但突然之间，你的朋友会给你看屏幕。它上面有一个空白页面！但是你覆盖了网站的所有路径。出了什么问题？！</p>
+<p>您肯定涵盖了您的网站所需的所有路径。但这并不能阻止您的朋友或任何其他用户在URL中输入他们想要的内容。由于VueRouter显然无法识别路径，因此显示空白页面。如果用户第一次访问您的网站时意外输入了错误的路径，也可能发生这种情况。</p>
+<p>我知道我很难弄清楚为什么GMail不在<a href="https://google.gmail.com上，而是在https://mail.google.com上。好奇怪吧😜。" target="_blank" rel="noopener">https://google.gmail.com上，而是在https://mail.google.com上。好奇怪吧😜。</a></p>
+<p>不是向用户显示空白页面，而是将它们重定向到您选择的页面可能更好。将以下路径添加到routes.js文件中：</p>
+<pre><code class="javascript">{
+    path:&#39;*&#39;,
+    redirect:&#39;/&#39;
+}
+</code></pre>
+<p>这样做，文件中未处理的所有路由都将重定向到主页。因此，下次有人输入错误的路线时，他们将被重定向回主页。</p>
+<h2 id="添加哈希片段"><a href="#添加哈希片段" class="headerlink" title="添加哈希片段"></a>添加哈希片段</h2><p>不知道你是否访问过维基百科页面？有许多页面（几乎所有页面）都有内容索引。当您单击它们时，页面向下滚动，您可以神奇地跳转到该内容。</p>
+<p>您的网站可能有一个主要内容进一步缩小的页面，您需要在访问该页面后立即向下滚动到该页面。可以使用锚标记<a>并将内容的id放在href属性中来实现此行为。但是，这仅适用于同一页面，而不是在您必须访问其他页面并立即跳转到内容时。为此，您可以使用名为hash的<router-link>属性。它需要内容的id，如锚标签。</router-link></a></p>
+<pre><code class="html">&lt;router-link :to=&quot;{name:pathName, hash:&#39;#text&#39;}&quot;&gt;
+&lt;/router-link&gt;
+</code></pre>
+<p>但是，这只会将文本的id附加到URL。与此类似的东西 -  <a href="https://something.com/user#text。它不会向下滚动到内容。这是因为我们只告诉我们的VueRouter为它的URL添加一个哈希值。我们还没有告诉它如何在页面上滚动。散列片段必须与下面显示的滚动行为相结合。" target="_blank" rel="noopener">https://something.com/user#text。它不会向下滚动到内容。这是因为我们只告诉我们的VueRouter为它的URL添加一个哈希值。我们还没有告诉它如何在页面上滚动。散列片段必须与下面显示的滚动行为相结合。</a></p>
+<h2 id="滚动行为"><a href="#滚动行为" class="headerlink" title="滚动行为"></a>滚动行为</h2><p>我们现在将设置路由的滚动行为。有了这个，我们可以使用我们附加到URL的哈希自动滚动到我们的内容，甚至让VueRouter记住滚动前的最后位置。这就像在维基百科中，您可以单击索引中的内容标题，单击后退按钮，而不是返回到上一页，页面向上滚动到索引位置。</p>
+<p>将以下函数添加到VueRouter实例：</p>
+<pre><code class="javascript">import {routes} from &#39;./routers.js&#39;
+const router = new VueRouter({
+    routes,
+    scrollBehaviour(to,from, savedPosition){
+        // 保存返回的位置
+        if(savedPosition){
+            return savedPosition
+        }
+        // 设置前往页面的锚点
+        if(to.hash){
+            return {selector: to.hash}
+        }
+        return {x:0, y:0}
+    }
+})
+</code></pre>
+<p><del>译者注：是不是有点像keep-alive的功能。</del></p>
+<p>这里，路由是我们所有的路由都保存在一个单独的文件中。 scrollBehavior（）函数管理我们路线的滚动。它有3个参数：</p>
+<ol>
+<li>to  - 这代表我们将要访问的新路线</li>
+<li>from  - 这是我们之前的路线。因此，如果我们点击主页上的<router-link>访问“关于”页面，那么将成为我们的“关于”页面，并且从主页开始。</router-link></li>
+<li>savedPosition  - 这是重要的参数。 它表示滚动前的前一个位置。 在我解释上述功能的作用后，它会变得清晰。</li>
+</ol>
+<p>当我们只是向下滚动页面时，按后退按钮会将我们返回到页面顶部。这是因为我们在滚动之前的“先前位置”是页面的顶部。这是scrollBehavior（）函数中的第一个条件检查。它检查存储在savedPosition参数中的此保存位置。</p>
+<p>第二个条件检查是针对散列片段。您可能还记得我们在上一节中向我们的URL添加了一个哈希值。但是，此哈希不应用于当前页面。我们点击链接时会应用它。</p>
+<p>访问下一页时，它的路由中会有一个哈希值。第二个条件检查会注意到这个哈希值。它返回一个对象。选择器值指示我们要跳转到的内容的ID。</p>
+<p>因此，当我们点击该链接时，会在URL中添加一个哈希片段，页面会自动向下滚动到我们的内容。<br>函数的最后一行返回一个对象，该对象具有页面顶部的x和y坐标。当我们刚访问一个页面并且没有散列片段时，这是必要的。当没有任何内容可以滚动到我们也没有手动向下滚动时，我们需要显示页面顶部。</p>
+<hr>
+<p>这是本文的内容。我希望你能学到一些关于VueRouter的新知识。如果你想参考VueRouter的可靠来源，最好的地方是<a href="https://router.vuejs.org/zh/" target="_blank" rel="noopener">官方文档</a>，因为它们编写得非常好。</p>
+<p>如果您知道VueRouter的更多小功能，欢迎在评论区提出来~</p>
+<hr>
+<p>翻译： <a href="https://gitjhub.com/Alfxjx" target="_blank" rel="noopener">Alfxjx</a></p>
+<p>原文： medium</p>
+
+          </div>
+          <br><br>
+          <div>
+              <p>
+                       
+                      <span class="badge badge-default">#&nbsp;Vue Translation</span>
+                      &nbsp;
+                      
+              </p>
+          </div>
+        </div>
+      </div>  
+    </div>
+  </div>
+  <!-- TOC -->
+  
+  <div id="toc">
+    <p class="toc-title"><i class="material-icons" style="vertical-align:middle">toc</i>Toc:</p> 
+    <div id="tocbot"></div>
+  </div>
+
+</div>
+
+
+<br>
+<!-- Comments -->
+<div class="comments" id="comments">
+
+    
+    <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script>               
+        var disqus_shortname = '';
+        var disqus_config = function () {
+            this.page.url = 'http://yoursite.com/2019/03/11/vueRouterCanDo/'; 
+            this.page.identifier = '/2019/03/11/vueRouterCanDo/';
+        };
+        (function() { 
+            var d = document, s = d.createElement('script');
+            s.type = 'text/javascript';
+            s.src = '//'+disqus_shortname+'.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                                
+</div>
+
+</div>
+  
+
+<footer class="footer footer-default">
+        <div class="container">
+          <div class="float-left" style="padding: 15px 0;">
+              <b>一日看尽长安花</b>
+          </div>
+          <div class="copyright float-right">
+            &copy;
+            <script>
+              document.write(new Date().getFullYear())
+            </script>&nbsp;<a href="https://hexo.io/zh-cn/" target="_blank">HEXO</a>&nbsp;<i class="material-icons">favorite_border</i>
+            <a href="https://github.com/invom/Material-T" target="_blank">Material-T</a>
+          </div>
+        </div>
+</footer>
+      <!--   Core JS Files   -->
+      <script src="/js/core/jquery.min.js?v=3.2.1"></script>
+      <script src="/js/main.js"></script>
+      <script src="/js/core/popper.min.js"></script>
+      <script src="/js/core/bootstrap-material-design.min.js"></script>
+      <script src="/js/plugins/moment.min.js"></script>
+      <!-- Control Center for Material Kit: parallax effects, scripts for the example pages etc -->
+      <script src="/js/material-kit.min.js?v=2.0.5"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+        <script src="/js/post.js"></script>
+        <script src="/js/plugins/prettify.js"></script>
+        <script>
+            $(document).ready(function(){
+                $('pre').addClass('prettyprint linenums');
+                prettyPrint();
+            })
+        </script>
+      
+</body>
+</html>
