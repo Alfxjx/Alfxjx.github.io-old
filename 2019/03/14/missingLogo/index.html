@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+
+
+
+
+
+
+
+
+
+<head><meta name="generator" content="Hexo 3.8.0">
+    <meta charset="utf-8">
+    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="/favicon.png">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no" name="viewport">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="description" content="Blog">
+    <meta name="author" content="Xu Jianxiang">
+    <meta name="keywords" content="">
+    <title>飞来飞去的logo ~ Alfred&#39;s</title>
+    <link rel="stylesheet" href="/css/Material_Icons.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/css/main.css">
+    
+        <link rel="stylesheet" href="/css/post.css">
+        
+            <link rel="stylesheet" href="/css/Prettify/github.min.css">
+        
+    
+</head>
+
+<body class=" sidebar-collapse">
+<nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
+    <div class="container">
+        <div class="navbar-translate">
+            <a class="navbar-brand" href="/">
+                Alfred&#39;s</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav ml-auto">
+                    
+                        
+                            <li class="nav-item">
+                                <a class="nav-link" href="/archives/">
+                                    archives
+                                </a>
+                            </li>
+                        
+                            <li class="nav-item">
+                                <a class="nav-link" href="/about/">
+                                    about
+                                </a>
+                            </li>
+                        
+                    
+                    
+                        
+                            <li class="nav-item">
+                                <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://github.com/" target="_blank" data-original-title="See me here">
+                                    <i class="fa fa-github"></i>
+                                </a>
+                            </li>
+                        
+                            <li class="nav-item">
+                                <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://twitter.com/" target="_blank" data-original-title="See me here">
+                                    <i class="fa fa-twitter"></i>
+                                </a>
+                            </li>
+                        
+                    
+                </ul>
+            </div>
+    </div>
+</nav>
+    
+  <div class="page-header header-filter" data-parallax="false" style="background-image: url('/img/post-banner.jpg'); height: 75vh;">
+    
+      <div class="container">
+        <h1 class="title text-center post_title">飞来飞去的logo</h1>
+        <p class="text-center"><b>Thursday, March 14th 2019, 9:11 pm</b></p>
+      </div>
+    
+  </div>
+
+  
+  
+  
+    <div class="row" style="margin: 0 0 0; z-index: 999;">
+  <div class="col-md-8 offset-md-1">
+    <div class="main main-raised">
+      <div class="container">
+        <div class="section">
+          <div class="post_content">
+              <p>今天开发的时候出现一个很奇怪的问题，路由跳转的时候，会让内页的logo样式添加不完全。就非常的奇怪，当时的情况是这样的：</p>
+<a id="more"></a>
+<p><img src="/post_img/index.JPG" alt="zhuye"></p>
+<p>点击进入查询页面：</p>
+<p><img src="/post_img/fail-query.JPG" alt="query"></p>
+<p>并且在该页面刷新就消失了，如图：</p>
+<p><img src="/post_img/success.JPG" alt="ok-query"></p>
+<p>那么是怎么回事呢。</p>
+<h3 id="vue-router"><a href="#vue-router" class="headerlink" title="vue-router"></a>vue-router</h3><p>因为发生在路由跳转的时候，首先想到的就是是不是路由跳转的时机和样式加载的时机冲突，虽然现在仔细一想，整个页面救你不对，一看就和路由无关，但是自己还是去看了一遍路由的源码，下面是<code>$router.push()</code>的主要切片：</p>
+<pre><code class="javascript">// push 方法
+push (location: RawLocation, onComplete?: Function, onAbort?: Function) {
+    const { current: fromRoute } = this
+    this.transitionTo(location, route =&gt; {
+      pushHash(route.fullPath)
+      handleScroll(this.router, route, fromRoute, false)
+      onComplete &amp;&amp; onComplete(route)
+    }, onAbort)
+}
+
+function pushHash (path) {
+    if (supportsPushState) {
+        pushState(getUrl(path))
+    } else {
+        window.location.hash = path
+    }
+}
+</code></pre>
+<pre><code class="javascript">export function handleScroll (
+    router: Router,
+    to: Route,
+    from: Route,
+    isPop: boolean
+) 
+{
+    if (!router.app) {
+        return
+    }
+
+    const behavior = router.options.scrollBehavior
+    if (!behavior) {
+        return
+    }
+
+    if (process.env.NODE_ENV !== &#39;production&#39;) {
+        assert(typeof behavior === &#39;function&#39;, `scrollBehavior must be a function`)
+    }
+
+    // wait until re-render finishes before scrolling
+    router.app.$nextTick(() =&gt; {
+        const position = getScrollPosition()
+        const shouldScroll = behavior.call(router, to, from, isPop ? position : null)
+
+        if (!shouldScroll) {
+        return
+        }
+
+        if (typeof shouldScroll.then === &#39;function&#39;) {
+            shouldScroll.then(shouldScroll =&gt; {
+                scrollToPosition((shouldScroll: any), position)
+            }).catch(err =&gt; {
+                if (process.env.NODE_ENV !== &#39;production&#39;) {
+                assert(false, err.toString())
+                }
+            })
+        } else {
+        scrollToPosition(shouldScroll, position)
+        }
+    })
+}
+</code></pre>
+<pre><code class="javascript">export function pushState (url?: string, replace?: boolean) {
+    saveScrollPosition()
+    // try...catch the pushState call to get around Safari
+    // DOM Exception 18 where it limits to 100 pushState calls
+    const history = window.history
+    try {
+      if (replace) {
+        history.replaceState({ key: _key }, &#39;&#39;, url)
+      } else {
+        _key = genKey()
+        history.pushState({ key: _key }, &#39;&#39;, url)
+      }
+    } catch (e) {
+      window.location[replace ? &#39;replace&#39; : &#39;assign&#39;](url)
+    }
+  }
+</code></pre>
+<p>这么一瞧，果然和router没关系，那么是哪里有问题呢？</p>
+<h3 id="检查元素"><a href="#检查元素" class="headerlink" title="检查元素"></a>检查元素</h3><p>接下来我就检查了一下图片的样式，发现在<code>/query</code>界面的图片，呈现的是一个绝对定位：</p>
+<pre><code class="css">.logo {
+    position: absolute;
+    bottom: -15px;
+  }
+</code></pre>
+<p>这正好是<code>/index</code>页面的logo的样式！</p>
+<p>因为这两页面的logo图片定义了一个相同的类，导致跳转的时候，后面的页面（<code>/query</code>）的logo样式不能正确的呈现。</p>
+<p>于是发现需要在index页面的样式上面加上<code>&lt;style scoped&gt;</code>，即可正确显示样式了。</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>该加<code>scoped</code>的地方一定要加！</p>
+
+          </div>
+          <br><br>
+          <div>
+              <p>
+                       
+                      <span class="badge badge-default">#&nbsp;css vue</span>
+                      &nbsp;
+                      
+              </p>
+          </div>
+        </div>
+      </div>  
+    </div>
+  </div>
+  <!-- TOC -->
+  
+  <div id="toc">
+    <p class="toc-title"><i class="material-icons" style="vertical-align:middle">toc</i>Toc:</p> 
+    <div id="tocbot"></div>
+  </div>
+
+</div>
+
+
+<br>
+<!-- Comments -->
+<div class="comments" id="comments">
+
+    
+    <div class="disqus" style="width:100%">
+    <div id="disqus_thread"></div>
+    <script>               
+        var disqus_shortname = '';
+        var disqus_config = function () {
+            this.page.url = 'http://yoursite.com/2019/03/14/missingLogo/'; 
+            this.page.identifier = '/2019/03/14/missingLogo/';
+        };
+        (function() { 
+            var d = document, s = d.createElement('script');
+            s.type = 'text/javascript';
+            s.src = '//'+disqus_shortname+'.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                                
+</div>
+
+</div>
+  
+
+<footer class="footer footer-default">
+        <div class="container">
+          <div class="float-left" style="padding: 15px 0;">
+              <b>一日看尽长安花</b>
+          </div>
+          <div class="copyright float-right">
+            &copy;
+            <script>
+              document.write(new Date().getFullYear())
+            </script>&nbsp;<a href="https://hexo.io/zh-cn/" target="_blank">HEXO</a>&nbsp;<i class="material-icons">favorite_border</i>
+            <a href="https://github.com/invom/Material-T" target="_blank">Material-T</a>
+          </div>
+        </div>
+</footer>
+      <!--   Core JS Files   -->
+      <script src="/js/core/jquery.min.js?v=3.2.1"></script>
+      <script src="/js/main.js"></script>
+      <script src="/js/core/popper.min.js"></script>
+      <script src="/js/core/bootstrap-material-design.min.js"></script>
+      <script src="/js/plugins/moment.min.js"></script>
+      <!-- Control Center for Material Kit: parallax effects, scripts for the example pages etc -->
+      <script src="/js/material-kit.min.js?v=2.0.5"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+        <script src="/js/post.js"></script>
+        <script src="/js/plugins/prettify.js"></script>
+        <script>
+            $(document).ready(function(){
+                $('pre').addClass('prettyprint linenums');
+                prettyPrint();
+            })
+        </script>
+      
+</body>
+</html>
