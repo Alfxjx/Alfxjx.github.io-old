@@ -1,105 +1,138 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-
-
-
-
-
-
-
-
-
-
-<head><meta name="generator" content="Hexo 3.8.0">
-    <meta charset="utf-8">
-    <link rel="apple-touch-icon" sizes="76x76" href="/apple-touch-icon.png">
-    <link rel="icon" type="image/png" href="/favicon.png">
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no" name="viewport">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <meta name="description" content="Blog">
-    <meta name="author" content="Xu Jianxiang">
-    <meta name="keywords" content="">
-    <title>Vue中的computed（计算属性） ~ Alfred&#39;s</title>
-    <link rel="stylesheet" href="/css/Material_Icons.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/css/main.css">
+<html lang="">
+  <head><meta name="generator" content="Hexo 3.8.0">
     
-        <link rel="stylesheet" href="/css/post.css">
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+  <meta name="description" content="Vue中的computed（计算属性）">
+
+
+
+
+  <meta name="keywords" content="Vue,">
+
+
+
+
+
+  <link rel="alternate" href="/default" title="Alfred's">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1">
+
+
+
+<link rel="canonical" href="http://yoursite.com/2019/02/24/Vuecomputed/">
+
+
+<meta name="description" content="computed 又称计算属性, 什么情况下会用到计算属性，我们直接上代码理解一下">
+<meta name="keywords" content="Vue">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue中的computed（计算属性）">
+<meta property="og:url" content="http://yoursite.com/2019/02/24/Vuecomputed/index.html">
+<meta property="og:site_name" content="Alfred&#39;s">
+<meta property="og:description" content="computed 又称计算属性, 什么情况下会用到计算属性，我们直接上代码理解一下">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2019-02-24T05:10:19.068Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue中的computed（计算属性）">
+<meta name="twitter:description" content="computed 又称计算属性, 什么情况下会用到计算属性，我们直接上代码理解一下">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
+<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: true
+    },
+  };
+</script>
+
+
+
+
+  
+
+
+
+    <title> Vue中的computed（计算属性） - Alfred's </title>
+  </head>
+
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">Alfred's</a>
+    </h1>
+
+    <nav id="nav-top">
         
-            <link rel="stylesheet" href="/css/Prettify/github.min.css">
+            <ul id="menu-top" class="nav-top-items">
+                
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
+                
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
+                
+            </ul>
         
-    
-</head>
+  </nav>
+</div>
 
-<body class=" sidebar-collapse">
-<nav class="navbar navbar-transparent navbar-color-on-scroll fixed-top navbar-expand-lg" color-on-scroll="100" id="sectionsNav">
-    <div class="container">
-        <div class="navbar-translate">
-            <a class="navbar-brand" href="/">
-                Alfred&#39;s</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="navbar-toggler-icon"></span>
-                <span class="navbar-toggler-icon"></span>
-                <span class="navbar-toggler-icon"></span>
-            </button>
-        </div>
-            <div class="collapse navbar-collapse">
-                <ul class="navbar-nav ml-auto">
-                    
-                        
-                            <li class="nav-item">
-                                <a class="nav-link" href="/archives/">
-                                    archives
-                                </a>
-                            </li>
-                        
-                            <li class="nav-item">
-                                <a class="nav-link" href="/about/">
-                                    about
-                                </a>
-                            </li>
-                        
-                    
-                    
-                        
-                            <li class="nav-item">
-                                <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://github.com/" target="_blank" data-original-title="See me here">
-                                    <i class="fa fa-github"></i>
-                                </a>
-                            </li>
-                        
-                            <li class="nav-item">
-                                <a class="nav-link" rel="tooltip" title="" data-placement="bottom" href="https://twitter.com/" target="_blank" data-original-title="See me here">
-                                    <i class="fa fa-twitter"></i>
-                                </a>
-                            </li>
-                        
-                    
-                </ul>
-            </div>
-    </div>
-</nav>
-    
-  <div class="page-header header-filter" data-parallax="false" style="background-image: url('/img/post-banner.jpg'); height: 75vh;">
-    
-      <div class="container">
-        <h1 class="title text-center post_title">Vue中的computed（计算属性）</h1>
-        <p class="text-center"><b>Sunday, February 24th 2019, 12:57 pm</b></p>
-      </div>
-    
-  </div>
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          Vue中的computed（计算属性）
+        
+      </h1>
 
-  
-  
-  
-    <div class="row" style="margin: 0 0 0; z-index: 999;">
-  <div class="col-md-8 offset-md-1">
-    <div class="main main-raised">
-      <div class="container">
-        <div class="section">
-          <div class="post_content">
-              <p>computed 又称计算属性, 什么情况下会用到计算属性，我们直接上代码理解一下</p>
+      <time class="post-time">
+          Feb 24 2019
+      </time>
+    </header>
+
+
+
+    
+            <div class="post-content">
+            <p>computed 又称计算属性, 什么情况下会用到计算属性，我们直接上代码理解一下</p>
 <a id="more"></a>
 <pre><code class="html">// 我们有一个message，结过多次逻辑处理最终显示到页面中
 // 它不是一个简单的声明式逻辑，我们需要看一段时间才能理解message意图
@@ -194,89 +227,91 @@ methods: {
 }
 </code></pre>
 
-          </div>
-          <br><br>
-          <div>
-              <p>
-                       
-                      <span class="badge badge-default">#&nbsp;Vue</span>
-                      &nbsp;
-                      
-              </p>
-          </div>
-        </div>
-      </div>  
-    </div>
-  </div>
-  <!-- TOC -->
-  
-  <div id="toc">
-    <p class="toc-title"><i class="material-icons" style="vertical-align:middle">toc</i>Toc:</p> 
-    <div id="tocbot"></div>
-  </div>
-
-</div>
-
-
-<br>
-<!-- Comments -->
-<div class="comments" id="comments">
+            </div>
+          
 
     
-    <div class="disqus" style="width:100%">
-    <div id="disqus_thread"></div>
-    <script>               
-        var disqus_shortname = '';
-        var disqus_config = function () {
-            this.page.url = 'http://yoursite.com/2019/02/24/Vuecomputed/'; 
-            this.page.identifier = '/2019/02/24/Vuecomputed/';
-        };
-        (function() { 
-            var d = document, s = d.createElement('script');
-            s.type = 'text/javascript';
-            s.src = '//'+disqus_shortname+'.disqus.com/embed.js';
-            s.setAttribute('data-timestamp', +new Date());
-            (d.head || d.body).appendChild(s);
-        })();
-    </script>
-    <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>                                
-</div>
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/Vue/">Vue</a>
+		  
+		</div>
+		
 
-</div>
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2019/02/25/Vue中的Diff算法/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">Vue中的Diff算法</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2019/02/22/Hexo主题设置缩略图/">
+        <span class="next-text nav-default">Hexo主题设置缩略图</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+        
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+      </footer>
+    
+  </article>
+
+    </div>
+
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
+    
+        &copy;
+    
+        2018 -
+    
+    2019
+    <span class="footer-author">Xu Jianxiang.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+    
+
+
+    
   
 
-<footer class="footer footer-default">
-        <div class="container">
-          <div class="float-left" style="padding: 15px 0;">
-              <b>一日看尽长安花</b>
-          </div>
-          <div class="copyright float-right">
-            &copy;
-            <script>
-              document.write(new Date().getFullYear())
-            </script>&nbsp;<a href="https://hexo.io/zh-cn/" target="_blank">HEXO</a>&nbsp;<i class="material-icons">favorite_border</i>
-            <a href="https://github.com/invom/Material-T" target="_blank">Material-T</a>
-          </div>
-        </div>
-</footer>
-      <!--   Core JS Files   -->
-      <script src="/js/core/jquery.min.js?v=3.2.1"></script>
-      <script src="/js/main.js"></script>
-      <script src="/js/core/popper.min.js"></script>
-      <script src="/js/core/bootstrap-material-design.min.js"></script>
-      <script src="/js/plugins/moment.min.js"></script>
-      <!-- Control Center for Material Kit: parallax effects, scripts for the example pages etc -->
-      <script src="/js/material-kit.min.js?v=2.0.5"></script>
-      
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
-        <script src="/js/post.js"></script>
-        <script src="/js/plugins/prettify.js"></script>
-        <script>
-            $(document).ready(function(){
-                $('pre').addClass('prettyprint linenums');
-                prettyPrint();
-            })
-        </script>
-      
-</body>
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
 </html>
