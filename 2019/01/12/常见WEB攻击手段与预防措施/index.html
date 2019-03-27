@@ -4,11 +4,16 @@
     
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 <meta http-equiv="Cache-Control" content="no-transform">
 <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
 
@@ -17,7 +22,12 @@
 
 
 
-  <meta name="keywords" content="HTTP,">
+  <meta name="keywords" content="HTTP, Alfred's">
+
+
+
+
+
 
 
 
@@ -28,31 +38,12 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1">
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.2">
 
 
 
 <link rel="canonical" href="http://yoursite.com/2019/01/12/常见WEB攻击手段与预防措施/">
 
-
-<meta name="description" content="xss, SQL注入, DDOS, CSRF跨站请求伪造...">
-<meta name="keywords" content="HTTP">
-<meta property="og:type" content="article">
-<meta property="og:title" content="常见WEB攻击手段与预防措施">
-<meta property="og:url" content="http://yoursite.com/2019/01/12/常见WEB攻击手段与预防措施/index.html">
-<meta property="og:site_name" content="Alfred&#39;s">
-<meta property="og:description" content="xss, SQL注入, DDOS, CSRF跨站请求伪造...">
-<meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/01/12/常见WEB攻击手段与预防措施/csrf.png">
-<meta property="og:updated_time" content="2019-02-20T08:59:30.869Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="常见WEB攻击手段与预防措施">
-<meta name="twitter:description" content="xss, SQL注入, DDOS, CSRF跨站请求伪造...">
-<meta name="twitter:image" content="http://yoursite.com/2019/01/12/常见WEB攻击手段与预防措施/csrf.png">
-
-
-<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
-<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
 
   <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
@@ -60,14 +51,11 @@
 
 
 
-<script type="text/javascript">
-  var themeConfig = {
-    fancybox: {
-      enable: true
-    },
-  };
-</script>
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
 
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.2">
 
 
 
@@ -75,48 +63,145 @@
 
 
 
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+<script>
+  window.config = {"leancloud":"app_id:87EJk4r6rO0U0Tul5uju2IPq-gzGzoHsz app_key:vhxBampeF8Xel2ETEh4RBLNa","toc":true,"fancybox":true,"pjax":true};
+</script>
+
     <title> 常见WEB攻击手段与预防措施 - Alfred's </title>
   </head>
 
-  <body>
-    <div id="page">
-      <header id="masthead"><div class="site-header-inner">
-    <h1 class="site-title">
-        <a href="/." class="logo">Alfred's</a>
-    </h1>
-
-    <nav id="nav-top">
-        
-            <ul id="menu-top" class="nav-top-items">
-                
-                    <li class="menu-item">
-                        <a href="/archives">
-                            
-                            
-                                Archives
-                            
-                        </a>
-                    </li>
-                
-                    <li class="menu-item">
-                        <a href="/about">
-                            
-                            
-                                About
-                            
-                        </a>
-                    </li>
-                
-            </ul>
-        
-  </nav>
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Alfred's</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
 </div>
 
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/about">
+        <li class="mobile-menu-item">
+          
+          
+            关于
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Alfred's</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            
+            
+              关于
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
       </header>
-      <div id="content">
-        
-    <div id="primary">
-        
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
   <article class="post">
     <header class="post-header">
       <h1 class="post-title">
@@ -125,16 +210,29 @@
         
       </h1>
 
-      <time class="post-time">
-          Jan 12 2019
-      </time>
+      <div class="post-meta">
+        <span class="post-time">
+          2019-01-12
+        </span>
+        
+        
+      </div>
     </header>
 
-
-
     
-            <div class="post-content">
-            <h2 id="常见WEB攻击手段与预防措施"><a href="#常见WEB攻击手段与预防措施" class="headerlink" title="常见WEB攻击手段与预防措施"></a>常见WEB攻击手段与预防措施</h2><h3 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h3><p>XSS攻击：跨站脚本攻击(Cross-Site Scripting)，为了不和层叠样式表(Cascading Style Sheets, CSS)的缩写混淆，故将跨站脚本攻击缩写为XSS。XSS是一种常见的web安全漏洞，它允许攻击者将恶意代码植入到提供给其它用户使用的页面中。不同于大多数攻击(一般只涉及攻击者和受害者)，XSS涉及到三方，即攻击者、客户端与Web应用。XSS的攻击目标是为了盗取存储在客户端的cookie或者其他网站用于识别客户端身份的敏感信息。一旦获取到合法用户的信息后，攻击者甚至可以假冒合法用户与网站进行交互。</p>
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#常见WEB攻击手段与预防措施"><span class="toc-text">常见WEB攻击手段与预防措施</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#XSS"><span class="toc-text">XSS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何预防XSS"><span class="toc-text">如何预防XSS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SQL注入"><span class="toc-text">SQL注入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何预防SQL注入"><span class="toc-text">如何预防SQL注入</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#DDOS"><span class="toc-text">DDOS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#如何预防DDOS"><span class="toc-text">如何预防DDOS</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSRF"><span class="toc-text">CSRF</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#预防CSRF"><span class="toc-text">预防CSRF</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <h2 id="常见WEB攻击手段与预防措施"><a href="#常见WEB攻击手段与预防措施" class="headerlink" title="常见WEB攻击手段与预防措施"></a>常见WEB攻击手段与预防措施</h2><h3 id="XSS"><a href="#XSS" class="headerlink" title="XSS"></a>XSS</h3><p>XSS攻击：跨站脚本攻击(Cross-Site Scripting)，为了不和层叠样式表(Cascading Style Sheets, CSS)的缩写混淆，故将跨站脚本攻击缩写为XSS。XSS是一种常见的web安全漏洞，它允许攻击者将恶意代码植入到提供给其它用户使用的页面中。不同于大多数攻击(一般只涉及攻击者和受害者)，XSS涉及到三方，即攻击者、客户端与Web应用。XSS的攻击目标是为了盗取存储在客户端的cookie或者其他网站用于识别客户端身份的敏感信息。一旦获取到合法用户的信息后，攻击者甚至可以假冒合法用户与网站进行交互。</p>
 <p>XSS通常可以分为两大类：</p>
 <ol>
 <li>存储型XSS，主要出现在让用户输入数据，供其他浏览此页的用户进行查看的地方，包括留言、评论、博客日志和各类表单等。应用程序从数据库中查询数据，在页面中显示出来，攻击者在相关页面输入恶意的脚本数据后，用户浏览此类页面时就可能受到攻击。这个流程简单可以描述为：<code>恶意用户的Html输入Web程序-&gt;进入数据库-&gt;Web程序-&gt;用户浏览器</code>。</li>
@@ -172,19 +270,44 @@
 <p>我采用的hash加密方法是JS实现Java的HashCode方法，得到hash值，这个比较简单。也可以采用其他的hash算法。</p>
 <p>前端向后台传递hash之后的csrf_token值和cookie中的csrf_token值，后台拿到cookie中的csrf_token值后得到hashCode值然后与前端传过来的值进行比较，一样则通过。</p>
 
-            </div>
-          
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="http://yoursite.com">Xu Jianxiang</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="http://yoursite.com/2019/01/12/常见WEB攻击手段与预防措施/">http://yoursite.com/2019/01/12/常见WEB攻击手段与预防措施/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
 
     
       <footer class="post-footer">
-		
-		<div class="post-tags">
-		  
-			<a href="/tags/HTTP/">HTTP</a>
-		  
-		</div>
-		
-
+        
+          <div class="post-tags">
+            
+              <a href="/tags/HTTP/">HTTP</a>
+            
+          </div>
+        
         
         
   <nav class="post-nav">
@@ -192,44 +315,106 @@
       <a class="prev" href="/2019/01/14/前端模块化/">
         <i class="iconfont icon-left"></i>
         <span class="prev-text nav-default">理解前端模块化</span>
-        <span class="prev-text nav-mobile">Prev</span>
+        <span class="prev-text nav-mobile">上一篇</span>
       </a>
     
     
       <a class="next" href="/2019/01/12/EventLoop/">
         <span class="next-text nav-default">EventLoop</span>
-        <span class="prev-text nav-mobile">Next</span>
+        <span class="prev-text nav-mobile">下一篇</span>
         <i class="iconfont icon-right"></i>
       </a>
     
   </nav>
 
-        
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
   <div class="comments" id="comments">
     
   </div>
 
 
-      </footer>
-    
-  </article>
+        </div>
+      </main>
 
-    </div>
+      <footer id="footer" class="footer">
 
-      </div>
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:xjxtju@163.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/Alfxjx" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
 
-      <footer id="colophon"><span class="copyright-year">
     
-        &copy;
+      
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
     
-        2018 -
+  </div>
+
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2018 - 
     
     2019
-    <span class="footer-author">Xu Jianxiang.</span>
-    <span class="power-by">
-        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
     </span>
-</span>
+    <span class="author">Xu Jianxiang</span>
+  </span>
+</div>
 
       </footer>
 
@@ -237,7 +422,13 @@
         <i class="iconfont icon-up"></i>
       </div>
     </div>
+
     
+  
+  
+
+  
+
 
 
     
@@ -245,18 +436,35 @@
 
 
 
+  
+  
+
+
+
 
 
   
-    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
   
 
   
     <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
   
 
-    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
-<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.2"></script>
 
   </body>
 </html>

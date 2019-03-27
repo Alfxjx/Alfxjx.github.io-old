@@ -4,11 +4,16 @@
     
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 <meta http-equiv="Cache-Control" content="no-transform">
 <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
 
@@ -17,7 +22,12 @@
 
 
 
-  <meta name="keywords" content="Vue,Translation,">
+  <meta name="keywords" content="Vue, Translation, Alfred's">
+
+
+
+
+
 
 
 
@@ -28,31 +38,12 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1">
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.2">
 
 
 
 <link rel="canonical" href="http://yoursite.com/2019/02/18/practices/">
 
-
-<meta name="description" content="经过网上的一段搜索以及查阅Vue.js的[文档](https://vuejs.org/v2/guide/)，我写下了本文中关于Vue的最佳实践以及风格指南，从而可以更正确，更优雅的使用Vue.js。">
-<meta name="keywords" content="Vue,Translation">
-<meta property="og:type" content="article">
-<meta property="og:title" content="译-Vue.js 最佳实践✓">
-<meta property="og:url" content="http://yoursite.com/2019/02/18/practices/index.html">
-<meta property="og:site_name" content="Alfred&#39;s">
-<meta property="og:description" content="经过网上的一段搜索以及查阅Vue.js的[文档](https://vuejs.org/v2/guide/)，我写下了本文中关于Vue的最佳实践以及风格指南，从而可以更正确，更优雅的使用Vue.js。">
-<meta property="og:locale" content="default">
-<meta property="og:image" content="http://yoursite.com/2019/02/18/practices/vueBestPractice.jpeg">
-<meta property="og:updated_time" content="2019-02-22T10:59:06.223Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="译-Vue.js 最佳实践✓">
-<meta name="twitter:description" content="经过网上的一段搜索以及查阅Vue.js的[文档](https://vuejs.org/v2/guide/)，我写下了本文中关于Vue的最佳实践以及风格指南，从而可以更正确，更优雅的使用Vue.js。">
-<meta name="twitter:image" content="http://yoursite.com/2019/02/18/practices/vueBestPractice.jpeg">
-
-
-<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
-<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
 
   <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
@@ -60,14 +51,11 @@
 
 
 
-<script type="text/javascript">
-  var themeConfig = {
-    fancybox: {
-      enable: true
-    },
-  };
-</script>
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
 
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.2">
 
 
 
@@ -75,48 +63,145 @@
 
 
 
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+<script>
+  window.config = {"leancloud":"app_id:87EJk4r6rO0U0Tul5uju2IPq-gzGzoHsz app_key:vhxBampeF8Xel2ETEh4RBLNa","toc":true,"fancybox":true,"pjax":true};
+</script>
+
     <title> 译-Vue.js 最佳实践✓ - Alfred's </title>
   </head>
 
-  <body>
-    <div id="page">
-      <header id="masthead"><div class="site-header-inner">
-    <h1 class="site-title">
-        <a href="/." class="logo">Alfred's</a>
-    </h1>
-
-    <nav id="nav-top">
-        
-            <ul id="menu-top" class="nav-top-items">
-                
-                    <li class="menu-item">
-                        <a href="/archives">
-                            
-                            
-                                Archives
-                            
-                        </a>
-                    </li>
-                
-                    <li class="menu-item">
-                        <a href="/about">
-                            
-                            
-                                About
-                            
-                        </a>
-                    </li>
-                
-            </ul>
-        
-  </nav>
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Alfred's</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
 </div>
 
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/about">
+        <li class="mobile-menu-item">
+          
+          
+            关于
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Alfred's</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            
+            
+              关于
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
       </header>
-      <div id="content">
-        
-    <div id="primary">
-        
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
   <article class="post">
     <header class="post-header">
       <h1 class="post-title">
@@ -125,16 +210,29 @@
         
       </h1>
 
-      <time class="post-time">
-          Feb 18 2019
-      </time>
+      <div class="post-meta">
+        <span class="post-time">
+          2019-02-18
+        </span>
+        
+        
+      </div>
     </header>
 
-
-
     
-            <div class="post-content">
-            <p><a href="https://blog.usejournal.com/vue-js-best-practices-c5da8d7af48d" target="_blank" rel="noopener">原文链接</a></p>
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#在组件销毁之后使用-off清除事件监听器"><span class="toc-text">在组件销毁之后使用$off清除事件监听器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#事件名称使用短横线式命名（kebab-case"><span class="toc-text">事件名称使用短横线式命名（kebab-case)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总是在v-for循环中使用-key"><span class="toc-text">总是在v-for循环中使用 :key</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#为混入属性-mixins-properties-使用-符号标记"><span class="toc-text">为混入属性(mixins properties)使用$_符号标记</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在Mixin中使用的属性必须全部包含在Mixin之中"><span class="toc-text">在Mixin中使用的属性必须全部包含在Mixin之中</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#对单文件组件使用PascalCase或kebab-case"><span class="toc-text">对单文件组件使用PascalCase或kebab-case</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基础组件名称之前加前缀"><span class="toc-text">基础组件名称之前加前缀</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#JS组件需以PascalCase-命名"><span class="toc-text">JS组件需以PascalCase 命名</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Prop-在声明时需要按照CamelCase命名，但是在模板中需要改成kebab-case"><span class="toc-text">Prop 在声明时需要按照CamelCase命名，但是在模板中需要改成kebab-case</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#按照风格指南设置组件内部选项顺序"><span class="toc-text">按照风格指南设置组件内部选项顺序</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#不在同一个元素上同时使用v-if和v-for"><span class="toc-text">不在同一个元素上同时使用v-if和v-for</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Actions必须要有返回值"><span class="toc-text">Actions必须要有返回值</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#在actions和getters内部使用选择器"><span class="toc-text">在actions和getters内部使用选择器</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考文献"><span class="toc-text">参考文献</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#后记"><span class="toc-text">后记</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#翻译后记"><span class="toc-text">翻译后记</span></a></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <p><a href="https://blog.usejournal.com/vue-js-best-practices-c5da8d7af48d" target="_blank" rel="noopener">原文链接</a></p>
 <p>开发者们，你们好。</p>
 <p>经过网上的一段搜索以及查阅Vue.js的<a href="https://vuejs.org/v2/guide/" target="_blank" rel="noopener">文档</a>，我写下了本文中关于Vue的最佳实践以及风格指南，从而可以更正确，更优雅的使用Vue.js。</p>
 <p>下面的要点指出了其中一些功能/优化相关，其他是VueJs命名约定和元素排序。 更详细的信息可以在<a href="https://blog.usejournal.com/vue-js-best-practices-c5da8d7af48d#26f6" target="_blank" rel="noopener">链接</a>中找到。</p>
@@ -304,21 +402,46 @@ export const language = (state) =&gt; state.userConfig.language;
 <h3 id="翻译后记"><a href="#翻译后记" class="headerlink" title="翻译后记"></a>翻译后记</h3><p>这篇文章着重于代码风格，良好的代码风格是优秀代码的必要条件，也是多人合作过程中必不可少的一部分，之前阅读过阿里的Java手册，深感一个庞大的项目，除了语法之外，也必须在开发之前对于全体开发者的代码风格进行约束，虽然目前有了Eslint之类的风格检查工具，但是诸如命名等还是需要统一约束。</p>
 <p>文章还对一些会影响性能以及容易报错的写法进行了纠正。总体来说值得一读，也值得翻译过来给大家看看😉</p>
 
-            </div>
-          
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="http://yoursite.com">Xu Jianxiang</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="http://yoursite.com/2019/02/18/practices/">http://yoursite.com/2019/02/18/practices/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
 
     
       <footer class="post-footer">
-		
-		<div class="post-tags">
-		  
-			<a href="/tags/Vue/">Vue</a>
-		  
-			<a href="/tags/Translation/">Translation</a>
-		  
-		</div>
-		
-
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Vue/">Vue</a>
+            
+              <a href="/tags/Translation/">Translation</a>
+            
+          </div>
+        
         
         
   <nav class="post-nav">
@@ -326,44 +449,106 @@ export const language = (state) =&gt; state.userConfig.language;
       <a class="prev" href="/2019/02/19/nextTick/">
         <i class="iconfont icon-left"></i>
         <span class="prev-text nav-default">如何理解Vue中的nextTick？</span>
-        <span class="prev-text nav-mobile">Prev</span>
+        <span class="prev-text nav-mobile">上一篇</span>
       </a>
     
     
       <a class="next" href="/2019/01/30/hello-world/">
         <span class="next-text nav-default">Hello World</span>
-        <span class="prev-text nav-mobile">Next</span>
+        <span class="prev-text nav-mobile">下一篇</span>
         <i class="iconfont icon-right"></i>
       </a>
     
   </nav>
 
-        
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
   <div class="comments" id="comments">
     
   </div>
 
 
-      </footer>
-    
-  </article>
+        </div>
+      </main>
 
-    </div>
+      <footer id="footer" class="footer">
 
-      </div>
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:xjxtju@163.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/Alfxjx" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
 
-      <footer id="colophon"><span class="copyright-year">
     
-        &copy;
+      
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
     
-        2018 -
+  </div>
+
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2018 - 
     
     2019
-    <span class="footer-author">Xu Jianxiang.</span>
-    <span class="power-by">
-        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
     </span>
-</span>
+    <span class="author">Xu Jianxiang</span>
+  </span>
+</div>
 
       </footer>
 
@@ -371,7 +556,13 @@ export const language = (state) =&gt; state.userConfig.language;
         <i class="iconfont icon-up"></i>
       </div>
     </div>
+
     
+  
+  
+
+  
+
 
 
     
@@ -379,18 +570,35 @@ export const language = (state) =&gt; state.userConfig.language;
 
 
 
+  
+  
+
+
+
 
 
   
-    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
   
 
   
     <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
   
 
-    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
-<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.2"></script>
 
   </body>
 </html>

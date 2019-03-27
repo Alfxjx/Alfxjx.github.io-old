@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="问的都好基础，然而还是不会...">
+
+
+
+
+  <meta name="keywords" content="面试, Alfred's">
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/default" title="Alfred's">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.2">
+
+
+
+<link rel="canonical" href="http://yoursite.com/2019/03/27/头条面试经验/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.2">
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+<script>
+  window.config = {"leancloud":"app_id:87EJk4r6rO0U0Tul5uju2IPq-gzGzoHsz app_key:vhxBampeF8Xel2ETEh4RBLNa","toc":true,"fancybox":true,"pjax":true};
+</script>
+
+    <title> 头条面试经验 - Alfred's </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Alfred's</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/about">
+        <li class="mobile-menu-item">
+          
+          
+            关于
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Alfred's</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            
+            
+              关于
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          头条面试经验
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019-03-27
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#var-let-const-区别"><span class="toc-text">var/let/const 区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类的继承ES6与原生关系"><span class="toc-text">类的继承ES6与原生关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#reduce求和"><span class="toc-text">reduce求和</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nextTick"><span class="toc-text">nextTick</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#嵌套数组展平"><span class="toc-text">嵌套数组展平</span></a></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <p>##stylus 优点</p>
+<blockquote>
+<p>格式缩进；嵌套</p>
+<p>自定义变量</p>
+<p>它不需要分配值给变量就可以定义引用属性。</p>
+<p>属性名插值</p>
+<p>混入(mixin) 设置一像素边框</p>
+<p>内置函数，例如颜色处理，类型判断等 自定义函数</p>
+</blockquote>
+<p>##css垂直居中</p>
+<p><a href="https://www.cnblogs.com/hutuzhu/p/4450850.html" target="_blank" rel="noopener">this link</a></p>
+<ul>
+<li><p>可以设置<code>table-cell`</code>vertical-align: middle;`</p>
+</li>
+<li><p><code></code>flex布局： align-items:center`</p>
+</li>
+<li><p><code>position:absolute</code> 设置外边距为子元素高度的一半</p>
+</li>
+<li><p>绝对定位，设置子元素和父元素一样大，再设置尺寸50%</p>
+</li>
+</ul>
+<p>##BFC清除浮动</p>
+<blockquote>
+<p><code>overflow:auto</code></p>
+<p><code>parent:after{ clear:both }</code></p>
+<p><code>&lt;div class=&quot;{clear:both}&quot;/&gt;</code></p>
+</blockquote>
+<h2 id="var-let-const-区别"><a href="#var-let-const-区别" class="headerlink" title="var/let/const 区别"></a>var/let/const 区别</h2><p><a href="https://alfxjx.github.io/2019/01/21/var-let-const%E7%9A%84%E5%8C%BA%E5%88%AB%E5%8F%8A%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/" target="_blank" rel="noopener">可以看看之前的文章</a></p>
+<h2 id="类的继承ES6与原生关系"><a href="#类的继承ES6与原生关系" class="headerlink" title="类的继承ES6与原生关系"></a>类的继承ES6与原生关系</h2><p><a href="http://es6.ruanyifeng.com/#docs/class-extends" target="_blank" rel="noopener">es6 class的继承</a></p>
+<h2 id="reduce求和"><a href="#reduce求和" class="headerlink" title="reduce求和"></a>reduce求和</h2><pre><code class="javascript">var numbers = [...];
+function getSum(total,num){
+    return total + num;
+}
+var sum = numbers.reduce(getSum);
+</code></pre>
+<p>##同步转异步</p>
+<p><a href="https://www.cnblogs.com/xiaohuochai/p/5773183.html" target="_blank" rel="noopener">setTimeOut，setInterval区别</a></p>
+<ul>
+<li><p>setTimeout()方法用来指定某个函数或字符串在指定的毫秒数之后执行。</p>
+</li>
+<li><p>setInterval的用法与setTimeout完全一致，区别仅仅在于setInterval指定某个任务每隔一段时间就执行一次，也就是无限次的定时执行</p>
+</li>
+</ul>
+<h2 id="nextTick"><a href="#nextTick" class="headerlink" title="nextTick"></a>nextTick</h2><p>由于事件循环自身的特点，定时器的精确度不够。而事实上，采用定时器需要动用红黑树，创建定时器对象和迭代等操作，而setTimeout(fn, 0)的方式较为浪费性能。实际上process.nextTick()方法的操作相对较为轻量。</p>
+<p>　　每次调用process.nextTick()方法，只会将回调函数放入队列中，在下轮tick时取出执行，定时器中采用红黑树的操作时间复杂度为O(lg(n)),nextTick()的时间复杂度为O(1),很明显，nextTick()更加高效。</p>
+<h2 id="嵌套数组展平"><a href="#嵌套数组展平" class="headerlink" title="嵌套数组展平"></a><a href="https://www.imooc.com/article/13521?block_id=tuijian_wz" target="_blank" rel="noopener">嵌套数组展平</a></h2><pre><code class="javascript">// method1
+function flatternMd(arr){
+    var res = [];
+    function flattern(arr){
+        for(let i=0;i&lt;arr.length;i++){
+            if(Array.isArray(arr[i])){
+                flattern(arr[i]);
+            } else {
+                res.push(arr[i]);
+            }
+        }
+    }
+    flattern(arr);
+    return res;
+}
+// method 2
+function flattern2d(arr){
+    let res = [];
+    for(let i=0;i&lt;arr.length;i++){
+        res = res.concat(arr[i]);
+    }
+    return res;
+}
+function flattern2d(arr){
+    return Array.prototype.concat.apply([],arr);
+    // return [].concat.apply([],arr);
+}
+// 需要迭代来多次降维
+function flatternMd(arr){
+    let res = [];
+    for(let i=0;i&lt;arr.length;i++){
+        if(arr[i] instanceOf Array){
+            res = res.concat(flatternMd(arr[i]));
+        } else {
+            res.push(arr[i]);
+        }
+    }
+    return res;
+}
+// 递归方法
+function flatten(arr) {
+  return arr.reduce(function (plane, toBeFlatten) {
+    return plane.concat(Array.isArray(toBeFlatten) ? flatten(toBeFlatten) : toBeFlatten);
+}, []);
+}
+// 简化版递归
+flatten = function (arr) {
+    return arr.reduce((plane, toBeFlatten) =&gt; (plane.concat(Array.isArray(toBeFlatten) ? flatten(toBeFlatten) : toBeFlatten)), []);
+}
+// more simplified
+flatten = arr =&gt; arr.reduce((a, b) =&gt; a.concat(Array.isArray(b) ? flatten(b) : b), []);
+// ES6
+function flatten(arr) {
+  return [].concat(...arr)
+}
+// 也是只有一层所以使用递归了
+function deepFlatten(arr) {
+    flatten = (arr)=&gt; [].concat(...arr);
+    return flatten(arr.map(x=&gt;Array.isArray(x)? deepFlatten(x): x));
+}
+// 对于纯数字数组
+function flattern(arr){
+    return arr.join().split(&#39;,&#39;);
+}
+</code></pre>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="http://yoursite.com">Xu Jianxiang</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="http://yoursite.com/2019/03/27/头条面试经验/">http://yoursite.com/2019/03/27/头条面试经验/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/面试/">面试</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2019/03/20/cli3addFont/">
+        <span class="next-text nav-default">如何在vue-cli3下引入字体以及骨架屏</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:xjxtju@163.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/Alfxjx" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+      
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2018 - 
+    
+    2019
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Xu Jianxiang</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+
+
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.2"></script>
+
+  </body>
+</html>

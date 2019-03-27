@@ -4,11 +4,16 @@
     
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 
 <meta http-equiv="Cache-Control" content="no-transform">
 <meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
 
 
 
@@ -17,7 +22,12 @@
 
 
 
-  <meta name="keywords" content="JavaScript,">
+  <meta name="keywords" content="JavaScript, Alfred's">
+
+
+
+
+
 
 
 
@@ -28,29 +38,12 @@
 
 
 
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1">
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.2">
 
 
 
 <link rel="canonical" href="http://yoursite.com/2019/01/12/EventLoop/">
 
-
-<meta name="description" content="JS中EventLoop事件循环机制">
-<meta name="keywords" content="JavaScript">
-<meta property="og:type" content="article">
-<meta property="og:title" content="EventLoop">
-<meta property="og:url" content="http://yoursite.com/2019/01/12/EventLoop/index.html">
-<meta property="og:site_name" content="Alfred&#39;s">
-<meta property="og:description" content="JS中EventLoop事件循环机制">
-<meta property="og:locale" content="default">
-<meta property="og:updated_time" content="2019-02-20T08:50:04.902Z">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="EventLoop">
-<meta name="twitter:description" content="JS中EventLoop事件循环机制">
-
-
-<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1">
-<link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
 
   <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
@@ -58,14 +51,11 @@
 
 
 
-<script type="text/javascript">
-  var themeConfig = {
-    fancybox: {
-      enable: true
-    },
-  };
-</script>
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
 
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.2">
 
 
 
@@ -73,48 +63,145 @@
 
 
 
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+<script>
+  window.config = {"leancloud":"app_id:87EJk4r6rO0U0Tul5uju2IPq-gzGzoHsz app_key:vhxBampeF8Xel2ETEh4RBLNa","toc":true,"fancybox":true,"pjax":true};
+</script>
+
     <title> EventLoop - Alfred's </title>
   </head>
 
-  <body>
-    <div id="page">
-      <header id="masthead"><div class="site-header-inner">
-    <h1 class="site-title">
-        <a href="/." class="logo">Alfred's</a>
-    </h1>
-
-    <nav id="nav-top">
-        
-            <ul id="menu-top" class="nav-top-items">
-                
-                    <li class="menu-item">
-                        <a href="/archives">
-                            
-                            
-                                Archives
-                            
-                        </a>
-                    </li>
-                
-                    <li class="menu-item">
-                        <a href="/about">
-                            
-                            
-                                About
-                            
-                        </a>
-                    </li>
-                
-            </ul>
-        
-  </nav>
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Alfred's</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
 </div>
 
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/about">
+        <li class="mobile-menu-item">
+          
+          
+            关于
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Alfred's</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            
+            
+              关于
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
       </header>
-      <div id="content">
-        
-    <div id="primary">
-        
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
   <article class="post">
     <header class="post-header">
       <h1 class="post-title">
@@ -123,16 +210,29 @@
         
       </h1>
 
-      <time class="post-time">
-          Jan 12 2019
-      </time>
+      <div class="post-meta">
+        <span class="post-time">
+          2019-01-12
+        </span>
+        
+        
+      </div>
     </header>
 
-
-
     
-            <div class="post-content">
-            <p><a href="https://www.cnblogs.com/hanzhecheng/p/9046144.html" target="_blank" rel="noopener">JS中EventLoop事件循环机制</a></p>
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#Event-Loop-是什么"><span class="toc-text">Event Loop 是什么</span></a></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <p><a href="https://www.cnblogs.com/hanzhecheng/p/9046144.html" target="_blank" rel="noopener">JS中EventLoop事件循环机制</a></p>
 <a id="more"></a>
 <h3 id="Event-Loop-是什么"><a href="#Event-Loop-是什么" class="headerlink" title="Event Loop 是什么"></a>Event Loop 是什么</h3><blockquote>
 <p>JavaScript的事件分两种，<strong>宏任务(macro-task)</strong>和<strong>微任务(micro-task)</strong>,先执行宏任务，然后执行微任务</p>
@@ -183,19 +283,44 @@ setTimeout(function() {
 </li>
 </ol>
 
-            </div>
-          
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="http://yoursite.com">Xu Jianxiang</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="http://yoursite.com/2019/01/12/EventLoop/">http://yoursite.com/2019/01/12/EventLoop/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
 
     
       <footer class="post-footer">
-		
-		<div class="post-tags">
-		  
-			<a href="/tags/JavaScript/">JavaScript</a>
-		  
-		</div>
-		
-
+        
+          <div class="post-tags">
+            
+              <a href="/tags/JavaScript/">JavaScript</a>
+            
+          </div>
+        
         
         
   <nav class="post-nav">
@@ -203,44 +328,106 @@ setTimeout(function() {
       <a class="prev" href="/2019/01/12/常见WEB攻击手段与预防措施/">
         <i class="iconfont icon-left"></i>
         <span class="prev-text nav-default">常见WEB攻击手段与预防措施</span>
-        <span class="prev-text nav-mobile">Prev</span>
+        <span class="prev-text nav-mobile">上一篇</span>
       </a>
     
     
       <a class="next" href="/2019/01/11/浏览器渲染页面的过程/">
         <span class="next-text nav-default">浏览器渲染页面的过程</span>
-        <span class="prev-text nav-mobile">Next</span>
+        <span class="prev-text nav-mobile">下一篇</span>
         <i class="iconfont icon-right"></i>
       </a>
     
   </nav>
 
-        
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
   <div class="comments" id="comments">
     
   </div>
 
 
-      </footer>
-    
-  </article>
+        </div>
+      </main>
 
-    </div>
+      <footer id="footer" class="footer">
 
-      </div>
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:xjxtju@163.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/Alfxjx" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
 
-      <footer id="colophon"><span class="copyright-year">
     
-        &copy;
+      
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
     
-        2018 -
+  </div>
+
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2018 - 
     
     2019
-    <span class="footer-author">Xu Jianxiang.</span>
-    <span class="power-by">
-        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
     </span>
-</span>
+    <span class="author">Xu Jianxiang</span>
+  </span>
+</div>
 
       </footer>
 
@@ -248,7 +435,13 @@ setTimeout(function() {
         <i class="iconfont icon-up"></i>
       </div>
     </div>
+
     
+  
+  
+
+  
+
 
 
     
@@ -256,18 +449,35 @@ setTimeout(function() {
 
 
 
+  
+  
+
+
+
 
 
   
-    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
   
 
   
     <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
   
 
-    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
-<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.2"></script>
 
   </body>
 </html>
