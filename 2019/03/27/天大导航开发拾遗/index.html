@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="处理日期，添加到收藏夹，Eslint关闭一行校验，通知栏，主题颜色，i18n，vue-slicksort">
+
+
+
+
+  <meta name="keywords" content="Js, Alfred's">
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/default" title="Alfred's">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.2">
+
+
+
+<link rel="canonical" href="http://yoursite.com/2019/03/27/天大导航开发拾遗/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.2">
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+<script>
+  window.config = {"leancloud":"app_id:87EJk4r6rO0U0Tul5uju2IPq-gzGzoHsz app_key:vhxBampeF8Xel2ETEh4RBLNa","toc":true,"fancybox":true,"pjax":true};
+</script>
+
+    <title> 天大导航开发拾遗 - Alfred's </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Alfred's</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/about">
+        <li class="mobile-menu-item">
+          
+          
+            关于
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Alfred's</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            
+            
+              关于
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          天大导航开发拾遗
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019-03-27
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#如何插入日期选择器"><span class="toc-text">如何插入日期选择器</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#如何加入收藏"><span class="toc-text">如何加入收藏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Eslint-关闭一行的校验"><span class="toc-text">Eslint 关闭一行的校验</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Element-通知栏默认会显示"><span class="toc-text">Element 通知栏默认会显示</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#主题颜色调整"><span class="toc-text">主题颜色调整</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#中英文i18n"><span class="toc-text">中英文i18n</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#在data里面使用i18n"><span class="toc-text">在data里面使用i18n</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#in-Vuex-with-I18n"><span class="toc-text">in Vuex with I18n</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#图标转换成icon"><span class="toc-text">图标转换成icon</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vue-slicksort"><span class="toc-text">vue-slicksort</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#设置窗口全屏"><span class="toc-text">设置窗口全屏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#css3实现的material-design"><span class="toc-text">css3实现的material design</span></a></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <h2 id="如何插入日期选择器"><a href="#如何插入日期选择器" class="headerlink" title="如何插入日期选择器"></a>如何插入日期选择器</h2><ul>
+<li><a href="https://github.com/ElementUI/vue-cli-plugin-element" target="_blank" rel="noopener">部分引入element ui</a>vue add element</li>
+<li><code>date-picker</code>的<code>clearable</code>属性需要设置为<code>:clearable=&quot;true&quot;</code></li>
+<li>如何计算开学几周了（操作Date）</li>
+</ul>
+<pre><code class="javascript">week() {
+        let dtStart = new Date(&#39;2019-2-25&#39;)
+        let res = parseInt(this.date - dtStart) / (86400000 * 7)
+        if (res &gt; 0 &amp;&amp; res &lt; 21) {
+          return parseInt(res)
+        } else {
+          alert(&#39;不对的周数&#39;)
+          // this.date = new Date()
+          return 0
+        }
+}
+</code></pre>
+<h2 id="如何加入收藏"><a href="#如何加入收藏" class="headerlink" title="如何加入收藏"></a>如何加入收藏</h2><pre><code class="javascript">&lt;script&gt;
+  function _addFavorite() {
+      var url = window.location;
+      var title = document.title;
+      var ua = navigator.userAgent.toLowerCase();
+      if (ua.indexOf(&quot;360se&quot;) &gt; -1) {
+          alert(&quot;由于360浏览器功能限制，请按 Ctrl+D 手动收藏！&quot;);
+      }
+      else if (ua.indexOf(&quot;msie 8&quot;) &gt; -1) {
+          window.external.AddToFavoritesBar(url, title); //IE8
+      }
+      else if (document.all) {//IE类浏览器
+        try{
+         window.external.addFavorite(url, title);
+        }catch(e){
+         alert(&#39;您的浏览器不支持,请按 Ctrl+D 手动收藏!&#39;);
+        }
+      }
+      else if (window.sidebar) {//firfox等浏览器；
+          window.sidebar.addPanel(title, url, &quot;&quot;);
+      }
+      else {
+          alert(&#39;您的浏览器不支持,请按 Ctrl+D 手动收藏!&#39;);
+      }
+  }    
+  &lt;/script&gt;
+　　&lt;a href=&quot;javascript:void(0)&quot; onclick=&quot;_addFavorite()&quot;&gt;加入收藏&lt;/a&gt;
+</code></pre>
+<p>但是这个貌似在vue里面无法使用</p>
+<p>因此：</p>
+<pre><code class="javascript">addFavo() {
+        let browser = browser||chrome
+        browser.bookmarks.create({
+          title: document.title,
+          url: document.URL
+        }).then(
+          console.log(&#39;created&#39;)
+        )
+}
+</code></pre>
+<p>但是还是会报错</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/Browser_support_for_JavaScript_APIs#bookmarks" target="_blank" rel="noopener">这个</a>解释了为啥在Chrome下不能这么用，但是并没有解决我的问题。</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/bookmarks" target="_blank" rel="noopener">mdn上是这么说的</a>:</p>
+<blockquote>
+<p>The <a href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions" target="_blank" rel="noopener">WebExtensions</a> <a href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/API/bookmarks" target="_blank" rel="noopener"><code>bookmarks</code></a> API lets an extension interact with and manipulate the browser’s bookmarking system. You can use it to bookmark pages, retrieve existing bookmarks, and edit, remove, and organize bookmarks.</p>
+<p>To use this API, an extension must request the “bookmarks” <a href="https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions/manifest.json/permissions" target="_blank" rel="noopener">permission</a> in its <code>manifest.json</code>file.</p>
+</blockquote>
+<p><a href="https://segmentfault.com/q/1010000018679584" target="_blank" rel="noopener">已经提问了</a></p>
+<p><a href="https://stackoverflow.com/questions/22085812/addfavorite-js-doesnt-work-with-chrome" target="_blank" rel="noopener">解答</a></p>
+<blockquote>
+<p>Opera, Google Chrome and Safari do not provide a way to add new elements to the Favorites (Bookmarks) from JavaScript.</p>
+</blockquote>
+<h2 id="Eslint-关闭一行的校验"><a href="#Eslint-关闭一行的校验" class="headerlink" title="Eslint 关闭一行的校验"></a><a href="https://www.cnblogs.com/liyongquan/p/7831717.html" target="_blank" rel="noopener">Eslint 关闭一行的校验</a></h2><p>\1. 关闭段落校验</p>
+<pre><code>/* eslint-disable */some code
+some code
+/* eslint-enable */
+</code></pre><p>\2. 关闭当前行校验</p>
+<pre><code>`some code ``// eslint-disable-line`
+</code></pre><p>\3. 关闭下一行校验</p>
+<pre><code>`// eslint-disable-next-line``some code`
+</code></pre><h2 id="Element-通知栏默认会显示"><a href="#Element-通知栏默认会显示" class="headerlink" title="Element 通知栏默认会显示"></a>Element 通知栏默认会显示</h2><p>解决办法就是在created的时候关闭所有窗口</p>
+<pre><code class="javascript">import {Notification} from &#39;element-ui&#39;
+export default{
+    created() {
+      ...
+      Notification.closeAll()
+    },
+    methods: {
+        addFavo() {
+        Notification({
+          title: &#39;收藏本站的方法&#39;,
+          message: &#39;按Ctrl+D收藏&#39;,
+          position: &#39;top-right&#39;,
+          offset: 60
+        })
+      }
+    }
+}
+</code></pre>
+<h2 id="主题颜色调整"><a href="#主题颜色调整" class="headerlink" title="主题颜色调整"></a>主题颜色调整</h2><p><a href="https://blog.csdn.net/wang1006008051/article/details/83902236" target="_blank" rel="noopener">参考</a>这篇文章</p>
+<ul>
+<li>自定义的全局颜色需要在对应的文件里面引入</li>
+<li>是不是有更好的<a href="https://www.imooc.com/article/43664" target="_blank" rel="noopener">方法</a></li>
+<li>清空颜色优化</li>
+</ul>
+<pre><code class="javascript">computed: {
+      base() {
+        return this.$store.state.baseColor ? this.$store.state.baseColor : &#39;#1DC3F5&#39;
+      },
+          ...
+}          
+</code></pre>
+<h2 id="中英文i18n"><a href="#中英文i18n" class="headerlink" title="中英文i18n"></a>中英文i18n</h2><p><a href="https://www.cnblogs.com/rogerwu/p/7744476.html" target="_blank" rel="noopener">参考1</a></p>
+<p><a href="https://www.jianshu.com/p/cc4253745b0f" target="_blank" rel="noopener">参考2</a> 使用了localStorage来保存状态</p>
+<p>因为i18n是全局注册的，因此在处理循环渲染的时候，可以这样：</p>
+<pre><code class="html">&lt;li v-for=&quot;value in $t(&#39;sideBar&#39;)&quot; :key=&quot;value.name&quot;&gt;{{value}}&lt;/li&gt;
+</code></pre>
+<p>此时的<code>zh.js</code>是这样的：</p>
+<pre><code class="javascript">sideBar: {
+    school: &#39;学生教务&#39;,
+    course: &#39;课程管理&#39;,
+    office: &#39;行政办公&#39;,
+    research: &#39;科研&#39;,
+    exam: &#39;考试&#39;,
+    party: &#39;党建&#39;,
+    scholarship: &#39;学生资助&#39;,
+    daily: &#39;日常生活&#39;,
+    activity: &#39;学生活动&#39;,
+    career: &#39;学生就业&#39;
+  }
+</code></pre>
+<h2 id="在data里面使用i18n"><a href="#在data里面使用i18n" class="headerlink" title="在data里面使用i18n"></a>在data里面使用i18n</h2><p>原本的i18n的语法是这样的</p>
+<pre><code>{{$t('blur.blur')}}
+</code></pre><p>但是为了能更好的使用，想放在data里面，</p>
+<p>但是放在data里面的话，数据不能随时更新。</p>
+<pre><code>this.$t(&#39;main.school.sub&#39;)
+</code></pre><p>因此选择computed:</p>
+<pre><code class="javascript"> computed: {
+      list() {
+        return [
+          this.$t(&#39;main.school.sub&#39;),
+          this.$t(&#39;main.course.sub&#39;),
+          this.$t(&#39;main.office.sub&#39;),
+          this.$t(&#39;main.research.sub&#39;)
+        ]
+      }
+    },
+</code></pre>
+<h2 id="in-Vuex-with-I18n"><a href="#in-Vuex-with-I18n" class="headerlink" title="in Vuex with I18n"></a>in Vuex with I18n</h2><p><a href="https://github.com/kazupon/vue-i18n/issues/415" target="_blank" rel="noopener">how to use in vuex?</a></p>
+<p>就是把i18n注册到store.js里面，成为一个引入的方法，这样就可以解决this中找不到i18n的问题了。</p>
+<h2 id="图标转换成icon"><a href="#图标转换成icon" class="headerlink" title="图标转换成icon"></a>图标转换成icon</h2><p><a href="https://alfxjx.github.io/2019/01/10/%E9%A5%BF%E4%BA%86%E4%B9%88App%E7%AC%94%E8%AE%B0/" target="_blank" rel="noopener">之前的文章</a>里面有，这一次复习了一下</p>
+<pre><code>//main.js
+import &#39;./common/stylus/icon.styl&#39;
+//xx.vue
+&lt;i class=&quot;icon-search ex-icon&quot;&gt;&lt;/i&gt;
+// 排布形式
+--icon.styl
+--/font
+</code></pre><h2 id="vue-slicksort"><a href="#vue-slicksort" class="headerlink" title="vue-slicksort"></a>vue-slicksort</h2><p><a href="https://github.com/Jexordexan/vue-slicksort/tree/master/src" target="_blank" rel="noopener">demo源码地址</a></p>
+<p>学习一下嵌套的可拖动组件是怎么组织的。</p>
+<h2 id="设置窗口全屏"><a href="#设置窗口全屏" class="headerlink" title="设置窗口全屏"></a>设置窗口全屏</h2><p><a href="https://segmentfault.com/a/1190000012707337" target="_blank" rel="noopener">方法1</a></p>
+<p>现在你知道了吧，%是一个相对父元素计算得来的高度，要想使他有效，我们需要设置父元素的height;<br>要特别注意的一点是，在<body>之中的元素的父元素并不仅仅只是<body>，还包括了<html>。<br>所以我们要同时设置这两者的height，只设置其中一个是不行的：</html></body></body></p>
+<pre><code>html,body{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+</code></pre><p>方法2</p>
+<pre><code>&lt;div id=&quot;root&quot; onload=&quot;onLoad()&quot;&gt;
+function onLoad(){
+    let target = document.getElementById(&#39;root&#39;);
+    let h = window.screen.height;
+    target.style.height = `${h}px`;
+}
+</code></pre><h2 id="css3实现的material-design"><a href="#css3实现的material-design" class="headerlink" title="css3实现的material design"></a>css3实现的material design</h2><p><a href="https://segmentfault.com/a/1190000008510381" target="_blank" rel="noopener">link</a></p>
+<pre><code class="css">/*button*/
+    button {
+      opacity: 0.9;
+      line-height: 1rem;
+      padding:  0.5rem 1rem;
+      border: none;
+      outline: none;
+      background-color: white;
+      text-decoration: none;
+      position: relative;
+      border-radius:2px;
+      box-shadow:0 1px 3px darkgray;
+      transition: box-shadow 0.5s ease-out;
+    }
+ button::before{
+      content: &#39;&#39;;
+      display:block;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      border-radius: 10%/40%;
+      -webkit-transform: translate(-50%, -50%) ;
+      transform: translate(-50%, -50%) ;
+      height: 100%;
+      width: 100%;
+      z-index: -1;
+      -webkit-transition: all 0.5s cubic-bezier(0.23, 0.95, 0.56, 1);
+      transition: all 0.5s cubic-bezier(0.23, 0.95, 0.56, 1);
+  }
+  button:hover{
+    box-shadow:0 6px 16px darkgray;
+      transition: all 0.8s ease-out;
+  }
+button:active{
+     opacity: 1;
+      -webkit-transition: all 0.5s ease-out;
+      transition: all 0.3s ease-out;
+}
+button:active::before{
+      width: 0;
+      height: 100%;
+      border-radius: 0;
+      background-color: rgba(0,0,0,.4);
+      -webkit-transition: all 0.01s ease-out;
+      transition: all 0.01s ease-out;
+}
+button.link{
+    background:none;
+    color:#0275d8;
+    box-shadow: none;
+}
+button[disabled]{
+    background-color:lightgray;
+    color:darkgray;
+    cursor:not-allowed;
+    box-shadow: none;
+}
+.circle{
+    border-radius: 100%;
+}
+button.circle{
+    padding: 0;
+    width: 3rem;height: 3rem;font-size: 1.5rem;
+      box-shadow:0 6px 12px darkgray;
+
+}
+button.circle:hover{
+      box-shadow:0 12px 24px darkgray;
+}
+ button.circle::before{
+      content: &#39;&#39;;
+    display:block;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      border-radius: 100%;
+      -webkit-transform: translate(-50%, -50%) ;
+      transform: translate(-50%, -50%) ;
+      height: 100%;
+      width: 100%;
+      z-index: -1;
+      -webkit-transition: all 0.5s cubic-bezier(0.23, 0.95, 0.56, 1);
+      transition: all 0.5s cubic-bezier(0.23, 0.95, 0.56, 1);
+  }
+  button.circle:active::before{
+      width: 0;
+      height: 0;
+      border-radius: 100%;
+      background-color: rgba(0,0,0,.4);
+      -webkit-transition: all 0.01s ease-out;
+      transition: all 0.01s ease-out;
+  }
+</code></pre>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="http://yoursite.com">Xu Jianxiang</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="http://yoursite.com/2019/03/27/天大导航开发拾遗/">http://yoursite.com/2019/03/27/天大导航开发拾遗/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Js/">Js</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+      <a class="prev" href="/2019/04/06/css揭秘/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">css揭秘（1-2）</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
+    
+    
+      <a class="next" href="/2019/03/27/头条面试经验/">
+        <span class="next-text nav-default">一场面试的经验</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:xjxtju@163.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/Alfxjx" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+      
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2018 - 
+    
+    2019
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Xu Jianxiang</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+
+
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.2"></script>
+
+  </body>
+</html>

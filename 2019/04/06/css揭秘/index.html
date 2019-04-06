@@ -17,12 +17,12 @@
 
 
 
-  <meta name="description" content="问的都好基础，然而还是不会...">
+  <meta name="description" content="css揭秘（1-2）">
 
 
 
 
-  <meta name="keywords" content="面试, Alfred's">
+  <meta name="keywords" content="css, Alfred's">
 
 
 
@@ -42,7 +42,7 @@
 
 
 
-<link rel="canonical" href="http://yoursite.com/2019/03/27/头条面试经验/">
+<link rel="canonical" href="http://yoursite.com/2019/04/06/css揭秘/">
 
 
 
@@ -90,7 +90,7 @@
   window.config = {"leancloud":"app_id:87EJk4r6rO0U0Tul5uju2IPq-gzGzoHsz app_key:vhxBampeF8Xel2ETEh4RBLNa","toc":true,"fancybox":true,"pjax":true};
 </script>
 
-    <title> 一场面试的经验 - Alfred's </title>
+    <title> css揭秘（1-2） - Alfred's </title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -206,13 +206,13 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          一场面试的经验
+          css揭秘（1-2）
         
       </h1>
 
       <div class="post-meta">
         <span class="post-time">
-          2019-03-27
+          2019-04-06
         </span>
         
         
@@ -221,126 +221,114 @@
 
     
     
-  <div class="post-toc" id="post-toc">
-    <h2 class="post-toc-title">文章目录</h2>
-    <div class="post-toc-content">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#var-let-const-区别"><span class="toc-text">var/let/const 区别</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#类的继承ES6与原生关系"><span class="toc-text">类的继承ES6与原生关系</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#reduce求和"><span class="toc-text">reduce求和</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nextTick"><span class="toc-text">nextTick</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#嵌套数组展平"><span class="toc-text">嵌套数组展平</span></a></li></ol>
-    </div>
-  </div>
-
 
 
     <div class="post-content">
       
-        <p>##stylus 优点</p>
-<blockquote>
-<p>格式缩进；嵌套</p>
-<p>自定义变量</p>
-<p>它不需要分配值给变量就可以定义引用属性。</p>
-<p>属性名插值</p>
-<p>混入(mixin) 设置一像素边框</p>
-<p>内置函数，例如颜色处理，类型判断等 自定义函数</p>
-</blockquote>
-<p>##css垂直居中</p>
-<p><a href="https://www.cnblogs.com/hutuzhu/p/4450850.html" target="_blank" rel="noopener">this link</a></p>
-<ul>
-<li><p>可以设置<code>table-cell`</code>vertical-align: middle;`</p>
-</li>
-<li><p><code></code>flex布局： align-items:center`</p>
-</li>
-<li><p><code>position:absolute</code> 设置外边距为子元素高度的一半</p>
-</li>
-<li><p>绝对定位，设置子元素和父元素一样大，再设置尺寸50%</p>
-</li>
-</ul>
-<p>##BFC清除浮动</p>
-<blockquote>
-<p><code>overflow:auto</code></p>
-<p><code>parent:after{ clear:both }</code></p>
-<p><code>&lt;div class=&quot;{clear:both}&quot;/&gt;</code></p>
-</blockquote>
-<h2 id="var-let-const-区别"><a href="#var-let-const-区别" class="headerlink" title="var/let/const 区别"></a>var/let/const 区别</h2><p><a href="https://alfxjx.github.io/2019/01/21/var-let-const%E7%9A%84%E5%8C%BA%E5%88%AB%E5%8F%8A%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF/" target="_blank" rel="noopener">可以看看之前的文章</a></p>
-<h2 id="类的继承ES6与原生关系"><a href="#类的继承ES6与原生关系" class="headerlink" title="类的继承ES6与原生关系"></a>类的继承ES6与原生关系</h2><p><a href="http://es6.ruanyifeng.com/#docs/class-extends" target="_blank" rel="noopener">es6 class的继承</a></p>
-<h2 id="reduce求和"><a href="#reduce求和" class="headerlink" title="reduce求和"></a>reduce求和</h2><pre><code class="javascript">var numbers = [...];
-function getSum(total,num){
-    return total + num;
-}
-var sum = numbers.reduce(getSum);
-</code></pre>
-<p>##同步转异步</p>
-<p><a href="https://www.cnblogs.com/xiaohuochai/p/5773183.html" target="_blank" rel="noopener">setTimeOut，setInterval区别</a></p>
-<ul>
-<li><p>setTimeout()方法用来指定某个函数或字符串在指定的毫秒数之后执行。</p>
-</li>
-<li><p>setInterval的用法与setTimeout完全一致，区别仅仅在于setInterval指定某个任务每隔一段时间就执行一次，也就是无限次的定时执行</p>
-</li>
-</ul>
-<h2 id="nextTick"><a href="#nextTick" class="headerlink" title="nextTick"></a>nextTick</h2><p>由于事件循环自身的特点，定时器的精确度不够。而事实上，采用定时器需要动用红黑树，创建定时器对象和迭代等操作，而setTimeout(fn, 0)的方式较为浪费性能。实际上process.nextTick()方法的操作相对较为轻量。</p>
-<p>　　每次调用process.nextTick()方法，只会将回调函数放入队列中，在下轮tick时取出执行，定时器中采用红黑树的操作时间复杂度为O(lg(n)),nextTick()的时间复杂度为O(1),很明显，nextTick()更加高效。</p>
-<h2 id="嵌套数组展平"><a href="#嵌套数组展平" class="headerlink" title="嵌套数组展平"></a><a href="https://www.imooc.com/article/13521?block_id=tuijian_wz" target="_blank" rel="noopener">嵌套数组展平</a></h2><pre><code class="javascript">// method1
-function flatternMd(arr){
-    var res = [];
-    function flattern(arr){
-        for(let i=0;i&lt;arr.length;i++){
-            if(Array.isArray(arr[i])){
-                flattern(arr[i]);
-            } else {
-                res.push(arr[i]);
-            }
+        <p>《css揭秘》这本书还是很有意思的，本文是对其前两章的总结。</p>
+<p><a href="http://play.csssecrets.io/" target="_blank" rel="noopener">这里</a>是这本书的相关例子，我自己也练习了一下。</p>
+<a id="more"></a>
+<p><img src="/2019/04/06/css揭秘/test.JPG" alt="pic"></p>
+<pre><code class="css">&lt;style type=&quot;text/css&quot;&gt;
+        .main{
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
         }
-    }
-    flattern(arr);
-    return res;
-}
-// method 2
-function flattern2d(arr){
-    let res = [];
-    for(let i=0;i&lt;arr.length;i++){
-        res = res.concat(arr[i]);
-    }
-    return res;
-}
-function flattern2d(arr){
-    return Array.prototype.concat.apply([],arr);
-    // return [].concat.apply([],arr);
-}
-// 需要迭代来多次降维
-function flatternMd(arr){
-    let res = [];
-    for(let i=0;i&lt;arr.length;i++){
-        if(arr[i] instanceOf Array){
-            res = res.concat(flatternMd(arr[i]));
-        } else {
-            res.push(arr[i]);
+        .test{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: 700;
+            font-size: 28px;
+            width: 200px;
+            height:200px;
+            margin: 5px;
+            color: red;
+            border: 1px solid black;
         }
-    }
-    return res;
-}
-// 递归方法
-function flatten(arr) {
-  return arr.reduce(function (plane, toBeFlatten) {
-    return plane.concat(Array.isArray(toBeFlatten) ? flatten(toBeFlatten) : toBeFlatten);
-}, []);
-}
-// 简化版递归
-flatten = function (arr) {
-    return arr.reduce((plane, toBeFlatten) =&gt; (plane.concat(Array.isArray(toBeFlatten) ? flatten(toBeFlatten) : toBeFlatten)), []);
-}
-// more simplified
-flatten = arr =&gt; arr.reduce((a, b) =&gt; a.concat(Array.isArray(b) ? flatten(b) : b), []);
-// ES6
-function flatten(arr) {
-  return [].concat(...arr)
-}
-// 也是只有一层所以使用递归了
-function deepFlatten(arr) {
-    flatten = (arr)=&gt; [].concat(...arr);
-    return flatten(arr.map(x=&gt;Array.isArray(x)? deepFlatten(x): x));
-}
-// 对于纯数字数组
-function flattern(arr){
-    return arr.join().split(&#39;,&#39;);
-}
+        .test1{
+            background: hsl(20,40%,90%);
+            background-image: 
+                linear-gradient(90deg,#fb3 11px, transparent 0),
+                linear-gradient(90deg,#ab4 23px, transparent 0),
+                linear-gradient(90deg,#655 47px, transparent 0);
+            background-size: 41px 100%, 61px 100%, 83px 100%;    
+        }
+        .test2{
+            background: #58a;
+            background-image:
+                linear-gradient(white 2px, transparent 0),
+                linear-gradient(90deg, white 2px, transparent 0),
+                linear-gradient(hsla(0,0%,100%,0.3) 1px, transparent 0),
+                linear-gradient(90deg, hsla(0,0%,100%,0.3) 1px, transparent 0);
+            background-size: 50px 50px,50px 50px,10px 10px, 10px 10px;    
+        }
+        .test3{
+            background: #655;
+            background-image:
+                radial-gradient(tan 30%, transparent 0),
+                radial-gradient(tan 30%, transparent 0);
+            background-size: 30px 30px;
+            background-position: 0 0, 15px 15px;    
+        }
+        .test4{
+            background:#eee;
+            background-image:
+                linear-gradient(45deg, #bbb 25%, transparent 0),
+                linear-gradient(45deg, transparent 75%, #bbb 0),
+                linear-gradient(45deg, #bbb 25%, transparent 0),
+                linear-gradient(45deg, transparent 75%, #bbb 0);
+            background-position: 0 0, 15px 15px,
+                             15px 15px, 30px 30px;
+            background-size: 30px 30px;
+        }
+        .test5{
+            background: linear-gradient(#fb3 50%, #58a 0);
+            background-size: 100% 30px;
+        }
+        .test6{
+            background: linear-gradient(45deg, #fb3 25%, #58a 0, #58a 50%, #fb3 0, #fb3 75%, #58a 0);
+            background-size: 30px 30px;
+        }
+        .test7{
+            width: 170px;
+            height: 170px;
+            background:yellowgreen;
+            border: 10px solid #655;
+            outline:5px solid deeppink;
+        }
+        .test8{
+            margin: 20px;
+            width: 170px;
+            height: 170px;
+            background: yellowgreen;
+            box-shadow: 0 0 0 10px #655,
+                        0 0 0 15px deeppink,
+                        0 2px 5px 15px rgba(0,0,0,0.6);
+        }
+        .test9{
+            width:160px;
+            height: 160px; 
+            margin: 20px;
+            background:tan;
+            border-radius: 20px;
+            padding: 10px;
+            box-shadow: 0 0 0 10px red;
+            outline:10px solid #58a;
+        }
+    &lt;/style&gt;
+    &lt;div class=&quot;main&quot;&gt;
+        &lt;div class=&quot;test test1&quot;&gt;随机条纹&lt;/div&gt;
+        &lt;div class=&quot;test test2&quot;&gt;网格&lt;/div&gt;
+        &lt;div class=&quot;test test3&quot;&gt;波点&lt;/div&gt;
+        &lt;div class=&quot;test test4&quot;&gt;棋盘&lt;/div&gt;
+        &lt;div class=&quot;test test5&quot;&gt;横条纹&lt;/div&gt;
+        &lt;div class=&quot;test test6&quot;&gt;竖条纹&lt;/div&gt;
+        &lt;div class=&quot;test test7&quot;&gt;outline双边框&lt;/div&gt;
+        &lt;div class=&quot;test test8&quot;&gt;boxShadow多层&lt;/div&gt;
+        &lt;div class=&quot;test test9&quot;&gt;内圆角&lt;/div&gt;
+    &lt;/div&gt;
 </code></pre>
 
       
@@ -357,7 +345,7 @@ function flattern(arr){
     </p>
     <p class="copyright-item">
       <span>原文链接: </span>
-      <a href="http://yoursite.com/2019/03/27/头条面试经验/">http://yoursite.com/2019/03/27/头条面试经验/</a>
+      <a href="http://yoursite.com/2019/04/06/css揭秘/">http://yoursite.com/2019/04/06/css揭秘/</a>
     </p>
     <p class="copyright-item">
       <span>许可协议: </span>
@@ -377,7 +365,7 @@ function flattern(arr){
         
           <div class="post-tags">
             
-              <a href="/tags/面试/">面试</a>
+              <a href="/tags/css/">css</a>
             
           </div>
         
@@ -385,15 +373,9 @@ function flattern(arr){
         
   <nav class="post-nav">
     
-      <a class="prev" href="/2019/03/27/天大导航开发拾遗/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text nav-default">天大导航开发拾遗</span>
-        <span class="prev-text nav-mobile">上一篇</span>
-      </a>
     
-    
-      <a class="next" href="/2019/03/20/cli3addFont/">
-        <span class="next-text nav-default">如何在vue-cli3下引入字体以及骨架屏</span>
+      <a class="next" href="/2019/03/27/天大导航开发拾遗/">
+        <span class="next-text nav-default">天大导航开发拾遗</span>
         <span class="prev-text nav-mobile">下一篇</span>
         <i class="iconfont icon-right"></i>
       </a>
