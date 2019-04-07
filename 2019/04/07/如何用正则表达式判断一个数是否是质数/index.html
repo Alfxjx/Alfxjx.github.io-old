@@ -17,12 +17,12 @@
 
 
 
-  <meta name="description" content="Vue中的Diff算法">
+  <meta name="description" content="如何用正则表达式判断一个数是否是质数">
 
 
 
 
-  <meta name="keywords" content="Vue, Alfred's">
+  <meta name="keywords" content="JS, Alfred's">
 
 
 
@@ -42,7 +42,7 @@
 
 
 
-<link rel="canonical" href="http://yoursite.com/2019/02/25/Vue中的Diff算法/">
+<link rel="canonical" href="http://yoursite.com/2019/04/07/如何用正则表达式判断一个数是否是质数/">
 
 
 
@@ -90,7 +90,7 @@
   window.config = {"leancloud":"app_id:87EJk4r6rO0U0Tul5uju2IPq-gzGzoHsz app_key:vhxBampeF8Xel2ETEh4RBLNa","toc":true,"fancybox":true,"pjax":true};
 </script>
 
-    <title> Vue中的Diff算法 - Alfred's </title>
+    <title> 如何用正则表达式判断一个数是否是质数 - Alfred's </title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -206,13 +206,13 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          Vue中的Diff算法
+          如何用正则表达式判断一个数是否是质数
         
       </h1>
 
       <div class="post-meta">
         <span class="post-time">
-          2019-02-25
+          2019-04-07
         </span>
         
         
@@ -224,7 +224,7 @@
   <div class="post-toc" id="post-toc">
     <h2 class="post-toc-title">文章目录</h2>
     <div class="post-toc-content">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#virtual-DOM和真实DOM的区别"><span class="toc-text">virtual DOM和真实DOM的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#diff-是如何比较的"><span class="toc-text">diff 是如何比较的?</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#key的作用"><span class="toc-text">key的作用</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol><li class="toc-item toc-level-3"><a class="toc-link" href="#Others"><span class="toc-text">Others</span></a></li>
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#太长不看"><span class="toc-text">太长不看</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#原理解释"><span class="toc-text">原理解释</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他"><span class="toc-text">其他</span></a></li></ol>
     </div>
   </div>
 
@@ -232,58 +232,57 @@
 
     <div class="post-content">
       
-        <p>概念: diff算法是一种优化手段，将前后两个模块进行差异对比，修补(更新)差异的过程叫做patch(打补丁)</p>
+        <p>本文展示了一种判断一个数是否是质数的奇技淫巧，采用的是正则表达式方法。</p>
 <a id="more"></a>
-<p>为什么vue,react这些框架中都会有diff算法呢? 我们都知道渲染真实dom的开销是很大的，这个跟性能优化中的重绘重排意义类似, 回到正题来, 有时候我们修改了页面中的某个数据，如果直接渲染到真实DOM中会引起整棵数的重绘重排, 那么我们能不能只让我们修改的数据映射到真实DOM, 做一个最少化重绘重排呢，说到这里你应该对为什么使用diff算法有一个简单的概念了</p>
-<h3 id="virtual-DOM和真实DOM的区别"><a href="#virtual-DOM和真实DOM的区别" class="headerlink" title="virtual DOM和真实DOM的区别"></a>virtual DOM和真实DOM的区别</h3><p>一句话概括吧，virtual DOM是将真实的DOM的数据抽取出来，以对象的形式模拟树形结构, diff 算法比较的也是virtual DOM</p>
-<p>代码理解</p>
-<pre><code class="html">&lt;div&gt;
-    &lt;p&gt;hello vue diff&lt;/p&gt;
-&lt;/div&gt;
-// 转换成VNode 类似于下面这种
-</code></pre>
-<pre><code class="javascript">const Vnode = {
-    tag: &#39;div&#39;,
-    children: [
-        {
-            tag: &#39;p&#39;,
-            text: &#39;hello vue diff&#39;
-        }
-    ]
+<h3 id="太长不看"><a href="#太长不看" class="headerlink" title="太长不看"></a>太长不看</h3><pre><code class="javascript">function isPrime(n){
+    return !(Array(n+1).join(1).match(/^1?$|^(11+?)\1+?$/))
 }
 </code></pre>
-<h3 id="diff-是如何比较的"><a href="#diff-是如何比较的" class="headerlink" title="diff 是如何比较的?"></a>diff 是如何比较的?</h3><blockquote>
-<p>源码太多了，就不贴了， 有兴趣的可以自己看看 <a href="https://github.com/vuejs/vue/blob/a702d1947b856cf3b9d6ca5fb27b2271a78a9a5b/src/core/vdom/patch.js#L70" target="_blank" rel="noopener">https://github.com/vuejs/vue/blob/a702d1947b856cf3b9d6ca5fb27b2271a78a9a5b/src/core/vdom/patch.js#L70</a></p>
-</blockquote>
-<p>简单的说就是新旧虚拟dom 的比较，如果有差异就以新的为准，然后再插入的真实的dom中，重新渲染</p>
-<p>特点</p>
-<ul>
-<li><p>只会做同级比较，不做跨级比较</p>
+<h3 id="原理解释"><a href="#原理解释" class="headerlink" title="原理解释"></a>原理解释</h3><p>这个方法主要分为三步：</p>
+<ol>
+<li>将待求数字转变为一元形式（unary form）;</li>
+<li>检测这个数是一还是零；</li>
+<li>检测这个数是否是很多个1组成；</li>
+</ol>
+<p>我们分开来慢慢说：</p>
+<ol>
+<li><p><code>Array(n+1).join(1)</code>这是将数字转化为一个长度为待求n+1的数组。</p>
+<p>在ES6下，也可以这么写：<code>&quot;1&quot;.repeat(n)</code>;</p>
 </li>
-<li><p>比较后几种情况</p>
+<li><p>接下来就是正则匹配的过程。<code>/^1?$/</code>匹配的是一个开头为1，结尾也是1的数，数量为1个或者一个也没有。这就是第二步的作用。</p>
 </li>
-<li><ul>
-<li><code>if(oldVnode===vnode)</code>，他们的引用一致，可以认为没有变化。</li>
-<li><code>if(oldVnode.text!==null&amp;&amp;vnode.text!==null&amp;&amp;oldVnode.text!==vnode.text)</code>，文本节点的比较，需要修改，则会调用 <code>Node.textContent=vnode.text</code>。</li>
-<li><code>if(oldCh&amp;&amp;ch&amp;&amp;oldCh!==ch)</code>, 两个节点都有子节点，而且它们不一样，这样我们会调用 <code>updateChildren</code>函数比较子节点，这是diff的核心</li>
-<li><code>elseif(ch)</code>，只有新的节点有子节点，调用 <code>createEle(vnode)</code>， <code>vnode.el</code>已经引用了老的dom节点， <code>createEle</code>函数会在老dom节点上添加子节点。</li>
-<li><code>elseif(oldCh)</code>，新节点没有子节点，老节点有子节点，直接删除老节点。</li>
-</ul>
+<li><p><code>/^(11+?)\1+$/</code> 这个正则匹配的是第三步，首先一个捕获组（<code>/11+?</code>/）匹配的是至少两个11为一组的情况，在 <code>+</code> 之后的 <code>?</code> 表示这个匹配是非贪心的，要是没有这个？的话，这个捕获组就会匹配全部的字符串了。</p>
 </li>
-</ul>
-<h5 id="key的作用"><a href="#key的作用" class="headerlink" title="key的作用"></a>key的作用</h5><p>设置key和不设置key的区别：<br>不设key，newCh和oldCh只会进行头尾两端的相互比较，设key后，除了头尾两端的比较外，还会从用key生成的对象 <code>oldKeyToIdx</code>中查找匹配的节点，所以为节点设置key可以更高效的利用dom</p>
-<p>如我们希望可以在B和C之间加一个F，Diff算法默认执行起来是这样的：</p>
-<p><img src="/2019/02/25/Vue中的Diff算法/diff-1.jpg" alt="diff-1"></p>
-<p>即把C更新成F，D更新成C，E更新成D，最后再插入E，是不是很没有效率？</p>
-<p>所以我们需要使用key来给每个节点做一个唯一标识，Diff算法就可以正确的识别此节点，找到正确的位置区插入新的节点。</p>
-<p><img src="/2019/02/25/Vue中的Diff算法/diff-2.jpg" alt="diff-2"></p>
-<p>所以一句话，key的作用主要是为了高效的更新虚拟DOM。另外vue中在使用相同标签名元素的过渡切换时，也会使用到key属性，其目的也是为了让vue可以区分它们，否则vue只会替换其内部属性而不会触发过渡效果</p>
-<h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ul>
-<li>尽量不要跨层级的修改dom</li>
-<li>在开发组件时，保持稳定的 DOM 结构会有助于性能的提升</li>
-<li>设置key可以让diff更高效</li>
-</ul>
-<h3 id="Others"><a href="#Others" class="headerlink" title="Others"></a>Others</h3><p><a href="https://segmentfault.com/a/1190000008782928" target="_blank" rel="noopener"><a href="https://segmentfault.com/a/1190000008782928" target="_blank" rel="noopener">解析vue2.0的diff算法</a></a></p>
+<li><p>再之后我们看一下<code>\1+?</code>，这会返回第一个匹配的位置，<code>+?</code>同样表示非贪心匹配。</p>
+</li>
+<li><p>总而言之，第三步是这样匹配的：当捕获组匹配到“11”时，同时会确定他的位置，接着正则表达式会匹配复数个”11”，如果匹配失败了（例如n是奇数的情况），那么匹配会返回之前的位置，并在括号里面加一个1来继续匹配，重复上面的动作。</p>
+</li>
+<li><p>这看起来就好像在使用多个数去整除输入的整数n一样。</p>
+</li>
+<li><p>如果匹配结果是true，那么就说明这个数是1）0或1；2）它会被整除，因此是合数，所以给返回值添加一个取反(<code>!</code>)。</p>
+</li>
+</ol>
+<p>ES6 的写法是这样的：</p>
+<pre><code class="javascript">function isPrime(n){
+    const regex = /^1+?$|^(11+?)\1+?$/
+    return !(&quot;1&quot;.repeat(n).match(regex))
+}
+</code></pre>
+<h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>相信你也能看出来，这个方法非常的蛮。是的，一般来说判断一个数是否是质数的方法是这样的：</p>
+<pre><code>function isPrime(n){
+    const root = Math,sqrt(n)
+    for(let i=0;i&lt;=root;i+=2){
+        if(n%i===0){
+            return false
+        }
+    }
+    return true
+}
+</code></pre><p>时间复杂度是O(n^0.5)，这个方法大概是O(n);</p>
+<p>此外，该方法受String长度的限制，大多数浏览器中，string的最大长度小于2.68亿，所以不能判断诸如<code>1000000000000066600000000000001</code>是否是质数。（当然她是）</p>
+<p>总的来说，这个方法也蛮有意思的。</p>
+<p><a href="https://itnext.io/a-wild-way-to-check-if-a-number-is-prime-using-a-regular-expression-4edfb725f895" target="_blank" rel="noopener">原文链接</a></p>
+<p>编译的文章首发于<a href="https://alfxjx.github.io/2019/04/07/如何用正则表达式判断一个数是否是质数/" target="_blank" rel="noopener">我的博客</a></p>
 
       
     </div>
@@ -303,7 +302,7 @@
         
           <div class="post-tags">
             
-              <a href="/tags/Vue/">Vue</a>
+              <a href="/tags/JS/">JS</a>
             
           </div>
         
@@ -311,15 +310,9 @@
         
   <nav class="post-nav">
     
-      <a class="prev" href="/2019/03/11/vueRouterCanDo/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text nav-default">鲜为人知的vue-router小技巧</span>
-        <span class="prev-text nav-mobile">上一篇</span>
-      </a>
     
-    
-      <a class="next" href="/2019/02/24/Vuecomputed/">
-        <span class="next-text nav-default">Vue中的computed（计算属性）</span>
+      <a class="next" href="/2019/04/06/css揭秘/">
+        <span class="next-text nav-default">css揭秘（1-2）</span>
         <span class="prev-text nav-mobile">下一篇</span>
         <i class="iconfont icon-right"></i>
       </a>

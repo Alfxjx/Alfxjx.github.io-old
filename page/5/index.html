@@ -17,12 +17,10 @@
 
 
 
-  <meta name="description" content="JS中的原型链与继承">
+  <meta name="description" content="Blog">
 
 
 
-
-  <meta name="keywords" content="JavaScript, Alfred's">
 
 
 
@@ -42,7 +40,7 @@
 
 
 
-<link rel="canonical" href="http://yoursite.com/2019/01/07/JS中的原型链与继承/">
+<link rel="canonical" href="http://yoursite.com/page/5/">
 
 
 
@@ -90,7 +88,7 @@
   window.config = {"leancloud":"app_id:87EJk4r6rO0U0Tul5uju2IPq-gzGzoHsz app_key:vhxBampeF8Xel2ETEh4RBLNa","toc":true,"fancybox":true,"pjax":true};
 </script>
 
-    <title> JS中的原型链与继承 - Alfred's </title>
+    <title> Alfred's </title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -202,17 +200,21 @@
           <div id="content" class="content">
             
   
+  <section id="posts" class="posts">
+    
+      
+        
   <article class="post">
     <header class="post-header">
       <h1 class="post-title">
         
-          JS中的原型链与继承
+          <a class="post-link" href="/2018/11/20/pydv/">python数据可视化笔记</a>
         
       </h1>
 
       <div class="post-meta">
         <span class="post-time">
-          2019-01-07
+          2018-11-20
         </span>
         
         
@@ -221,95 +223,48 @@
 
     
     
-  <div class="post-toc" id="post-toc">
-    <h2 class="post-toc-title">文章目录</h2>
-    <div class="post-toc-content">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#refs"><span class="toc-text">refs</span></a></li></ol>
-    </div>
-  </div>
-
 
 
     <div class="post-content">
       
-        <p>JavaScript继承可以说是发生在对象与对象之间，而原型链则是实现继承的主要方法；</p>
-<p>利用原型让一引用类型继承另一个引用类型的属性和方法。</p>
-<a id="more"></a>
-<p>构造函数中有个prototype（每个函数中都有），指向他的原型对象，每个原型对象中也有一个constructor属性，指向原构造函数。通过构造函数创建的新对象中都有一个无法直接访问的<code>[[proto]]</code>属性，使得对象也指向构造函数的原型。这使得对象也获得了原型中的方法和属性。</p>
-<pre><code class="javascript">function Father(name,age){
-    this.name = name
-    this.age = age
-}
-Father.prototype.iAmUFather(){
-    console.log(&#39;i am your father&#39;)
-}
-var f1 = new Father(&#39;Luke&#39;, 18)
-function Son(){
-}
-// 将子构造函数的prototype指向了父类型的对象，这里实现了——继承
-Son.prototype = f1
-var son1 = new Son()
-son1.iAmUFather()
-</code></pre>
-<p><strong>当 Son.prototype指向Father的时候，他就已经是父类型的Son了。</strong></p>
-<p><strong>s1中没有此方法，该方法在父类型原型中，当s1访问时，现在s1中查找，若没有则向他指向的原型中去查找该方法，若还是没有，则继续往上面的原型中查找。这样就形成了一条原型链</strong></p>
-<p><strong>通过原型链实现了继承。</strong></p>
-<h3 id="refs"><a href="#refs" class="headerlink" title="refs"></a>refs</h3><p><a href="https://blog.csdn.net/qq_33744228/article/details/77431729" target="_blank" rel="noopener">JavaScript原型链与继承内容总结</a></p>
+        
+        
+          
+        
 
+        
+          <p>来自中国大学MOOC的课程笔记。</p>
+          <div class="read-more">
+            <a href="/2018/11/20/pydv/" class="read-more-link">阅读更多</a>
+          </div>
+        
       
     </div>
 
     
-      
-      
 
-
-
-      
-      
-    
-
-    
-      <footer class="post-footer">
-        
-          <div class="post-tags">
-            
-              <a href="/tags/JavaScript/">JavaScript</a>
-            
-          </div>
-        
-        
-        
-  <nav class="post-nav">
-    
-      <a class="prev" href="/2019/01/10/饿了么App笔记/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text nav-default">Vue.js 2.5饿了么移动App笔记</span>
-        <span class="prev-text nav-mobile">上一篇</span>
-      </a>
-    
-    
-      <a class="next" href="/2019/01/02/从URL输入到页面展现/">
-        <span class="next-text nav-default">从URL输入到页面展现</span>
-        <span class="prev-text nav-mobile">下一篇</span>
-        <i class="iconfont icon-right"></i>
-      </a>
-    
-  </nav>
-
-
-      </footer>
     
 
   </article>
 
+      
+      
+  <nav class="pagination">
+    
+      <a class="prev" href="/page/4/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text">上一页</span>
+      </a>
+    
+    
+  </nav>
+
+
+    
+  </section>
 
           </div>
           
-  <div class="comments" id="comments">
-    
-  </div>
-
 
         </div>
       </main>
@@ -394,11 +349,6 @@ son1.iAmUFather()
     </div>
 
     
-  
-  
-
-  
-
 
 
     
