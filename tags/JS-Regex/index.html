@@ -17,12 +17,10 @@
 
 
 
-  <meta name="description" content="ES6中的Promise">
+  <meta name="description" content="Blog">
 
 
 
-
-  <meta name="keywords" content="ES6, JavaScript, Live life to the fullest.">
 
 
 
@@ -42,7 +40,7 @@
 
 
 
-<link rel="canonical" href="https://Alfxjx.github.io/2019/01/25/ES6中的Promise/">
+<link rel="canonical" href="https://Alfxjx.github.io/tags/JS-Regex/">
 
 
 
@@ -90,7 +88,11 @@
   window.config = {"leancloud":"app_id:87EJk4r6rO0U0Tul5uju2IPq-gzGzoHsz app_key:vhxBampeF8Xel2ETEh4RBLNa","toc":true,"fancybox":true,"pjax":true};
 </script>
 
-    <title> ES6中的Promise - Live life to the fullest. </title>
+    <title>
+  
+    JS Regex · Live life to the fullest.
+  
+</title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -202,162 +204,47 @@
           <div id="content" class="content">
             
   
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          ES6中的Promise
-        
-      </h1>
+  
+  
 
-      <div class="post-meta">
-        <span class="post-time">
-          2019-01-25
+  <section id="archive" class="archive">
+    
+      
+        <div class="archive-title tag">
+          <h2 class="archive-name">JS Regex</h2>
+        </div>
+      
+    
+
+    
+      
+
+      <div class="archive-post">
+        <span class="archive-post-time">
+          
+            2019-04-10
+          
         </span>
-        
-        
+        <span class="archive-post-title">
+          <a href="/2019/04/10/格式化字符合集/" class="archive-post-link">
+            格式化字符合集
+          </a>
+        </span>
       </div>
-    </header>
-
     
+  </section>
+
+  
+  <nav class="pagination">
     
-  <div class="post-toc" id="post-toc">
-    <h2 class="post-toc-title">文章目录</h2>
-    <div class="post-toc-content">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#特点"><span class="toc-text">特点:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#基本用法"><span class="toc-text">基本用法:</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Promise-all"><span class="toc-text">Promise.all</span></a></li></ol>
-    </div>
-  </div>
-
-
-
-    <div class="post-content">
-      
-        <p>js是单线程的，也就是说一次只能完成一个任务，为了解决这个问题，js将任务的执行模式分为两种， 同步和异步, 在es5中我们处理异步只能通过的回调的方式进行处理，在多层异步中，回调会一层一层嵌套，也就是所谓的回调地狱，promise就是异步编程的一种解决方案Promise<br><a id="more"></a></p>
-<h3 id="特点"><a href="#特点" class="headerlink" title="特点:"></a>特点:</h3><ul>
-<li>对象的状态不受外界影响, promise对象代表一个异步操作，有三种状态pendding(进行中), fulfilled(成功), rejected(失败)</li>
-<li>一旦状态改变，就不会再变, 状态的改变只有两种可能, pendding =&gt; fulfilled及pendding =&gt; rejected</li>
-</ul>
-<h3 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法:"></a>基本用法:</h3><pre><code class="javascript">const promise = new Promise(function(resolve,reject){
-    // ... some code
-    if(/*异步操作成功*/){
-        resolve(value); // 将状态从pendding变成fulfilled
-    } else {
-        reject(error); // 将状态从pendding变成rejected
-    }
-});
-</code></pre>
-<p>promise 生成实例后可以使用then方法接收resolved状态和rejected状态的回调函数</p>
-<pre><code class="javascript">promise.then(()=&gt;{
-    console.log(&#39;resolved&#39;)
-}, ()=&gt;{
-    console.log(&#39;rejected&#39;)
-});
-</code></pre>
-<p>promise原型上具有catch方法， catch方法是rejection的别名， 用于指定发生错误时的回调函数</p>
-<pre><code class="javascript">promise.then(()=&gt;{
-    console.log(&#39;resolved&#39;)
-}, ()=&gt;{
-    console.log(&#39;rejected&#39;)
-}).catch((err)=&gt;{
-    console.log(&#39;catch&#39;)
-});
-</code></pre>
-<p>promise原型上具有finally方法，用于不管promise对象最后的状态如何，都会执行的操作</p>
-<pre><code class="javascript">promise.then(()=&gt;{
-    console.log(&#39;resolved&#39;)
-}, ()=&gt;{
-    console.log(&#39;rejected&#39;)
-}).finally((err)=&gt;{
-    console.log(&#39;end&#39;)
-})
-</code></pre>
-<h3 id="Promise-all"><a href="#Promise-all" class="headerlink" title="Promise.all"></a>Promise.all</h3><p>Promise.all方法用于将多个 Promise 实例，包装成一个新的 Promise 实例</p>
-<p>简单使用: <code>const p = Promise.all([p1, p2, p3]);</code></p>
-<p>特点:</p>
-<ul>
-<li><p>参数都是promise实例，如果不是会调用promise.resolve方法将其转为promise实例</p>
-</li>
-<li><p>p的奖态由传入的promise实例的状态决定</p>
-</li>
-<li><ul>
-<li>promise实例状态都变成fulfilled,p状态为fulfilled</li>
-<li>promise实例状态一个变成rejected,p状态为rejected</li>
-</ul>
-</li>
-</ul>
-
-      
-    </div>
-
-    
-      
-      
-
-  <div class="post-copyright">
-    <p class="copyright-item">
-      <span>原文作者: </span>
-      <a href="https://Alfxjx.github.io">Xu Jianxiang</a>
-    </p>
-    <p class="copyright-item">
-      <span>原文链接: </span>
-      <a href="https://Alfxjx.github.io/2019/01/25/ES6中的Promise/">https://Alfxjx.github.io/2019/01/25/ES6中的Promise/</a>
-    </p>
-    <p class="copyright-item">
-      <span>许可协议: </span>
-      
-      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商用4.0协议</a>
-    </p>
-  </div>
-
-
-
-      
-      
-    
-
-    
-      <footer class="post-footer">
-        
-          <div class="post-tags">
-            
-              <a href="/tags/ES6/">ES6</a>
-            
-              <a href="/tags/JavaScript/">JavaScript</a>
-            
-          </div>
-        
-        
-        
-  <nav class="post-nav">
-    
-      <a class="prev" href="/2019/01/26/ES6中的Decorator/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text nav-default">ES6中的Decorator</span>
-        <span class="prev-text nav-mobile">上一篇</span>
-      </a>
-    
-    
-      <a class="next" href="/2019/01/25/ES6中的Proxy/">
-        <span class="next-text nav-default">ES6中的Proxy</span>
-        <span class="prev-text nav-mobile">下一篇</span>
-        <i class="iconfont icon-right"></i>
-      </a>
     
   </nav>
 
 
-      </footer>
-    
-
-  </article>
 
 
           </div>
           
-  <div class="comments" id="comments">
-    
-  </div>
-
 
         </div>
       </main>

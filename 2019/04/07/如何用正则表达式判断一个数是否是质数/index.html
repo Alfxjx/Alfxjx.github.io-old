@@ -269,7 +269,7 @@
 }
 </code></pre>
 <h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><p>相信你也能看出来，这个方法非常的蛮。是的，一般来说判断一个数是否是质数的方法是这样的：</p>
-<pre><code>function isPrime(n){
+<pre><code class="javascript">function isPrime(n){
     const root = Math,sqrt(n)
     for(let i=0;i&lt;=root;i+=2){
         if(n%i===0){
@@ -278,11 +278,12 @@
     }
     return true
 }
-</code></pre><p>时间复杂度是O(n^0.5)，这个方法大概是O(n);</p>
+</code></pre>
+<p>时间复杂度是O(n^0.5)，这个方法大概是O(n);</p>
 <p>此外，该方法受String长度的限制，大多数浏览器中，string的最大长度小于2.68亿，所以不能判断诸如<code>1000000000000066600000000000001</code>是否是质数。（当然她是）</p>
 <p>总的来说，这个方法也蛮有意思的。</p>
 <p><a href="https://itnext.io/a-wild-way-to-check-if-a-number-is-prime-using-a-regular-expression-4edfb725f895" target="_blank" rel="noopener">原文链接</a></p>
-<p>编译的文章首发于<a href="https://alfxjx.github.io/2019/04/07/如何用正则表达式判断一个数是否是质数/" target="_blank" rel="noopener">我的博客</a></p>
+<p>编译的文章首发于<a href="https://alfxjx.github.io/2019/04/07/如何用正则表达式判断一个数是否是质数/">我的博客</a></p>
 
       
     </div>
@@ -325,6 +326,12 @@
         
         
   <nav class="post-nav">
+    
+      <a class="prev" href="/2019/04/10/格式化字符合集/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">格式化字符合集</span>
+        <span class="prev-text nav-mobile">上一篇</span>
+      </a>
     
     
       <a class="next" href="/2019/04/06/css揭秘/">
