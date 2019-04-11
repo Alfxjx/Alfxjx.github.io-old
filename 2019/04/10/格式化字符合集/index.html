@@ -17,7 +17,7 @@
 
 
 
-  <meta name="description" content="格式化字符合集">
+  <meta name="description" content="感觉关于字符串的操作在笔试面试中还是很重要的。">
 
 
 
@@ -232,10 +232,11 @@
 
     <div class="post-content">
       
-        <h2 id="连字符字符串转驼峰"><a href="#连字符字符串转驼峰" class="headerlink" title="连字符字符串转驼峰"></a><a href="https://blog.csdn.net/SuperluminalSnails/article/details/52723580" target="_blank" rel="noopener">连字符字符串转驼峰</a></h2><blockquote>
+        <p>从阿里前端笔试题发散出来。</p>
+<h2 id="连字符字符串转驼峰"><a href="#连字符字符串转驼峰" class="headerlink" title="连字符字符串转驼峰"></a><a href="https://blog.csdn.net/SuperluminalSnails/article/details/52723580" target="_blank" rel="noopener">连字符字符串转驼峰</a></h2><blockquote>
 <p>border-bottom-color =&gt;borderBottomColor</p>
 </blockquote>
-<pre><code class="javascript">// solution1 按照分隔符拆开数组
+<pre><code class="js">// solution1 按照分隔符拆开数组
 function transform(str){
     var strArr = str.split(&#39;-&#39;);
     for(let i=1;i&lt;strArr.length;i++){
@@ -269,6 +270,7 @@ function transform(str){
 }
 console.log(transform((&#39;border-bottom-color&#39;)))
 </code></pre>
+<p>‘\$0’代表完整的模式匹配文本，’\$1’代表的是第一个捕获组。</p>
 <h2 id="驼峰转连字符字符串"><a href="#驼峰转连字符字符串" class="headerlink" title="驼峰转连字符字符串"></a><a href="https://blog.csdn.net/qq_42392522/article/details/83376466" target="_blank" rel="noopener">驼峰转连字符字符串</a></h2><blockquote>
 <p>borderBottomColor =&gt; border-bottom-color </p>
 </blockquote>
@@ -341,13 +343,36 @@ console.log(toLower(inputStr));
     background: &quot;red&quot;;
     fontSize:&quot;17px&quot;;
 }
-// 解答
-function cssToReact(cssString){}
 </code></pre>
 <p>可以看出<code>cssString</code>是这样的：</p>
-<pre><code class="javascript">var cssString = &#39;:root &gt;div{\nbackground: red;\nfont-size: 17px;\n}&#39;;
+<pre><code class="javascript">var cssString = &#39;:root &gt;div{\n\tbackground: red;\n\tfont-size: 17px;\n}&#39;;
 </code></pre>
-<pre><code class="javascript">// TODO
+<pre><code class="javascript">// 不用正则，使用字符流的方法。
+var cssString = &#39;:root &gt;div{\n\tbackground: red;\n\tfont-size: 17px;\n}&#39;;
+function cssToReact(str){
+    if(typeof str ===&#39;string&#39;){
+        str = str.split(&#39;&#39;);
+    }
+    let arr = str;
+    let start, end;
+    for(let i=0;i&lt;str.length;i++){
+        if(str[i]===&#39;{&#39;) start = i+2;
+        if(str[i]===&#39;}&#39;) end = i;
+    }
+    let temp = str.slice(start,end);
+    for(let j=0;j&lt;temp.length;j++){
+        if(temp[j]===&#39;-&#39;){
+            temp.splice(j,1);
+            if(j&lt;temp.length){
+                temp[j] = temp[j].toUpperCase();
+            }
+        }
+    }
+    let ret = arr.slice(0,start).concat(temp,arr.slice(end,arr.length));
+    return ret.join(&#39;&#39;);
+
+}
+cssToReact(cssString);
 </code></pre>
 <h2 id="金融数字格式化"><a href="#金融数字格式化" class="headerlink" title="金融数字格式化"></a>金融数字格式化</h2><p>要求： 数字保留两位小数。</p>
 <pre><code>123 =&gt; 123.00
