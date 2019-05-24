@@ -17,12 +17,12 @@
 
 
 
-  <meta name="description" content="今天学习了一下怎么使用wamp链接mysql数据库。">
+  <meta name="description" content="axios拦截器的配置和使用">
 
 
 
 
-  <meta name="keywords" content="mysql, Live life to the fullest.">
+  <meta name="keywords" content="axios, Live life to the fullest.">
 
 
 
@@ -42,7 +42,7 @@
 
 
 
-<link rel="canonical" href="https://Alfxjx.github.io/2019/05/24/mysql/">
+<link rel="canonical" href="https://Alfxjx.github.io/2019/05/24/axios拦截器/">
 
 
 
@@ -90,7 +90,7 @@
   window.config = {"leancloud":"app_id:87EJk4r6rO0U0Tul5uju2IPq-gzGzoHsz app_key:vhxBampeF8Xel2ETEh4RBLNa","toc":true,"fancybox":true,"pjax":true};
 </script>
 
-    <title> 在WAMP环境操作MySQL数据库 - Live life to the fullest. </title>
+    <title> axios拦截器的配置和使用 - Live life to the fullest. </title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -206,7 +206,7 @@
     <header class="post-header">
       <h1 class="post-title">
         
-          在WAMP环境操作MySQL数据库
+          axios拦截器的配置和使用
         
       </h1>
 
@@ -224,7 +224,7 @@
   <div class="post-toc" id="post-toc">
     <h2 class="post-toc-title">文章目录</h2>
     <div class="post-toc-content">
-      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#准备工作"><span class="toc-text">准备工作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#操作数据库"><span class="toc-text">操作数据库</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CRUD"><span class="toc-text">CRUD</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#需求点"><span class="toc-text">需求点</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#初始的api-js"><span class="toc-text">初始的api.js</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#修改"><span class="toc-text">修改</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#具体应用的情况"><span class="toc-text">具体应用的情况</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#TODO"><span class="toc-text">TODO</span></a></li></ol>
     </div>
   </div>
 
@@ -232,22 +232,106 @@
 
     <div class="post-content">
       
-        <p>今天学习了一下怎么使用 wamp 链接 mysql 数据库。</p>
-<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><p>首先是打开 wamp server, 点击状态栏的图标，选择<code>MySQL</code>-&gt;<code>MySQL console</code>;</p>
-<p>输入<code>use mysql</code></p>
-<p>浏览器中打开<code>localhost</code></p>
-<p>在界面中选择<code>phpmyadmin</code></p>
-<p><a href="https://www.cnblogs.com/pearl07/p/6242705.html" target="_blank" rel="noopener">reference</a></p>
-<h3 id="操作数据库"><a href="#操作数据库" class="headerlink" title="操作数据库"></a>操作数据库</h3><p>选择<code>新建</code>， 即可新建一个数据库。排序规则选择<code>utf8_general_ci</code>，貌似这个比较常用。</p>
-<p>接着就是新建数据表，配置字段数。</p>
-<p>可以看到一个配置界面，愉快的配置吧。</p>
-<p>PS：设置主键的时候，需要将类型设置为<code>INT</code>,并且勾选<code>A_I</code>(自增)。</p>
-<h3 id="CRUD"><a href="#CRUD" class="headerlink" title="CRUD"></a>CRUD</h3><p>CRUD 就是增删改查的意思。</p>
-<ul>
-<li>增加 选择插入的 tab 即可 PPS: 插入的时候，主键<strong>不需要</strong>填数字嗷。</li>
-<li>查询 选择搜索里面可以根据条件检索</li>
-<li>修改和删除 在查询之后就可完成</li>
-</ul>
+        <p>在开发自己博客的过程中，终于领会到了 axios 的功能不止于封装 get,post 等方法，其拦截器也有很好的功能。</p>
+<a id="more"></a>
+<h2 id="需求点"><a href="#需求点" class="headerlink" title="需求点"></a>需求点</h2><p>开发的博客的点赞、登录注册鉴权时，后台需要一个<code>csrftoken</code>来判断登录的情况，因此在每一次调用点赞和登录的时候需要手动获取 token，再添加到 headers 里面。</p>
+<h2 id="初始的api-js"><a href="#初始的api-js" class="headerlink" title="初始的api.js"></a>初始的<code>api.js</code></h2><p>一开始我的方法是这么写的,以点赞的<code>like(id)</code>为例：</p>
+<pre><code class="javascript">function like(id) {
+    return axios({
+        method: &#39;put&#39;,
+        url: baseUrl + &#39;/blog/like/&#39; + id,
+        // 开始的时候是把token写死在方法里面的，但是很快发现不对
+        // 因为这样的话相当于没有鉴权
+        headers: {
+            &#39;x-csrf-token&#39;: &#39;tXY4TlCk8pIcaMlwb3n-y6zd&#39;,
+        },
+        withCredentials: true,
+    })
+        .then(res =&gt; {
+            let { statusCode, msg } = res.data;
+            if (statusCode !== 1) {
+                console.log(&#39;error&#39;);
+                return false;
+            } else {
+                console.log(msg);
+                return msg;
+            }
+        })
+        .catch(() =&gt; {
+            console.log(&#39;like error&#39;);
+        });
+}
+</code></pre>
+<h2 id="修改"><a href="#修改" class="headerlink" title="修改"></a>修改</h2><p>后来参考了<a href="https://www.kancloud.cn/yunye/axios/234845" target="_blank" rel="noopener">axios 文档</a>里面关于创建 axios 实例的说明，<br>以及朋友的写法，发现可以添加拦截器，并把 cookie 中的 token 取出来：</p>
+<pre><code class="javascript">// 配置axios拦截器 在每次请求的时候自动添加headers
+const axiosBaseConfig = {
+  //  ......
+  // `transformRequest` 允许在向服务器发送前，修改请求数据
+  // 只能用在 &#39;PUT&#39;, &#39;POST&#39; 和 &#39;PATCH&#39; 这几个请求方法
+  // 后面数组中的函数必须返回一个字符串，或 ArrayBuffer，或 Stream
+  transformRequest: [(data, headers) =&gt; {
+    // 加入token？
+    const token = getCookie(&#39;csrfToken&#39;)
+    console.log(token)
+    if (token) {
+      headers[&#39;x-csrf-token&#39;] = token
+    }
+    // 请求对象转换成appliction/x-www-form-urlencoded格式
+    if (typeof data === &#39;object&#39;) {
+      // headers[&#39;Content-Type&#39;] = &#39;appliction/x-www-form-urlencoded&#39;
+      return qs.stringify(data)
+    }
+    return data
+  }],
+  // 返回数据预处理
+  transformResponse: [respData =&gt;
+    // 数据预处理
+    respData
+  ]
+}
+}
+</code></pre>
+<pre><code class="javascript">// 拿出cookie里面的csrftoken
+function getCookie(cName) {
+    if (document.cookie.length &gt; 0) {
+        let cStart = document.cookie.indexOf(cName + &#39;=&#39;);
+        if (cStart !== -1) {
+            cStart = cStart + cName.length + 1;
+            let cEnd = document.cookie.indexOf(&#39;;&#39;, cStart);
+            if (cEnd === -1) cEnd = document.cookie.length;
+            // return unescape(document.cookie.substring(cStart, cEnd))
+            return document.cookie.substring(cStart, cEnd);
+        }
+    }
+    return &#39;&#39;;
+}
+</code></pre>
+<pre><code class="javascript">// 应用axios配置
+const instance = axios.create(axiosBaseConfig);
+// 在请求里面加入这个实例
+export async function generalRequest(url, method, params) {
+    const res = await instance[method](baseUrl + url, params);
+    console.log(res);
+    const { statusCode } = res.data;
+    if (statusCode !== 1) {
+        return false;
+    } else {
+        return res.data;
+    }
+}
+</code></pre>
+<h3 id="具体应用的情况"><a href="#具体应用的情况" class="headerlink" title="具体应用的情况"></a>具体应用的情况</h3><p>这样使用的时候：</p>
+<pre><code class="javascript">methods:{
+  async addLike(_id){
+    let res = awit generalRequest(&#39;/like/&#39;+_id,&#39;put&#39;)
+    if(res){
+      console.log(&#39;like success&#39;)
+    }
+  }
+}
+</code></pre>
+<p>这样就完成了。</p>
+<h2 id="TODO"><a href="#TODO" class="headerlink" title="TODO"></a>TODO</h2><p>为了能把点赞之后，点赞数立刻+1，可能需要把点赞数加入<code>store.js</code>，方便管理。</p>
 
       
     </div>
@@ -263,7 +347,7 @@
     </p>
     <p class="copyright-item">
       <span>原文链接: </span>
-      <a href="https://Alfxjx.github.io/2019/05/24/mysql/">https://Alfxjx.github.io/2019/05/24/mysql/</a>
+      <a href="https://Alfxjx.github.io/2019/05/24/axios拦截器/">https://Alfxjx.github.io/2019/05/24/axios拦截器/</a>
     </p>
     <p class="copyright-item">
       <span>许可协议: </span>
@@ -283,7 +367,7 @@
         
           <div class="post-tags">
             
-              <a href="/tags/mysql/">mysql</a>
+              <a href="/tags/axios/">axios</a>
             
           </div>
         
@@ -291,15 +375,9 @@
         
   <nav class="post-nav">
     
-      <a class="prev" href="/2019/05/24/axios拦截器/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text nav-default">axios拦截器的配置和使用</span>
-        <span class="prev-text nav-mobile">上一篇</span>
-      </a>
     
-    
-      <a class="next" href="/2019/04/10/格式化字符合集/">
-        <span class="next-text nav-default">格式化字符合集</span>
+      <a class="next" href="/2019/05/24/mysql/">
+        <span class="next-text nav-default">在WAMP环境操作MySQL数据库</span>
         <span class="prev-text nav-mobile">下一篇</span>
         <i class="iconfont icon-right"></i>
       </a>
