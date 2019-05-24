@@ -257,7 +257,7 @@
 <h3 id="如何预防DDOS"><a href="#如何预防DDOS" class="headerlink" title="如何预防DDOS"></a>如何预防DDOS</h3><p>DDoS 防御产品的核心是检测技术和清洗技术。检测技术就是检测网站是否正在遭受 DDoS 攻击，而清洗技术就是清洗掉异常流量。而检测技术的核心在于对业务深刻的理解，才能快速精确判断出是否真的发生了 DDoS 攻击。清洗技术对检测来讲，不同的业务场景下要求的粒度不一样。</p>
 <h3 id="CSRF"><a href="#CSRF" class="headerlink" title="CSRF"></a>CSRF</h3><p>CSRF（Cross-site request forgery），中文名称：跨站请求伪造，也被称为：one click attack/session riding，缩写为：CSRF/XSRF。</p>
 <p>你这可以这么理解CSRF攻击：攻击者盗用了你的身份，以你的名义发送恶意请求。CSRF能够做的事情包括：以你名义发送邮件，发消息，盗取你的账号，甚至于购买商品，虚拟货币转账……造成的问题包括：个人隐私泄露以及财产安全</p>
-<p><img src="/2019/01/12/常见WEB攻击手段与预防措施/csrf.png" alt="csrf"></p>
+<p><img src="./static/csrf.png" alt="csrf"></p>
 <h3 id="预防CSRF"><a href="#预防CSRF" class="headerlink" title="预防CSRF"></a>预防CSRF</h3><p><strong>Synchronizer Tokens</strong></p>
 <p>Synchronizer Tokens： 在表单里隐藏一个随机变化的 csrf_token csrf_token 提交到后台进行验证，如果验证通过则可以继续执行操作。这种情况有效的主要原因是网站 B 拿不到网站 A 表单里的 csrf_token</p>
 <p>这种方式的使用条件是PHP和JSP等。因为cookie已经不安全了，因此把csrf_token值存储在session中，然后每次表单提交时都从session取出来放到form表单的隐藏域中，这样B网站不可以得到这个存储到session中的值。</p>

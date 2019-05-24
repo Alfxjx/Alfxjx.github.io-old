@@ -326,7 +326,7 @@ array([[[0.        , 0.08695652, 0.17391304, 0.26086957],
 </code></pre>
 <p><em>注意数组是否真实改变</em></p>
 <p>numpy 函数是对对应元素进行计算</p>
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a><strong>小结</strong></h3><p><img src="/2018/11/20/pydv/np-week1.JPG" alt="np-week1"></p>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a><strong>小结</strong></h3><p><img src="./pydv/np-week1.JPG" alt="np-week1"></p>
 <h3 id="csv文件：存取一维、二维数组"><a href="#csv文件：存取一维、二维数组" class="headerlink" title="csv文件：存取一维、二维数组"></a><strong>csv文件：存取一维、二维数组</strong></h3><pre><code class="Python">np.savetxt(frame, array,fmt = &#39;%18e&#39;,delimiter=None)#读取
 np.loadtxt(frame, dtype=float,delimiter=None,unpack=false)#写入
 #&#39;%18e&#39; 18位小数的浮点数
@@ -347,7 +347,7 @@ np.savez(frame, array)# zip
 </code></pre>
 <h3 id="随机数函数"><a href="#随机数函数" class="headerlink" title="随机数函数"></a><strong>随机数函数</strong></h3><pre><code class="Python">np.random.randn(d0,d1,....,dn) # 有n 表示正态分布
 </code></pre>
-<p><img src="/2018/11/20/pydv/seed.JPG" alt="seed"></p>
+<p><img src="./pydv/seed.JPG" alt="seed"></p>
 <p><em>seed函数，每次生成相同的随机数组。</em></p>
 <pre><code class="Python">&gt;&gt;&gt; a = np.random.randint(100,200,(3,4))
 &gt;&gt;&gt; np.random.shuffle(a)
@@ -447,7 +447,7 @@ plt.pie(sizes,explode = explode,labels = labels,autopct = &#39;%1.1f%%&#39;,shad
 plt.axis(&#39;equal&#39;)
 plt.show()
 </code></pre>
-<p><img src="/2018/11/20/pydv/pieEqual.png" alt="pieEqual"></p>
+<p><img src="./pydv/pieEqual.png" alt="pieEqual"></p>
 <h3 id="直方图"><a href="#直方图" class="headerlink" title="直方图"></a>直方图</h3><pre><code class="python">np.random.seed(0)
 mu,sigma = 100,20 # 均值和标准差
 a = np.random.normal(mu, sigma, size=100)
@@ -457,7 +457,7 @@ a = np.random.normal(mu, sigma, size=100)
 plt.hist(a,bin=10,normed=1,histtype=&#39;stepfilled&#39;, facecolor=&#39;b&#39;, alpha = 0.75)
 plt.title(&#39;Histogram&#39;)
 </code></pre>
-<p><img src="/2018/11/20/pydv/histogram.png" alt="histograml"></p>
+<p><img src="./pydv/histogram.png" alt="histograml"></p>
 <h3 id="极坐标图"><a href="#极坐标图" class="headerlink" title="极坐标图"></a>极坐标图</h3><p>面向对象的绘制方法</p>
 <pre><code class="python">import numpy as np
 import matplotlib.pyplot as plt
@@ -471,7 +471,7 @@ for r, bar in zip(radii,bars):
     bar.set_facecolor(plt.cm.viridis(r/10.))
     bar.set_alpha(0.5)
 </code></pre>
-<p><img src="/2018/11/20/pydv/polar.png" alt="polar"></p>
+<p><img src="./pydv/polar.png" alt="polar"></p>
 <h3 id="散点图"><a href="#散点图" class="headerlink" title="散点图"></a>散点图</h3><pre><code class="python">import numpy as np
 import matplotlib.pyplot as plt
 #建立一个fig对象，建立一个axis对象。
@@ -480,7 +480,7 @@ ax.plot(10*np.random.randn(100), 10*np.random.randn(100),&#39;o&#39;)
 ax.set_title(&#39;Simple Scatter&#39;)
 plt.show()
 </code></pre>
-<p><img src="/2018/11/20/pydv/simpleScatter.png" alt="simple scatterl"></p>
+<p><img src="./pydv/simpleScatter.png" alt="simple scatterl"></p>
 <h3 id="引力波绘制"><a href="#引力波绘制" class="headerlink" title="引力波绘制"></a>引力波绘制</h3><pre><code class="python">import numpy as np
 import matplotlib.pyplot as plt
 from scipy.io import wavfile
@@ -522,7 +522,7 @@ plt.savefig(&quot;F:\\code\\c\\DataScience\\pyDV\\pic\\Gravitational_Waves_Origi
 plt.show()
 #plt.close(fig)
 </code></pre>
-<p><img src="/2018/11/20/pydv/grawave.png" alt="grawave"></p>
+<p><img src="./pydv/grawave.png" alt="grawave"></p>
 <h2 id="Pandas"><a href="#Pandas" class="headerlink" title="Pandas"></a>Pandas</h2><ul>
 <li>易操作的数据类型<code>Series &amp; DataFrame</code></li>
 <li>分析工具</li>

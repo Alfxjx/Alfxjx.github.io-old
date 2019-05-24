@@ -239,7 +239,7 @@
 </blockquote>
 <h2 id="使用场景"><a href="#使用场景" class="headerlink" title="使用场景"></a>使用场景</h2><p>我们在<a href="">Scrumpy</a>（一个在线工作平台）中使用了很多的组件模板，例如通知、评论以及附件等等。首先让我以评论组件为例。</p>
 <p>目前来说，评论栏早已经不是一个简简单单的文本域了。用户在评论的时候不可避免的需要加入诸如超链接、图片、短视频等等多媒体材料。这些复杂的元素都需要在评论中被渲染出来。但是如果你决定在一个组件中把所有工作都做了，这个组件的复杂度将会变得太高，失去了组建的意义。</p>
-<p><img src="/2019/01/24/动态组件模板/1_Dr9qaaVrBy3Yv2c5WRswHQ.jpeg" alt="The most common previews"></p>
+<p><img src="./动态组件模板/1_Dr9qaaVrBy3Yv2c5WRswHQ.jpeg" alt="The most common previews"></p>
 <p>​        The most common previews for links — open graph data, images &amp; videos</p>
 <p>那么我们该如何解决这个问题呢。大多数的程序员会检查所有的可能性，然后分别为此设置特定的组件。例如：</p>
 <pre><code>&lt;template&gt;
@@ -269,7 +269,7 @@
 &lt;/template&gt;
 </code></pre><p>看起来好多了，对吗？</p>
 <p>现在让我们来看看这些组件具体是如何工作的。首先我们需要改变一下文件的结构。</p>
-<p><img src="/2019/01/24/动态组件模板/1_mAqwoWbkZwspc_W7sYLwAA.jpeg" alt="folder structure"></p>
+<p><img src="./动态组件模板/1_mAqwoWbkZwspc_W7sYLwAA.jpeg" alt="folder structure"></p>
 <p>​                    folder structure for dynamic component templates</p>
 <p>就我个人而言，我偏向于将每一个组件包裹在一个文件夹里，这样之后可以添加样式以及测试文件。当然文件的结构如何组织其实完全取决于你自己。</p>
 <p>接下来，我们看看<code>&lt;dynamic-link /&gt;</code>是如何工作的。</p>

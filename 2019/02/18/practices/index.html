@@ -236,7 +236,7 @@
 <p>开发者们，你们好。</p>
 <p>经过网上的一段搜索以及查阅Vue.js的<a href="https://vuejs.org/v2/guide/" target="_blank" rel="noopener">文档</a>，我写下了本文中关于Vue的最佳实践以及风格指南，从而可以更正确，更优雅的使用Vue.js。</p>
 <p>下面的要点指出了其中一些功能/优化相关，其他是VueJs命名约定和元素排序。 更详细的信息可以在<a href="https://blog.usejournal.com/vue-js-best-practices-c5da8d7af48d#26f6" target="_blank" rel="noopener">链接</a>中找到。</p>
-<p><img src="/2019/02/18/practices/vueBestPractice.jpeg" alt="题图"></p>
+<p><img src="./practices/vueBestPractice.jpeg" alt="题图"></p>
 <h3 id="在组件销毁之后使用-off清除事件监听器"><a href="#在组件销毁之后使用-off清除事件监听器" class="headerlink" title="在组件销毁之后使用$off清除事件监听器"></a>在组件销毁之后使用<code>$off</code>清除事件监听器</h3><p>当我们在使用<code>$on</code>监听事件的时候，总是需要在事件销毁（<code>destroyed()</code>）的时候使用<code>$off</code>清除事件监听，这样可以有效防止内存泄漏。</p>
 <h3 id="事件名称使用短横线式命名（kebab-case"><a href="#事件名称使用短横线式命名（kebab-case" class="headerlink" title="事件名称使用短横线式命名（kebab-case)"></a>事件名称使用短横线式命名（kebab-case)</h3><p>在派发/监听事件的时候，我们应该始终使用短横线式命名（kebab-case)，这是因为事件最终会被自动转换为该命名方式。我们监听的时间格式不能是驼峰式以及Pascal式，因此在声明时间的时候，最好就讲时间命名为短横线式。例如：</p>
 <pre><code class="javascript">// Emitting

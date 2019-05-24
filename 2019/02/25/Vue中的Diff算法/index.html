@@ -273,10 +273,10 @@
 </ul>
 <h5 id="key的作用"><a href="#key的作用" class="headerlink" title="key的作用"></a>key的作用</h5><p>设置key和不设置key的区别：<br>不设key，newCh和oldCh只会进行头尾两端的相互比较，设key后，除了头尾两端的比较外，还会从用key生成的对象 <code>oldKeyToIdx</code>中查找匹配的节点，所以为节点设置key可以更高效的利用dom</p>
 <p>如我们希望可以在B和C之间加一个F，Diff算法默认执行起来是这样的：</p>
-<p><img src="/2019/02/25/Vue中的Diff算法/diff-1.jpg" alt="diff-1"></p>
+<p><img src="./Vue中的Diff算法/diff-1.jpg" alt="diff-1"></p>
 <p>即把C更新成F，D更新成C，E更新成D，最后再插入E，是不是很没有效率？</p>
 <p>所以我们需要使用key来给每个节点做一个唯一标识，Diff算法就可以正确的识别此节点，找到正确的位置区插入新的节点。</p>
-<p><img src="/2019/02/25/Vue中的Diff算法/diff-2.jpg" alt="diff-2"></p>
+<p><img src="./Vue中的Diff算法/diff-2.jpg" alt="diff-2"></p>
 <p>所以一句话，key的作用主要是为了高效的更新虚拟DOM。另外vue中在使用相同标签名元素的过渡切换时，也会使用到key属性，其目的也是为了让vue可以区分它们，否则vue只会替换其内部属性而不会触发过渡效果</p>
 <h4 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h4><ul>
 <li>尽量不要跨层级的修改dom</li>
