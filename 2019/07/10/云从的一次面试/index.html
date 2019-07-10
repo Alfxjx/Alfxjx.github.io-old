@@ -17,10 +17,12 @@
 
 
 
-  <meta name="description" content="tags">
+  <meta name="description" content="云从的一次面试">
 
 
 
+
+  <meta name="keywords" content="JS, Vue, Live life to the fullest.">
 
 
 
@@ -40,7 +42,7 @@
 
 
 
-<link rel="canonical" href="https://Alfxjx.github.io/tags/">
+<link rel="canonical" href="https://Alfxjx.github.io/2019/07/10/云从的一次面试/">
 
 
 
@@ -88,7 +90,7 @@
   window.config = {"leancloud":"app_id:87EJk4r6rO0U0Tul5uju2IPq-gzGzoHsz app_key:vhxBampeF8Xel2ETEh4RBLNa","toc":true,"fancybox":true,"pjax":true};
 </script>
 
-    <title> 标签 - Live life to the fullest. </title>
+    <title> 云从的一次面试 - Live life to the fullest. </title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -199,17 +201,155 @@
         <div class="content-wrapper">
           <div id="content" class="content">
             
-  <div class="tag-cloud">
-    <div class="tag-cloud-title">
-      目前共计 24 个标签
-    </div>
-    <div class="tag-cloud-tags">
-      <a href="/tags/日常/" style="font-size: 16px;">日常</a> <a href="/tags/ES6/" style="font-size: 20.8px;">ES6</a> <a href="/tags/HTTP/" style="font-size: 20.8px;">HTTP</a> <a href="/tags/Hexo/" style="font-size: 16px;">Hexo</a> <a href="/tags/Vue/" style="font-size: 25.6px;">Vue</a> <a href="/tags/axios/" style="font-size: 16px;">axios</a> <a href="/tags/css/" style="font-size: 16px;">css</a> <a href="/tags/mysql/" style="font-size: 16px;">mysql</a> <a href="/tags/css-vue/" style="font-size: 16px;">css vue</a> <a href="/tags/python/" style="font-size: 16px;">python</a> <a href="/tags/JS-Vue/" style="font-size: 16px;">JS, Vue</a> <a href="/tags/JavaScript/" style="font-size: 28px;">JavaScript</a> <a href="/tags/Vue-Translation/" style="font-size: 16px;">Vue Translation</a> <a href="/tags/CSS/" style="font-size: 16px;">CSS</a> <a href="/tags/FE/" style="font-size: 23.2px;">FE</a> <a href="/tags/Translation/" style="font-size: 18.4px;">Translation</a> <a href="/tags/JS/" style="font-size: 16px;">JS</a> <a href="/tags/面试/" style="font-size: 16px;">面试</a> <a href="/tags/JS-Regex/" style="font-size: 16px;">JS Regex</a> <a href="/tags/Js/" style="font-size: 16px;">Js</a> <a href="/tags/Python/" style="font-size: 16px;">Python</a> <a href="/tags/Leetcode/" style="font-size: 16px;">Leetcode</a>
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          云从的一次面试
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019-07-10
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#怼项目-Vue的问题"><span class="toc-text">怼项目 + Vue的问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JS的基础题"><span class="toc-text">JS的基础题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#原型链"><span class="toc-text">原型链</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#变量提升"><span class="toc-text">变量提升</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#JS优化长列表"><span class="toc-text">JS优化长列表</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#总结"><span class="toc-text">总结</span></a></li></ol>
     </div>
   </div>
 
+
+
+    <div class="post-content">
+      
+        <p>当时电话面试之后又过了好久，抱着试一试的想法去联系了面试官，没想到还可以现场面试。于是今天就去背景面试了~</p>
+<a id="more"></a>
+<h2 id="怼项目-Vue的问题"><a href="#怼项目-Vue的问题" class="headerlink" title="怼项目 + Vue的问题"></a>怼项目 + Vue的问题</h2><p>主要是问了：</p>
+<ul>
+<li>有没有封装什么方法</li>
+<li>Vue组件传值的几种方法</li>
+<li>博客项目点赞的实际过程</li>
+<li>携带的token是怎么更新的</li>
+<li>如何管理状态（在不使用Vuex的情况下）</li>
+<li>跨域是怎么解决的。</li>
+</ul>
+<h2 id="JS的基础题"><a href="#JS的基础题" class="headerlink" title="JS的基础题"></a>JS的基础题</h2><h3 id="原型链"><a href="#原型链" class="headerlink" title="原型链"></a><a href="https://www.cnblogs.com/petterguo/p/9152956.html" target="_blank" rel="noopener">原型链</a></h3><pre><code class="javascript">function Foo() {
+    getName = function () {
+        console.log(1);
+    }
+    return this;
+}
+
+Foo.getName = function () {
+    console.log(2);
+}
+
+Foo.prototype.getName = function () {
+    console.log(3);
+}
+
+var getName = function () {
+    console.log(4);
+}
+
+function getName() {
+    console.log(5);
+}
+
+Foo.getName(); // 2
+getName(); // 4
+Foo().getName(); // 1
+getName(); // 1
+new Foo.getName(); // 2
+new Foo().getName(); //3
+new new Foo().getName(); //3 Foo.getName{}
+</code></pre>
+<h3 id="变量提升"><a href="#变量提升" class="headerlink" title="变量提升"></a>变量提升</h3><pre><code class="javascript">//函数提示优于变量
+console.log(a);//function a(){}
+console.log(b);//undefined
+var a = 1;
+function a(){}
+var b= function(){};
+console.log(a)//1
+</code></pre>
+<h2 id="JS优化长列表"><a href="#JS优化长列表" class="headerlink" title="JS优化长列表"></a>JS优化长列表</h2><p>因为这个公司数据量貌似蛮大的， 然后就问了这个长列表的优化。</p>
+<p><a href="https://zhuanlan.zhihu.com/p/34585166?utm_source=wechat_session&amp;utm_medium=social" target="_blank" rel="noopener">看看这个链接</a></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>希望能过哈哈哈，但是感觉希望不大…</p>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="https://Alfxjx.github.io">Xu Jianxiang</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="https://Alfxjx.github.io/2019/07/10/云从的一次面试/">https://Alfxjx.github.io/2019/07/10/云从的一次面试/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商用4.0协议</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/JS-Vue/">JS, Vue</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2019/06/22/pandas使用必知必会/">
+        <span class="next-text nav-default">pandas使用必知必会</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
           </div>
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
       </main>
