@@ -17,10 +17,12 @@
 
 
 
-  <meta name="description" content="Blog">
+  <meta name="description" content="前端100问(1)">
 
 
 
+
+  <meta name="keywords" content="js, Live life to the fullest.">
 
 
 
@@ -40,7 +42,7 @@
 
 
 
-<link rel="canonical" href="https://Alfxjx.github.io/archives/2019/03/">
+<link rel="canonical" href="https://Alfxjx.github.io/2019/07/16/前端100问-1/">
 
 
 
@@ -88,11 +90,7 @@
   window.config = {"leancloud":"app_id:87EJk4r6rO0U0Tul5uju2IPq-gzGzoHsz app_key:vhxBampeF8Xel2ETEh4RBLNa","toc":true,"fancybox":true,"pjax":true};
 </script>
 
-    <title>
-  
-    归档 - Live life to the fullest.
-  
-</title>
+    <title> 前端100问(1) - Live life to the fullest. </title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -204,139 +202,174 @@
           <div id="content" class="content">
             
   
-  
-  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          前端100问(1)
+        
+      </h1>
 
-  <section id="archive" class="archive">
-    
-      
-        <div class="archive-title">
-          <span class="archive-post-counter">
-            目前共计 47 篇日志
-          </span>
-        </div>
-      
-    
-
-    
-      
+      <div class="post-meta">
+        <span class="post-time">
+          2019-07-16
+        </span>
         
         
+      </div>
+    </header>
 
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#第-67-题-数组分组"><span class="toc-text">第 67 题 数组分组</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第-77-题：旋转数组算法题"><span class="toc-text">第 77 题：旋转数组算法题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#第-81-题：打印出-1-10000-之间的所有对称数"><span class="toc-text">第 81 题：打印出 1 - 10000 之间的所有对称数 </span></a></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <p>最近在网上看到这个<a href="https://juejin.im/post/5d23e750f265da1b855c7bbe#heading-85" target="_blank" rel="noopener">前端 100 问：能搞懂 80% 的请把简历给我</a>，自己做了其中一些有意思的题目。记录一下。</p>
+<a id="more"></a>
+<h2 id="第-67-题-数组分组"><a href="#第-67-题-数组分组" class="headerlink" title="第 67 题 数组分组"></a><a href="https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/113" target="_blank" rel="noopener">第 67 题 数组分组</a></h2><blockquote>
+<p>随机生成一个长度为 10 的整数类型的数组，例如 [2, 10, 3, 4, 5, 11, 10, 11, 20]，将其排列成一个新数组，要求新数组形式如下，例如 [[2, 3, 4, 5], [10, 11], [20]]。</p>
+</blockquote>
+<p>这个题主要是做三件事，一个是排序，一个是去重，还有一个出现了一点点分歧，不过就是分组和连续数字两种。</p>
+<pre><code class="javascript">const array = [2, 10, 3, 4, 5, 11, 10, 11, 20];
+
+function transform(arr){
+  arr.sort((a,b)=&gt;{return a-b});
+  let _arr = [];
+  for(let i=0;i&lt;arr.length;i++){
+    if(_arr.indexOf(arr[i])&lt;0){
+      _arr.push(arr[i])
+    }
+  }
+  let continueArr = [], tempArr = [];
+  _arr.map((e, index) =&gt; {
+      tempArr.push(e);
+      if (_arr[index+1] !== ++e) {
+          continueArr.push(tempArr);
+          tempArr = [];
+      }
+  });
+  return continueArr;
+}
+
+console.log(transform(array));
+</code></pre>
+<h2 id="第-77-题：旋转数组算法题"><a href="#第-77-题：旋转数组算法题" class="headerlink" title="第 77 题：旋转数组算法题"></a><a href="https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/126" target="_blank" rel="noopener">第 77 题：旋转数组算法题</a></h2><blockquote>
+<p> 给定一个数组，将数组中的元素向右移动 k 个位置，其中 k 是非负数。</p>
+</blockquote>
+<pre><code>输入: [1, 2, 3, 4, 5, 6, 7] 和 k = 3
+输出: [5, 6, 7, 1, 2, 3, 4]
+</code></pre><pre><code class="javascript">// 右移
+const rotate1 = (arr, num) =&gt; {
+    for (let i = 0; i &lt; num; i++) {
+        let val = arr.pop();
+        arr.unshift(val);
+    }
+    return arr;
+};
+
+// 左移
+const rotate2 = (arr, num) =&gt; {
+    for (let i = 0; i &lt; num; i++) {
+    let val = arr[0];
+    arr.shift();
+        arr.push(val);
+    }
+    return arr;
+};
+
+console.log(rotate1([-1, -100, 3, 99], 1));
+console.log(rotate2([-1, -100, 3, 99], 1));
+</code></pre>
+<h2 id="第-81-题：打印出-1-10000-之间的所有对称数"><a href="#第-81-题：打印出-1-10000-之间的所有对称数" class="headerlink" title="第 81 题：打印出 1 - 10000 之间的所有对称数 "></a><a href="https://github.com/Advanced-Frontend/Daily-Interview-Question/issues/131" target="_blank" rel="noopener">第 81 题：打印出 1 - 10000 之间的所有对称数 </a></h2><blockquote>
+<p>打印出 1 - 10000 之间的所有对称数</p>
+<p>例如：121、1331 等</p>
+</blockquote>
+<pre><code class="javascript">const symmetry = (startIndex, endIndex) =&gt; {
+    let res = [];
+    for (let i = startIndex; i &lt; endIndex; i++) {
+        let temp = (i).toString().split(&#39;&#39;);
+        if (temp.join() == temp.reverse().join()) {
+            res.push(i);
+        }
+    }
+    return res;
+};
+
+console.log(symmetry(1, 200));
+</code></pre>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="https://Alfxjx.github.io">Xu Jianxiang</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="https://Alfxjx.github.io/2019/07/16/前端100问-1/">https://Alfxjx.github.io/2019/07/16/前端100问-1/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商用4.0协议</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
         
-          
-          <div class="collection-title">
-            <h2 class="archive-year">2019</h2>
+          <div class="post-tags">
+            
+              <a href="/tags/js/">js</a>
+            
           </div>
         
-      
-
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            03-27
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2019/03/27/天大导航开发拾遗/" class="archive-post-link">
-            天大导航开发拾遗
-          </a>
-        </span>
-      </div>
+        
+        
+  <nav class="post-nav">
     
-      
-        
-        
-
-        
-      
-
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            03-27
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2019/03/27/头条面试经验/" class="archive-post-link">
-            一场面试的经验
-          </a>
-        </span>
-      </div>
     
-      
-        
-        
-
-        
-      
-
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            03-20
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2019/03/20/cli3addFont/" class="archive-post-link">
-            如何在vue-cli3下引入字体以及骨架屏
-          </a>
-        </span>
-      </div>
-    
-      
-        
-        
-
-        
-      
-
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            03-14
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2019/03/14/missingLogo/" class="archive-post-link">
-            飞来飞去的logo
-          </a>
-        </span>
-      </div>
-    
-      
-        
-        
-
-        
-      
-
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            03-11
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2019/03/11/vueRouterCanDo/" class="archive-post-link">
-            鲜为人知的vue-router小技巧
-          </a>
-        </span>
-      </div>
-    
-  </section>
-
-  
-  <nav class="pagination">
-    
+      <a class="next" href="/2019/07/10/云从的一次面试/">
+        <span class="next-text nav-default">云从的一次面试</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
     
   </nav>
 
 
+      </footer>
+    
+
+  </article>
 
 
           </div>
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
       </main>
@@ -421,6 +454,11 @@
     </div>
 
     
+  
+  
+
+  
+
 
 
     
