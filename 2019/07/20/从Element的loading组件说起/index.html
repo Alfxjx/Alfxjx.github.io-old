@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="Blog">
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/default" title="Live life to the fullest.">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.2">
+
+
+
+<link rel="canonical" href="https://Alfxjx.github.io/2019/07/20/从Element的loading组件说起/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.2">
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+<script>
+  window.config = {"leancloud":"app_id:87EJk4r6rO0U0Tul5uju2IPq-gzGzoHsz app_key:vhxBampeF8Xel2ETEh4RBLNa","toc":true,"fancybox":true,"pjax":true};
+</script>
+
+    <title>  - Live life to the fullest. </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Live life to the fullest.</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/about">
+        <li class="mobile-menu-item">
+          
+          
+            关于
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Live life to the fullest.</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            
+            
+              关于
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2019-07-20
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#从ElementUI的loading组件说起"><span class="toc-text">从ElementUI的loading组件说起</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#element-ui-的loading文档"><span class="toc-text">element ui 的loading文档</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#loading源码分吸"><span class="toc-text">loading源码分吸</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#服务式的代码（src-index-js）"><span class="toc-text">服务式的代码（src/index.js）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#指令式代码（src-directive-js）"><span class="toc-text">指令式代码（src/directive.js）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#vue-js-中相关概念"><span class="toc-text">vue js 中相关概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#实现一个自己的Loading插件"><span class="toc-text">实现一个自己的Loading插件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#起步"><span class="toc-text">起步</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#使用"><span class="toc-text">使用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Ref"><span class="toc-text">Ref</span></a></li></ol></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <h1 id="从ElementUI的loading组件说起"><a href="#从ElementUI的loading组件说起" class="headerlink" title="从ElementUI的loading组件说起"></a>从ElementUI的loading组件说起</h1><p>最近发现自己的<a href="http://www.alfxjx.club" target="_blank" rel="noopener">主页</a>首屏加载很慢，于是想用一个loading组件掩饰一下，这一下就来到了知识的荒原，对插件几乎一无所知，就知道<code>v-model</code>之流，于是学习了一下<code>element-ui</code>的写法，并自己写一个插件出来。</p>
+<a id="more"></a>
+<h2 id="element-ui-的loading文档"><a href="#element-ui-的loading文档" class="headerlink" title="element ui 的loading文档"></a>element ui 的loading文档</h2><p>看一下loading的<a href="https://element.eleme.cn/#/zh-CN/component/loading" target="_blank" rel="noopener">文档</a>，发现loading除了常规的一些配置项之外，有指令式和服务式（directive&amp;service)两种模式：</p>
+<p>指令式是这样的：</p>
+<pre><code class="javascript"> &lt;el-button
+    type=&quot;primary&quot;
+    @click=&quot;openFullScreen&quot;
+    v-loading.fullscreen.lock=&quot;fullscreenLoading&quot;&gt;
+    指令方式
+ &lt;/el-button&gt;
+export default {
+    data() {
+      return {
+        fullscreenLoading: false
+      }
+    },
+}    
+</code></pre>
+<p>服务式是这样的：</p>
+<pre><code class="javascript">import { Loading } from &#39;element-ui&#39;;
+let loadingInstance = Loading.service(options);
+// 以服务的方式调用的 Loading 需要异步关闭
+this.$nextTick(() =&gt; { 
+  loadingInstance.close();
+});
+</code></pre>
+<p>可以看出，两种模式一个是自定义指令，一个是定义了一个全局方法。</p>
+<h2 id="loading源码分吸"><a href="#loading源码分吸" class="headerlink" title="loading源码分吸"></a>loading源码分<del>吸</del></h2><p>那就看看源码是怎么实现的吧</p>
+<p>目录结构是这样的：</p>
+<pre><code>- loading
+    - src
+        - directive.js
+        - index.js
+        - loading.vue
+    - index.js
+</code></pre><p>还是很整齐的。</p>
+<p>在loading/index.js中，引入了指令和服务两种：</p>
+<pre><code class="js">import directive from &#39;./src/directive&#39;;
+import service from &#39;./src/index&#39;;
+
+export default {
+  install(Vue) {
+    Vue.use(directive);
+    Vue.prototype.$loading = service;
+  },
+  directive,
+  service
+};
+</code></pre>
+<h3 id="服务式的代码（src-index-js）"><a href="#服务式的代码（src-index-js）" class="headerlink" title="服务式的代码（src/index.js）"></a>服务式的代码（<a href="https://github.com/ElemeFE/element/blob/dev/packages/loading/src/index.js" target="_blank" rel="noopener">src/index.js</a>）</h3><pre><code class="js">// 通过vue.extend()新建一个子类LoadingConstructor
+// loadingvue是对应的loading的模板
+const LoadingConstructor = Vue.extend(loadingVue);
+// 默认设置项
+const defaults = {}
+// 设置样式的一个方法，不是loading的重点
+const addStyle = (options, parent, instance) =&gt;{}
+// 主要方法
+const Loading = (options = {}) =&gt; {
+    ...
+    // 新建实例
+    let instance = new LoadingConstructor({
+        el: document.createElement(&#39;div&#39;),
+        data: options
+    });
+    ...
+    // 挂载，异步显示
+    parent.appendChild(instance.$el);
+    Vue.nextTick(() =&gt; {
+        instance.visible = true;
+    });
+    return instance
+}
+export default Loading;
+</code></pre>
+<h3 id="指令式代码（src-directive-js）"><a href="#指令式代码（src-directive-js）" class="headerlink" title="指令式代码（src/directive.js）"></a>指令式代码（<a href="https://github.com/ElemeFE/element/blob/dev/packages/loading/src/directive.js" target="_blank" rel="noopener">src/directive.js</a>）</h3><p>对于自定义指令<code>v-loading</code>，只需要绑定<code>Boolean</code>即可。默认状况下，Loading 遮罩会插入到绑定元素的子节点，通过添加<code>body</code>修饰符，可以使遮罩插入至 DOM 中的 body 上。</p>
+<pre><code class="js">import Loading from &#39;./loading.vue&#39;;
+...
+const Mask = Vue.extend(Loading);
+const loadingDirective = {};
+// main
+loadingDirective.install = Vue =&gt; {
+    const toggleLoading = (el, binding) =&gt; {
+        if (binding.value) {
+            Vue.nextTick(() =&gt; {
+                // 生成dom并调用insertDOM方法插入dom
+            })
+        } else {
+            afterLeave(el.instance, _ =&gt; {
+                // 将loading删掉
+            })
+            el.instance.visible = false;
+            el.instance.hiding = true;
+        }
+    }
+    const insertDom = (parent, el, binding) =&gt; {}
+    Vue.directive(&#39;loading&#39;, {
+        // 绑定到dom
+        bind: function(el, binding, vnode){
+            // 新建了一个loading实例
+            const mask = new Mask()
+            ...
+            binding.value &amp;&amp; toggleLoading(el, binding);
+        },
+        // 更新视图
+        update: function(el, binding) {},
+        // 删除视图
+        unbind: function(el, binding) {
+            // ...
+            el.instance &amp;&amp; el.instance.$destroy();
+        }
+    })
+}
+
+export default loadingDirective;
+</code></pre>
+<p>源代码中还有很多配置项的写法，这里就不一一说了。</p>
+<h2 id="vue-js-中相关概念"><a href="#vue-js-中相关概念" class="headerlink" title="vue js 中相关概念"></a>vue js 中相关概念</h2><ul>
+<li><a href="https://cn.vuejs.org/v2/guide/plugins.html" target="_blank" rel="noopener">plugins</a></li>
+<li><a href="https://cn.vuejs.org/v2/api/#Vue-extend" target="_blank" rel="noopener">Vue.extend()</a></li>
+<li><a href="https://cn.vuejs.org/v2/api/#Vue-use" target="_blank" rel="noopener">Vue.use()</a></li>
+<li><a href="https://cn.vuejs.org/v2/api/#vm-nextTick" target="_blank" rel="noopener">vm.$nextTick()</a></li>
+</ul>
+<h2 id="实现一个自己的Loading插件"><a href="#实现一个自己的Loading插件" class="headerlink" title="实现一个自己的Loading插件"></a>实现一个自己的Loading插件</h2><h3 id="起步"><a href="#起步" class="headerlink" title="起步"></a>起步</h3><p>设置模板文件<code>loading.vue</code></p>
+<pre><code class="vue">&lt;template&gt;
+  &lt;div v-show=&quot;show&quot; class=&quot;loading-wrapper&quot;&gt;
+    &lt;img src=&quot;../../assets/loading.png&quot; alt=&quot;&quot; class=&quot;loading&quot;/&gt;
+    &lt;p&gt;loading...&lt;/p&gt;
+  &lt;/div&gt;
+&lt;/template&gt;
+
+&lt;script type=&quot;text/ecmascript-6&quot;&gt;
+  export default {
+    name: &#39;loading&#39;,
+    data() {
+      return {
+        show: false
+      }
+    }
+  }
+&lt;/script&gt;
+
+&lt;style&gt;
+  .loading-wrapper {
+    background: #e3e3e3;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100vh;
+  }
+
+  .loading {
+    animation: rotate 2s infinite;
+  }
+
+  @keyframes rotate {
+    0% {
+      transform: rotate(0deg);
+    }
+    50% {
+      transform: rotate(180deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+&lt;/style&gt;
+
+</code></pre>
+<p><code>index.js</code>负责主要的逻辑</p>
+<pre><code class="js">import loadingVue from &#39;./loading&#39;
+
+let loading = {}
+
+loading.install = (Vue) =&gt; {
+  const LoadingConstructor = Vue.extend(loadingVue)
+  const instance = new LoadingConstructor()
+
+  instance.$mount(document.createElement(&#39;div&#39;))
+  document.body.appendChild(instance.$el)
+
+  Vue.prototype.$loading = () =&gt; {
+    instance.show = true
+    setTimeout(() =&gt; {
+      instance.show = false
+    }, 2000)
+  }
+}
+
+export default loading
+
+</code></pre>
+<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><pre><code class="js">// main.js
+import loading from &#39;./plugins/loading&#39;
+
+Vue.use(loading)
+</code></pre>
+<pre><code class="js">// usage
+export default {
+    created(){
+        this.$loading()
+    }
+}
+</code></pre>
+<p><a href="http://www.alfxjx.club" target="_blank" rel="noopener">在线演示</a></p>
+<h2 id="Ref"><a href="#Ref" class="headerlink" title="Ref"></a>Ref</h2><ul>
+<li><p><a href="https://cn.vuejs.org/v2/guide/plugins.html#%E5%BC%80%E5%8F%91%E6%8F%92%E4%BB%B6" target="_blank" rel="noopener">Vue.js</a></p>
+</li>
+<li><p><a href="https://element.eleme.cn/#/zh-CN/component/installation" target="_blank" rel="noopener">element ui doc</a></p>
+</li>
+<li><p><a href="https://segmentfault.com/a/1190000012224638" target="_blank" rel="noopener">简单的例子实现vue插件</a></p>
+</li>
+</ul>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="https://Alfxjx.github.io">Xu Jianxiang</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="https://Alfxjx.github.io/2019/07/20/从Element的loading组件说起/">https://Alfxjx.github.io/2019/07/20/从Element的loading组件说起/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商用4.0协议</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2019/07/16/前端100问-1/">
+        <span class="next-text nav-default">前端100问(1)</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:xjxtju@163.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/Alfxjx" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+      
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2018 - 
+    
+    2019
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Xu Jianxiang</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+
+
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.2"></script>
+
+  </body>
+</html>
