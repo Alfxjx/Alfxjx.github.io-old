@@ -17,10 +17,12 @@
 
 
 
-  <meta name="description" content="Blog">
+  <meta name="description" content="控制编译时显示与不显示">
 
 
 
+
+  <meta name="keywords" content="nodeJs, Live life to the fullest.">
 
 
 
@@ -40,7 +42,7 @@
 
 
 
-<link rel="canonical" href="https://Alfxjx.github.io/archives/2019/05/">
+<link rel="canonical" href="https://Alfxjx.github.io/2019/10/08/控制编译时显示与不显示/">
 
 
 
@@ -88,11 +90,7 @@
   window.config = {"leancloud":"app_id:87EJk4r6rO0U0Tul5uju2IPq-gzGzoHsz app_key:vhxBampeF8Xel2ETEh4RBLNa","toc":true,"fancybox":true,"pjax":true};
 </script>
 
-    <title>
-  
-    归档 - Live life to the fullest.
-  
-</title>
+    <title> 控制编译时显示与不显示 - Live life to the fullest. </title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -204,79 +202,120 @@
           <div id="content" class="content">
             
   
-  
-  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          控制编译时显示与不显示
+        
+      </h1>
 
-  <section id="archive" class="archive">
-    
-      
-        <div class="archive-title">
-          <span class="archive-post-counter">
-            目前共计 49 篇日志
-          </span>
-        </div>
-      
-    
-
-    
-      
+      <div class="post-meta">
+        <span class="post-time">
+          2019-10-08
+        </span>
         
         
+      </div>
+    </header>
 
+    
+    
+
+
+    <div class="post-content">
+      
+        <p>一个文件可能需要在多个平台使用，在不同的平台上可能有一点点不一样，需要具有设置自定义打包的功能。</p>
+<a id="more"></a>
+<ul>
+<li>需求：一个文件可能需要在多个平台使用，在不同的平台上可能有一点点不一样，需要具有设置自定义打包的功能。</li>
+<li>例如：微信内显示的页面可以有小程序入口二维码，app内部使用的版本就不需要了。</li>
+<li>解决方案：设置打包的时候一个变量<strong>flag</strong> 来控制显示与不显示的逻辑。</li>
+</ul>
+<pre><code class="json">&quot;serve&quot;: &quot;vue-cli-service serve&quot;,
+&quot;serve_h5&quot;: &quot;VUE_APP_PLATFORM=browser vue-cli-service serve&quot;,
+
+</code></pre>
+<p>这个VUE_APP_PLATFORM就是一个flag。</p>
+<p>使用：</p>
+<pre><code class="ts">import BaseComponent, { UrlDespatch } from &quot;jdb-h5-core&quot;;
+export default class A extends BaseComponent{
+    env:string = ‘’;
+    mounted(){
+        this.env = UrlDespatch.env.VUE_APP_PLATFORM;
+    }
+    template:`&lt;div v-if=&quot;env === &#39;browser&#39;&quot;&gt;
+                &lt;ChildComponent /&gt;
+            &lt;/div&gt;`    
+}
+
+</code></pre>
+<p><em>TODO:</em> process.env的实现方式</p>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="https://Alfxjx.github.io">Xu Jianxiang</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="https://Alfxjx.github.io/2019/10/08/控制编译时显示与不显示/">https://Alfxjx.github.io/2019/10/08/控制编译时显示与不显示/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商用4.0协议</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
         
-          
-          <div class="collection-title">
-            <h2 class="archive-year">2019</h2>
+          <div class="post-tags">
+            
+              <a href="/tags/nodeJs/">nodeJs</a>
+            
           </div>
         
-      
-
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            05-24
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2019/05/24/axios拦截器/" class="archive-post-link">
-            axios拦截器的配置和使用
-          </a>
-        </span>
-      </div>
-    
-      
         
         
-
-        
-      
-
-      <div class="archive-post">
-        <span class="archive-post-time">
-          
-            05-24
-          
-        </span>
-        <span class="archive-post-title">
-          <a href="/2019/05/24/mysql/" class="archive-post-link">
-            在WAMP环境操作MySQL数据库
-          </a>
-        </span>
-      </div>
+  <nav class="post-nav">
     
-  </section>
-
-  
-  <nav class="pagination">
     
+      <a class="next" href="/2019/07/20/从Element的loading组件说起/">
+        <span class="next-text nav-default"></span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
     
   </nav>
 
 
+      </footer>
+    
+
+  </article>
 
 
           </div>
           
+  <div class="comments" id="comments">
+    
+  </div>
+
 
         </div>
       </main>
@@ -361,6 +400,11 @@
     </div>
 
     
+  
+  
+
+  
+
 
 
     
