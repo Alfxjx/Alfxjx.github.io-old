@@ -17,12 +17,10 @@
 
 
 
-  <meta name="description" content="Hexo主题设置缩略图">
+  <meta name="description" content="Blog">
 
 
 
-
-  <meta name="keywords" content="Hexo, Live life to the fullest.">
 
 
 
@@ -42,7 +40,7 @@
 
 
 
-<link rel="canonical" href="https://Alfxjx.github.io/2019/02/22/Hexo主题设置缩略图/">
+<link rel="canonical" href="https://Alfxjx.github.io/archives/2020/">
 
 
 
@@ -90,7 +88,11 @@
   window.config = {"leancloud":"app_id:87EJk4r6rO0U0Tul5uju2IPq-gzGzoHsz app_key:vhxBampeF8Xel2ETEh4RBLNa","toc":true,"fancybox":true,"pjax":true};
 </script>
 
-    <title> Hexo主题设置缩略图 - Live life to the fullest. </title>
+    <title>
+  
+    归档 - Live life to the fullest.
+  
+</title>
   </head>
 
   <body><div id="mobile-navbar" class="mobile-navbar">
@@ -202,126 +204,59 @@
           <div id="content" class="content">
             
   
-  <article class="post">
-    <header class="post-header">
-      <h1 class="post-title">
-        
-          Hexo主题设置缩略图
-        
-      </h1>
+  
+  
 
-      <div class="post-meta">
-        <span class="post-time">
-          2019-02-22
-        </span>
-        
-        
-      </div>
-    </header>
-
-    
-    
-
-
-    <div class="post-content">
-      
-        <p>给自己的博客加上了<a href="https://github.com/invom/Material-T" target="_blank" rel="noopener">Material-T</a>主题，但是安装上配置了一番之后，发现好看的文章缩略图无法显示了，当然当你读到这篇文章的时候，已经解决了，以下是我的解决过程：<br><a id="more"></a></p>
-<ol>
-<li><p>首先，根据<a href="https://invom.cc/Material-T-docs/" target="_blank" rel="noopener">文档</a>的内容，在文章开头的front matter里面添加 了图片，发现缩略图不显示，但是会显示一个占位的图，当时是在vscode里面编辑的，在<code>Material-T/layout/index.ejs</code>文件中出现了一个报错，研究不明白于是去项目的github上提了一个<a href="https://github.com/invom/Material-T/issues/25" target="_blank" rel="noopener">issue</a>。</p>
-</li>
-<li><p>后来发现这个报错是一个假报错，换到Webstorm就不显示了。但是事实上的问题还是没解决，于是又询问了作者。</p>
-</li>
-<li><p>今天作者回复我说：</p>
-<blockquote>
-<p>涉及到的 Hexo 解析逻辑是这样的：</p>
-<ol>
-<li>从 <code>/source/_posts</code> 中读取文章内容渲染成HTML；</li>
-<li>将 <code>/themes/Material-T/source/</code> 下的文件全部拷贝到网站根目录；</li>
-</ol>
-<p>所以建议所有图片引用使用相对于根目录的 url ，比如我把图片放到 <code>/themes/Material-T/source/here_is_my_img/</code> ，引用的时候链接应为 <code>/here_is_my_img/***.jpg</code>。</p>
-</blockquote>
-</li>
-</ol>
-<p>于是如法炮制,发现实际上应该是保存在/source/post_img/中，和主题无关。</p>
-<p>这。。。</p>
-<p>就这样吧， issue都被我关掉了。</p>
-<p>PS：</p>
-<p><a href="https://www.cnblogs.com/wsmrzx/p/9439448.html" target="_blank" rel="noopener">Hexo在每一次内容更改过后需要做的操作：</a></p>
-<pre><code>hexo clean ——清理文件
-hexo generate / hexo g ——生成静态文件
-hexo server / hexo s ——启动本地服务器
-hexo deploy / hexo d ——部署网站
-</code></pre>
-      
-    </div>
-
+  <section id="archive" class="archive">
     
       
-      
-
-  <div class="post-copyright">
-    <p class="copyright-item">
-      <span>原文作者: </span>
-      <a href="https://Alfxjx.github.io">Xu Jianxiang</a>
-    </p>
-    <p class="copyright-item">
-      <span>原文链接: </span>
-      <a href="https://Alfxjx.github.io/2019/02/22/Hexo主题设置缩略图/">https://Alfxjx.github.io/2019/02/22/Hexo主题设置缩略图/</a>
-    </p>
-    <p class="copyright-item">
-      <span>许可协议: </span>
-      
-      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商用4.0协议</a>
-    </p>
-  </div>
-
-
-
-      
+        <div class="archive-title">
+          <span class="archive-post-counter">
+            目前共计 50 篇日志
+          </span>
+        </div>
       
     
 
     
-      <footer class="post-footer">
+      
         
-          <div class="post-tags">
-            
-              <a href="/tags/Hexo/">Hexo</a>
-            
+        
+
+        
+          
+          <div class="collection-title">
+            <h2 class="archive-year">2020</h2>
           </div>
         
-        
-        
-  <nav class="post-nav">
+      
+
+      <div class="archive-post">
+        <span class="archive-post-time">
+          
+            02-01
+          
+        </span>
+        <span class="archive-post-title">
+          <a href="/2020/02/01/vue项目打包优化实践/" class="archive-post-link">
+            vue项目打包优化实践
+          </a>
+        </span>
+      </div>
     
-      <a class="prev" href="/2019/02/24/Vuecomputed/">
-        <i class="iconfont icon-left"></i>
-        <span class="prev-text nav-default">Vue中的computed（计算属性）</span>
-        <span class="prev-text nav-mobile">上一篇</span>
-      </a>
+  </section>
+
+  
+  <nav class="pagination">
     
-    
-      <a class="next" href="/2019/02/21/Vuex/">
-        <span class="next-text nav-default">Vuex的使用步骤</span>
-        <span class="prev-text nav-mobile">下一篇</span>
-        <i class="iconfont icon-right"></i>
-      </a>
     
   </nav>
 
 
-      </footer>
-    
-
-  </article>
 
 
           </div>
           
-  <div class="comments" id="comments">
-    
-  </div>
-
 
         </div>
       </main>
@@ -406,11 +341,6 @@ hexo deploy / hexo d ——部署网站
     </div>
 
     
-  
-  
-
-  
-
 
 
     

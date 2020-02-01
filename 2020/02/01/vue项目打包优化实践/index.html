@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="">
+  <head><meta name="generator" content="Hexo 3.8.0">
+    
+<meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+<meta name="theme-color" content="#f8f5ec">
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="本文是我开发过程中对于项目打包优化的操作">
+
+
+
+
+  <meta name="keywords" content="Vue, Live life to the fullest.">
+
+
+
+
+
+
+
+
+
+
+  <link rel="alternate" href="/default" title="Live life to the fullest.">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=2.10.2">
+
+
+
+<link rel="canonical" href="https://Alfxjx.github.io/2020/02/01/vue项目打包优化实践/">
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css">
+
+
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/nprogress/nprogress.min.css">
+
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=2.10.2">
+
+
+
+  
+
+
+
+  <script id="baidu_push">
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+
+
+
+
+
+
+
+<script>
+  window.config = {"leancloud":"app_id:87EJk4r6rO0U0Tul5uju2IPq-gzGzoHsz app_key:vhxBampeF8Xel2ETEh4RBLNa","toc":true,"fancybox":true,"pjax":true};
+</script>
+
+    <title> vue项目打包优化实践 - Live life to the fullest. </title>
+  </head>
+
+  <body><div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/." class="logo">Live life to the fullest.</a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    
+      <a href="/">
+        <li class="mobile-menu-item">
+          
+          
+            首页
+          
+        </li>
+      </a>
+    
+      <a href="/archives/">
+        <li class="mobile-menu-item">
+          
+          
+            归档
+          
+        </li>
+      </a>
+    
+      <a href="/tags">
+        <li class="mobile-menu-item">
+          
+          
+            标签
+          
+        </li>
+      </a>
+    
+      <a href="/about">
+        <li class="mobile-menu-item">
+          
+          
+            关于
+          
+        </li>
+      </a>
+    
+  </ul>
+</nav>
+
+    <div class="container" id="mobile-panel">
+      <header id="header" class="header"><div class="logo-wrapper">
+  <a href="/." class="logo">Live life to the fullest.</a>
+</div>
+
+<nav class="site-navbar">
+  
+    <ul id="menu" class="menu">
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/">
+            
+            
+              首页
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/archives/">
+            
+            
+              归档
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/tags">
+            
+            
+              标签
+            
+          </a>
+        </li>
+      
+        <li class="menu-item">
+          <a class="menu-item-link" href="/about">
+            
+            
+              关于
+            
+          </a>
+        </li>
+      
+    </ul>
+  
+</nav>
+
+      </header>
+
+      <main id="main" class="main">
+        <div class="content-wrapper">
+          <div id="content" class="content">
+            
+  
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          vue项目打包优化实践
+        
+      </h1>
+
+      <div class="post-meta">
+        <span class="post-time">
+          2020-02-01
+        </span>
+        
+        
+      </div>
+    </header>
+
+    
+    
+  <div class="post-toc" id="post-toc">
+    <h2 class="post-toc-title">文章目录</h2>
+    <div class="post-toc-content">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#CDN-优化"><span class="toc-text">CDN 优化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#环境切换"><span class="toc-text">环境切换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#打包技巧"><span class="toc-text">打包技巧</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#html-plugin-配置"><span class="toc-text">html-plugin 配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考文章"><span class="toc-text">参考文章</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#路由懒加载优化"><span class="toc-text">路由懒加载优化</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#loading-插件"><span class="toc-text">loading 插件</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#写在最后"><span class="toc-text">写在最后</span></a></li></ol>
+    </div>
+  </div>
+
+
+
+    <div class="post-content">
+      
+        <p>首先上结果：</p>
+<ol>
+<li>把常用的 Vue，router，vuex，axios 的 runtime 包拆分了出来，改为 cdn；</li>
+<li>另外就是对于自己编写的业务代码进行分包，根据路由进行懒加载，可以较好的提高首屏加载速度。</li>
+<li>添加了全局 loading 来提高体验。</li>
+</ol>
+<p><img src="/post_img/before.png" alt="优化前"></p>
+<p><img src="/post_img/after.png" alt="优化后"></p>
+<blockquote>
+<p>不出意外core-js也可以改成CDN</p>
+</blockquote>
+<h2 id="CDN-优化"><a href="#CDN-优化" class="headerlink" title="CDN 优化"></a>CDN 优化</h2><p>CDN 优化是在 webpack 中实现的，主要分为环境切换，webpack 打包技巧和 <code>html-webpack-plugin</code>配置三个部分。</p>
+<p><a href="https://github.com/Alfxjx/abandon.work/blob/client-dev/client/vue.config.js" target="_blank" rel="noopener">这部分的代码可以点击这个链接</a></p>
+<h3 id="环境切换"><a href="#环境切换" class="headerlink" title="环境切换"></a>环境切换</h3><p>通过<code>process.env.NODE_ENV</code>来切换环境，因为在 dev 环境的时候，最好还是使用本地包，方便 debug 等，在生产环境的时候才需要添加 CDN.</p>
+<p>本项目的<code>vue.config.js</code>中就是这样安排的，这样就可以在不同环境对 webpack 进行配置，类似于<code>vue-cli2</code>的配置类型：</p>
+<pre><code class="shell"># cli 2
+webpack.dev.js
+webpack.prod.js
+</code></pre>
+<p>本项目中;</p>
+<pre><code class="js">if (process.env.NODE_ENV === &#39;production&#39;) {
+    webpackConfig[&#39;chainWebpack&#39;] = config =&gt; {
+        config.plugin(&#39;html&#39;).tap(args =&gt; {
+            args[0].cdn = cdn;
+            return args;
+        });
+    };
+    webpackConfig[&#39;configureWebpack&#39;] = config =&gt; {
+        config[&#39;externals&#39;] = {
+            vue: &#39;Vue&#39;,
+            vuex: &#39;Vuex&#39;,
+            &#39;vue-router&#39;: &#39;VueRouter&#39;,
+            axios: &#39;axios&#39;,
+        };
+        config[&#39;plugins&#39;].push(new BundleAnalyzerPlugin());
+    };
+}
+
+module.exports = webpackConfig;
+</code></pre>
+<p>具体操作涉及<code>vue/cli3+</code>的配置，具体可以看<a href="https://cli.vuejs.org/zh/guide/webpack.html#%E7%AE%80%E5%8D%95%E7%9A%84%E9%85%8D%E7%BD%AE%E6%96%B9%E5%BC%8F" target="_blank" rel="noopener">这里</a>;<br>对于<code>configureWebpack</code>， 有配置式和函数式，当使用函数式的时候，添加插件的方法可以看上面的片段，这是官方文档里面没有的。</p>
+<h3 id="打包技巧"><a href="#打包技巧" class="headerlink" title="打包技巧"></a>打包技巧</h3><blockquote>
+<p>那么该怎么设置 cdn 呢？</p>
+</blockquote>
+<p>这里需要两个 webpack 的配置项：</p>
+<ol>
+<li><code>webpack.externals</code></li>
+<li><code>webpack.plugins.html-webpack-plugin</code><br>具体也可以看代码，主要的思路就是在区分环境的基础上，在生产环境将需要 cdn 的包放在<code>webpack.externals</code>里面：</li>
+</ol>
+<pre><code class="js">webpackConfig[&#39;configureWebpack&#39;] = config =&gt; {
+    config[&#39;externals&#39;] = {
+        vue: &#39;Vue&#39;,
+        vuex: &#39;Vuex&#39;,
+        &#39;vue-router&#39;: &#39;VueRouter&#39;,
+        axios: &#39;axios&#39;,
+    };
+};
+</code></pre>
+<p>接着就是操作 plugin，这里选择链式操作，将需要填入的 cdn 连接的内容传给<code>index.html</code>模板：</p>
+<pre><code class="js">let cdn = {
+    js: [
+        // 可以写成动态版本号
+        &#39;//cdn.bootcss.com/vue/2.6.10/vue.runtime.min.js&#39;,
+        &#39;//cdn.bootcss.com/vue-router/3.1.3/vue-router.min.js&#39;,
+        &#39;//cdn.bootcss.com/vuex/3.1.2/vuex.min.js&#39;,
+        &#39;//cdn.bootcss.com/axios/0.19.0/axios.min.js&#39;,
+    ],
+};
+webpackConfig[&#39;chainWebpack&#39;] = config =&gt; {
+    config.plugin(&#39;html&#39;).tap(args =&gt; {
+        args[0].cdn = cdn;
+        return args;
+    });
+};
+</code></pre>
+<h3 id="html-plugin-配置"><a href="#html-plugin-配置" class="headerlink" title="html-plugin 配置"></a>html-plugin 配置</h3><p>上述的配置完成之后，需要在<code>public/inedx.html</code>中修改一下：</p>
+<pre><code class="html">&lt;div id=&quot;app&quot;&gt;&lt;/div&gt;
+&lt;% if(process.env.NODE_ENV===&#39;production&#39;){htmlWebpackPlugin.options.cdn.js.forEach(function(item){ if(item){ %&gt;
+&lt;script type=&quot;text/javascript&quot; src=&quot;&lt;%= item %&gt;&quot;&gt;&lt;/script&gt;
+&lt;% }})} %&gt;
+&lt;!-- built files will be auto injected --&gt;
+</code></pre>
+<p>这个的目的就是当是生产环境的时候，遍历生成 CDN 的元素。这是一个模板语法，可以看看<a href="https://www.npmjs.com/package/html-webpack-plugin" target="_blank" rel="noopener"><code>html-webpack-plugin</code></a></p>
+<h3 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h3><ol>
+<li><a href="https://www.jianshu.com/p/9248db0349fb" target="_blank" rel="noopener">webpack 使用 HtmlWebpackPlugin 进行 cdn 配置</a></li>
+<li><a href="https://www.jianshu.com/p/70d2fe63c943" target="_blank" rel="noopener">vue 打包优化</a></li>
+<li><a href="https://www.jianshu.com/p/62dde86d2b17" target="_blank" rel="noopener">在 vue-cli 3.0 中根据不同环境动态注入 CDN</a></li>
+<li><a href="https://github.com/shirotech/webpack-cdn-plugin" target="_blank" rel="noopener">webpack-cdn-plugin</a></li>
+<li><a href="https://juejin.im/post/5b304f1f51882574c72f19b0#heading-7" target="_blank" rel="noopener">webpack4 配置的最佳实践</a></li>
+</ol>
+<h2 id="路由懒加载优化"><a href="#路由懒加载优化" class="headerlink" title="路由懒加载优化"></a>路由懒加载优化</h2><p>这里主要是根据<a href="https://router.vuejs.org/zh/guide/advanced/lazy-loading.html" target="_blank" rel="noopener">官方文档</a>的实践：<br>结合 Vue 的异步组件和 Webpack 的代码分割功能，轻松实现路由组件的懒加载。</p>
+<pre><code class="js">// src/router/index.js
+// 路由懒加载 博客分块
+const Blog = () =&gt; import(/* webpackChunkName: &quot;group-blog&quot; */ &#39;../views/Blog/Blog.vue&#39;);
+const ContentPage = () =&gt; import(/* webpackChunkName: &quot;group-blog&quot; */ &#39;../views/Blog/ContentPage.vue&#39;);
+</code></pre>
+<h2 id="loading-插件"><a href="#loading-插件" class="headerlink" title="loading 插件"></a>loading 插件</h2><p>为了美化加载的过程，自定义一个Loading插件，主要参考了<a href="https://juejin.im/search?query=vue%20loading&amp;type=all" target="_blank" rel="noopener">这些文章</a></p>
+<p>选择了一个<a href="https://codepen.io/Chokcoco/pen/XWJPzjw" target="_blank" rel="noopener">蛮炫酷的动效</a></p>
+<p>功能：</p>
+<ul>
+<li>单例模式</li>
+<li>可以在axios拦截器中使用</li>
+</ul>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h2><p>希望大家可以多多关注我的<a href="abandon.work">abandon.work</a>，一个<code>nest.js+mongoDB+Vue.js</code>的小站。</p>
+
+      
+    </div>
+
+    
+      
+      
+
+  <div class="post-copyright">
+    <p class="copyright-item">
+      <span>原文作者: </span>
+      <a href="https://Alfxjx.github.io">Xu Jianxiang</a>
+    </p>
+    <p class="copyright-item">
+      <span>原文链接: </span>
+      <a href="https://Alfxjx.github.io/2020/02/01/vue项目打包优化实践/">https://Alfxjx.github.io/2020/02/01/vue项目打包优化实践/</a>
+    </p>
+    <p class="copyright-item">
+      <span>许可协议: </span>
+      
+      <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商用4.0协议</a>
+    </p>
+  </div>
+
+
+
+      
+      
+    
+
+    
+      <footer class="post-footer">
+        
+          <div class="post-tags">
+            
+              <a href="/tags/Vue/">Vue</a>
+            
+          </div>
+        
+        
+        
+  <nav class="post-nav">
+    
+    
+      <a class="next" href="/2019/10/08/控制编译时显示与不显示/">
+        <span class="next-text nav-default">控制编译时显示与不显示</span>
+        <span class="prev-text nav-mobile">下一篇</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+      </footer>
+    
+
+  </article>
+
+
+          </div>
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+      </main>
+
+      <footer id="footer" class="footer">
+
+  <div class="social-links">
+    
+      
+        
+          <a href="mailto:xjxtju@163.com" class="iconfont icon-email" title="email"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+          <a href="https://github.com/Alfxjx" class="iconfont icon-github" title="github"></a>
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+
+    
+      
+      <a href="/atom.xml" class="iconfont icon-rss" title="rss"></a>
+    
+  </div>
+
+
+
+<div class="copyright">
+  <span class="power-by">
+    由 <a class="hexo-link" href="https://hexo.io/">Hexo</a> 强力驱动
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    主题 - 
+    <a class="theme-link" href="https://github.com/ahonn/hexo-theme-even">Even</a>
+  </span>
+
+  <span class="copyright-year">
+    
+    &copy; 
+     
+      2018 - 
+    
+    2020
+
+    <span class="heart">
+      <i class="iconfont icon-heart"></i>
+    </span>
+    <span class="author">Xu Jianxiang</span>
+  </span>
+</div>
+
+      </footer>
+
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
+
+    
+  
+  
+
+  
+
+
+
+    
+  
+
+
+
+  
+  
+
+
+
+
+
+  
+    <script type="text/javascript" src="/lib/jquery/jquery.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/slideout/slideout.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/pjax/jquery.pjax.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/nprogress/nprogress.min.js"></script>
+  
+
+
+    <script type="text/javascript" src="/js/src/even.js?v=2.10.2"></script>
+
+  </body>
+</html>
