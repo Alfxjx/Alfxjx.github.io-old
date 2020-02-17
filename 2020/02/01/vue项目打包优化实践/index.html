@@ -239,10 +239,14 @@
 <li>添加了全局 loading 来提高体验。</li>
 </ol>
 <p><img src="/post_img/before.png" alt="优化前"></p>
+<p>优化前，可以看出包含了不少的runtime包</p>
 <p><img src="/post_img/after.png" alt="优化后"></p>
+<p>经过优化体积大幅减小</p>
 <blockquote>
 <p>不出意外core-js也可以改成CDN</p>
 </blockquote>
+<p>配合静态资源的CDN加速，目前首页的速度大概是700ms，除了图片外加载的速度大概是200ms左右</p>
+<p><a href="http://abandon.work" target="_blank" rel="noopener">测试链接</a></p>
 <h2 id="CDN-优化"><a href="#CDN-优化" class="headerlink" title="CDN 优化"></a>CDN 优化</h2><p>CDN 优化是在 webpack 中实现的，主要分为环境切换，webpack 打包技巧和 <code>html-webpack-plugin</code>配置三个部分。</p>
 <p><a href="https://github.com/Alfxjx/abandon.work/blob/client-dev/client/vue.config.js" target="_blank" rel="noopener">这部分的代码可以点击这个链接</a></p>
 <h3 id="环境切换"><a href="#环境切换" class="headerlink" title="环境切换"></a>环境切换</h3><p>通过<code>process.env.NODE_ENV</code>来切换环境，因为在 dev 环境的时候，最好还是使用本地包，方便 debug 等，在生产环境的时候才需要添加 CDN.</p>
